@@ -102,6 +102,9 @@ th.act .ar{opacity:1}
 td{padding:8px 9px;border-bottom:1px solid var(--line);vertical-align:top}
 tbody tr:hover{background:var(--panel2)}
 tr.marked td:first-child{box-shadow:inset 3px 0 0 var(--or)}
+tr.passed{opacity:.5}
+tr.passed td:first-child{box-shadow:inset 3px 0 0 var(--dim)}
+tr.passed .nm{text-decoration:line-through;text-decoration-color:var(--dim)}
 .nm{font-weight:600}
 .vn{font-size:11.5px;color:var(--dim);margin-top:1px}
 .dt{white-space:nowrap;font-variant-numeric:tabular-nums;font-weight:600}
@@ -145,6 +148,8 @@ tr.marked td:first-child{box-shadow:inset 3px 0 0 var(--or)}
   background:var(--panel2);border:1px solid var(--line);color:var(--dim);text-decoration:none;overflow:hidden}
 .cell .ev b{display:block;font-weight:600;color:var(--txt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .cell .ev.best{background:var(--or);border-color:var(--or);color:#1B1B1B}
+.cell .ev.passed{opacity:.5}
+.cell .ev.passed b{text-decoration:line-through;text-decoration-color:var(--dim)}
 .cell .ev.best b{color:#1B1B1B;font-weight:750}
 .cell .ev .tag{display:inline-block;font-size:9px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
   background:#1B1B1B;color:var(--or);border-radius:3px;padding:0 4px;margin-top:2px}
@@ -225,6 +230,7 @@ footer{margin-top:26px;padding-top:14px;border-top:1px solid var(--line);font-si
   <div class="grp"><span class="lbl">Cost</span>
     <button class="chip" data-f="cc" data-v="1" type="button">Confirmed cost only</button>
     <button class="chip" data-f="mk" data-v="1" type="button">My marked shows</button>
+    <button class="chip" data-f="sp" data-v="1" id="spChip" type="button">Show passed</button>
   </div>
   <div class="acts">
     <span class="seg"><button id="vTable" aria-pressed="true" type="button">Table</button><button id="vCal" type="button">Calendar</button></span>
@@ -579,10 +585,15 @@ SHOWS.forEach(function(s){
 });
 
 /* ---------- filter state ---------- */
-var F = {rad:999, mon:"all", typ:"nopoke", cc:false, mk:false};
+var F = {rad:999, mon:"all", typ:"nopoke", cc:false, mk:false, sp:false};
 var SORT = {k:"date", dir:1};
 
+function isPassed(s){ return MARK[s._slug] === "pass"; }
+function passedCount(){ return SHOWS.filter(isPassed).length; }
+
 function passes(s){
+  // Passed shows are hidden everywhere unless "Show passed" is on.
+  if(isPassed(s) && !F.sp) return false;
   if(s.drive > F.rad) return false;
   if(F.mon !== "all" && s.date.slice(0,7) !== F.mon) return false;
   if(F.typ === "sports" && s.focus !== "sports") return false;
@@ -611,7 +622,8 @@ function sortList(list){
 
 /* ---------- best pick / picks bar ---------- */
 function ranked(){
-  return upcoming(visible()).filter(function(s){ return s._ev.scored; })
+  // a passed show is never a pick, even while "Show passed" is on
+  return upcoming(visible()).filter(function(s){ return s._ev.scored && !isPassed(s); })
     .sort(function(a,b){ return b._ev.perHr - a._ev.perHr || a._d - b._d; });
 }
 function bestPick(){ var r = ranked(); return r.length ? r[0] : null; }
@@ -692,7 +704,14 @@ function gcalUrl(s){
 
 function renderTable(){
   var list = sortList(visible()), best = bestPick();
-  document.getElementById("empty").style.display = list.length ? "none" : "block";
+  var em = document.getElementById("empty");
+  em.style.display = list.length ? "none" : "block";
+  if(!list.length){
+    var hidden = SHOWS.filter(function(s){ return isPassed(s); }).length;
+    em.textContent = (hidden && !F.sp)
+      ? "Nothing matches those filters. " + hidden + " passed show" + (hidden === 1 ? " is" : "s are") + " hidden — turn on “Show passed” to see them."
+      : "Nothing matches those filters.";
+  }
   document.getElementById("tbody").innerHTML = list.map(function(s){
     var e = s._ev, d = daysOut(s), past = s._e < TODAY;
     var dcls = past ? "dd" : (d <= 14 ? "u14" : d <= 30 ? "u30" : "dd");
@@ -702,7 +721,8 @@ function renderTable(){
         money(e.perHr) + "/hr <span class=\"sc\">" + e.score + "/10</span></span>" +
         (e.est ? ' <span class="est">est.</span>' : "")
       : '<span class="val" title="' + esc(tipFor(s)) + '" style="font-weight:600;color:var(--dim)">not scored</span>';
-    return '<tr class="' + (MARK[s._slug] ? "marked" : "") + (best && best._slug === s._slug ? " isbest" : "") + '">' +
+    return '<tr class="' + (MARK[s._slug] ? "marked" : "") + (best && best._slug === s._slug ? " isbest" : "") +
+      (isPassed(s) ? " passed" : "") + '">' +
       '<td><div class="dt">' + fmtD(s) + '</div><div class="' + dcls + '">' + DW[s._d.getDay()] + " \u00b7 " + dtxt + '</div></td>' +
       '<td><div class="nm">' + esc(s.name) + '</div><div class="vn">' + esc(s.city) + (s.venue ? " \u00b7 " + esc(s.venue) : "") + '</div>' +
         '<a class="gc" target="_blank" rel="noopener" href="' + gcalUrl(s) + '">+ Calendar</a></td>' +
@@ -759,7 +779,8 @@ function renderCal(){
           evs.map(function(s){
             var isB = best && best._slug === s._slug;
             var e = s._ev;
-            return '<span class="ev' + (isB ? " best" : "") + '" title="' + esc(s.name + " \u2014 " + s.city + "\n" + tipFor(s)) + '">' +
+            return '<span class="ev' + (isB ? " best" : "") + (isPassed(s) ? " passed" : "") +
+              '" data-sl="' + esc(s._slug) + '" title="' + esc(s.name + " \u2014 " + s.city + "\n" + tipFor(s)) + '">' +
               "<b>" + esc(s.name) + "</b>" +
               '<span class="vv">' + esc(s.city) + " \u00b7 " + s.drive + " min" +
               (e.scored ? " \u00b7 " + money(e.perHr) + "/hr" : "") + "</span>" +
@@ -773,7 +794,14 @@ function renderCal(){
   }).join("");
 }
 
-function renderAll(){ renderTiles(); renderPicks(); renderTable(); renderCal(); }
+function renderChips(){
+  var n = passedCount(), c = document.getElementById("spChip");
+  c.textContent = n ? "Show passed (" + n + ")" : "Show passed";
+  c.disabled = !n && !F.sp;
+  c.style.opacity = c.disabled ? ".45" : "";
+  c.style.cursor = c.disabled ? "default" : "pointer";
+}
+function renderAll(){ renderTiles(); renderPicks(); renderTable(); renderCal(); renderChips(); }
 
 /* ---------- ICS ---------- */
 function icsEsc(t){ return String(t==null?"":t).replace(/\\/g,"\\\\").replace(/;/g,"\\;").replace(/,/g,"\\,").replace(/\r?\n/g,"\\n"); }
@@ -895,8 +923,12 @@ document.addEventListener("click", function(ev){
   var b = ev.target.closest("[data-mk]");
   if(b){
     var sl = b.getAttribute("data-sl"), m = b.getAttribute("data-mk");
+    var hiding = (m === "pass" && MARK[sl] !== "pass" && !F.sp);
     if(MARK[sl] === m) delete MARK[sl]; else MARK[sl] = m;
-    saveMark(); renderAll(); return;
+    saveMark(); renderAll();
+    // the row just disappeared — say how to get it back, or it's unrecoverable
+    if(hiding) toast("Hidden. “Show passed” brings it back.");
+    return;
   }
   var c = ev.target.closest(".chip");
   if(c){
@@ -906,9 +938,11 @@ document.addEventListener("click", function(ev){
     else if(f === "typ"){ F.typ = v; }
     else if(f === "cc"){ F.cc = !F.cc; }
     else if(f === "mk"){ F.mk = !F.mk; }
+    else if(f === "sp"){ F.sp = !F.sp; }
     document.querySelectorAll('.chip[data-f="' + f + '"]').forEach(function(x){
       if(f === "cc") x.setAttribute("aria-pressed", F.cc ? "true" : "false");
       else if(f === "mk") x.setAttribute("aria-pressed", F.mk ? "true" : "false");
+      else if(f === "sp") x.setAttribute("aria-pressed", F.sp ? "true" : "false");
       else x.setAttribute("aria-pressed", x.getAttribute("data-v") === v ? "true" : "false");
     });
     renderAll(); return;
