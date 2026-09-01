@@ -104,6 +104,19 @@ pre#out{background:var(--panel2);border:1px solid var(--line);border-radius:8px;
 .pk .pd{font-size:11.5px;color:var(--dim)}
 .pk .pv{font-size:19px;font-weight:800;letter-spacing:-.02em;margin-top:6px;font-variant-numeric:tabular-nums}
 /* calendar */
+.wkbox{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--or);border-radius:10px;padding:13px 15px;margin-top:4px;box-shadow:var(--shadow)}
+.wkbox h3{margin:0 0 8px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--or-deep);font-weight:800}
+.wktab{width:100%;border-collapse:collapse;background:transparent;border:0;box-shadow:none}
+.wktab td{padding:8px 8px;border-bottom:1px solid var(--line2);vertical-align:top}
+.wktab tr:last-child td{border-bottom:none}
+.wktab tr.tw{background:var(--or-1)}
+.wkw{white-space:nowrap;font-weight:700;font-size:12px;color:var(--dim);width:1%}
+.wktab tr.tw .wkw{color:var(--or-deep)}
+.wkn{font-size:13px}
+.wkv{text-align:right;font-variant-numeric:tabular-nums;font-weight:800;white-space:nowrap;width:1%}
+.ch.wk{border-color:var(--or);border-width:1.5px;background:var(--or-1)}
+.mtag.wtag{background:transparent;border:1px solid var(--or);color:var(--or-ink)}
+@media(max-width:560px){.wkw{white-space:normal}.wktab td{padding:7px 4px}}
 .mon{margin:22px 0 0}
 .mon h3{margin:0 0 8px;font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--or-deep);font-weight:800}
 .grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden}
@@ -124,6 +137,11 @@ pre#out{background:var(--panel2);border:1px solid var(--line);border-radius:8px;
 .how{margin-top:14px;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:13px 15px;font-size:12px;color:var(--dim);line-height:1.7}
 .how b{color:var(--txt)}
 .how code{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:1px 5px;font-size:11.5px;color:var(--or-ink)}
+.rmv{display:inline-block;margin-top:5px;margin-right:5px;background:transparent;border:1px solid var(--line);color:var(--dim);border-radius:6px;padding:3px 7px;font-size:10.5px;font-weight:700;cursor:pointer;font-family:inherit}
+.rmv:hover{border-color:var(--bad);color:var(--bad)}
+button.chip.arm{background:var(--bad);border-color:var(--bad);color:#fff;font-weight:800}
+#imp{width:100%;min-height:64px;margin-top:9px;background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:9px;font-size:11.5px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--txt);resize:vertical}
+#imp:focus{outline:2px solid var(--or);outline-offset:1px}
 .cal{display:inline-flex;align-items:center;gap:4px;margin-top:6px;background:transparent;border:1px solid var(--line);color:var(--or-ink);border-radius:6px;padding:3px 8px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;text-decoration:none;white-space:nowrap}
 .cal:hover{border-color:var(--or);background:var(--or-1)}
 .foc{display:inline-block;white-space:nowrap;font-size:9.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:1px 5px;border-radius:4px;border:1px solid var(--line);color:var(--dim);margin-left:6px;vertical-align:1px}
@@ -198,7 +216,7 @@ pre#out{background:var(--panel2);border:1px solid var(--line);border-radius:8px;
 <th data-s="ev">Value</th><th data-s="drive" class="hide-m">Drive</th><th data-s="cost" class="hide-m">Table</th><th class="hide-s">Tables</th>
 <th class="hide-s">Contact / booking</th><th data-s="status">Status</th>
 </tr></thead><tbody id="tb"></tbody></table></div></div>
-<div id="v-cal" style="display:none"></div>
+<div id="v-cal" style="display:none"><div id="weekly"></div><div id="months2"></div></div>
 <div class="empty" id="empty" style="display:none">No shows match those filters.</div>
 
 <div class="picks"><h3>Your picks &mdash; copy this back to me and I'll save it to the project</h3>
@@ -207,8 +225,12 @@ pre#out{background:var(--panel2);border:1px solid var(--line);border-radius:8px;
 <button class="chip" id="copy">Copy picks</button>
 <button class="chip" id="ics">Download .ics</button>
 <button class="chip" id="clear">Clear all</button>
+<button class="chip" id="undo" style="display:none">Undo clear</button>
+<button class="chip" id="showimp">Paste picks in</button>
 <span class="badge" id="stor"></span>
-<span class="sub" id="cs"></span></div></div>
+<span class="sub" id="cs"></span></div>
+<textarea id="imp" style="display:none" placeholder="Paste a picks block here (the same format Copy picks produces) and it will restore your marks. Useful for moving picks from your phone to your laptop, or when this page can't save on its own."></textarea>
+<div id="impbar" style="display:none;margin-top:7px"><button class="chip" id="doimp">Restore these picks</button></div></div>
 
 <div class="foot">
 <b>Reading the table.</b> Drive times are estimates from Troy &mdash; darker orange is closer to home.
@@ -216,8 +238,8 @@ pre#out{background:var(--panel2);border:1px solid var(--line);border-radius:8px;
 <span class="conf c-listed">listed</span> date and venue from a show calendar, table cost not published, you'll need to email &middot;
 <span class="conf c-unverified">unverified</span> aggregator listing with no venue detail; a lead, not a plan.<br>
 <b>Calendar.</b> <b style="color:var(--or-ink)">+ Calendar</b> on any row opens Google Calendar with the date, venue, table cost and promoter contact already filled in &mdash; you just hit Save. <b>Download .ics</b> exports everything you've marked (except Pass) as one file you can import into Google Calendar, Apple Calendar or Outlook in one go. Both create all-day events.<br>
-<b>Status marks save in this browser</b> and survive reloads and weekly file updates &mdash; they're keyed to the show, not the row position. They do not sync between your phone and desktop; use Copy picks to move them across, or paste the block to me and I'll fold it into the project.
-</div>
+<b>Status marks.</b> Set one with the dropdown, drop it with the <b>&times; clear</b> button on that row, or wipe everything with <b>Clear all</b> &mdash; which asks once on the button itself and leaves an <b>Undo</b> for a few seconds. No pop-ups, so it works inside a preview pane.<br>
+<b>Where they live.</b> On the hosted page they save in that browser and survive reloads and weekly file updates &mdash; they're keyed to the show, not the row position. The badge next to the buttons tells you which mode you're in: inside a sandboxed preview the page can't write to storage, so marks last only until you refresh. Either way <b>Copy picks</b> &rarr; <b>Paste picks in</b> moves them between phone and laptop, or back after a clear.</div>
 </div>
 <script>
 const SHOWS=[{"name":"Dyehard Card Show","city":"Connersville, IN","venue":"Moore Sports & Rec Center","drive":75,"date":"2026-08-22","end":"","hours":"11:00a-3:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Sports Cards & TCG Show","city":"Piqua, OH","venue":"Crooked Handle Brewing Co.","drive":15,"date":"2026-08-23","end":"","hours":"11:00a-3:00p","focus":"mixed","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Hoosier Card Show","city":"New Castle, IN","venue":"Parker Elementary","drive":85,"date":"2026-08-23","end":"","hours":"10:00a-4:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Coffee & Cards","city":"Lebanon, OH","venue":"Script Coffee","drive":55,"date":"2026-08-29","end":"","hours":"9:00a-2:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Cards And Cold Ones","city":"Cincinnati, OH","venue":"High Grain Brewery","drive":70,"date":"2026-08-29","end":"","hours":"4:00p-9:00p","focus":"mixed","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Grab a Centerpiece Card Show","city":"Newark, OH","venue":"VFW Club","drive":120,"date":"2026-08-29","end":"","hours":"9:00a-4:00p","focus":"mixed","tables":60,"cost":50,"adm":null,"contact":"","src":"tcdb.com","conf":"confirmed"},{"name":"Oakley Greens Card Party","city":"Cincinnati, OH","venue":"Oakley Greens","drive":70,"date":"2026-08-30","end":"","hours":"10:00a-3:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Columbus Trading Card & Collectibles Show","city":"Hilliard, OH","venue":"Franklin County Fairgrounds","drive":80,"date":"2026-08-30","end":"","hours":"10:00a-4:00p","focus":"mixed","tables":null,"cost":null,"adm":null,"contact":"columbuscardshopevents.com","src":"tcdb.com","conf":"listed"},{"name":"PokePop","city":"Dayton, OH","venue":"Dayton Mall","drive":25,"date":"2026-09-05","end":"2026-09-06","hours":"10:00a-8:00p","focus":"pokemon","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Rockford Community Card Show","city":"Rockford, OH","venue":"Parks & Community Buildings","drive":55,"date":"2026-09-05","end":"","hours":"9:00a-3:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Columbus Sports Card Show","city":"Hilliard, OH","venue":"Franklin County Fairgrounds","drive":80,"date":"2026-09-05","end":"","hours":"10:00a-4:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Indy Sports Card Show","city":"Indianapolis, IN","venue":"LaQuinta Inn","drive":110,"date":"2026-09-05","end":"","hours":"8:00a-2:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Card Collector Fellowship","city":"Greenfield, IN","venue":"Hancock County Fairgrounds","drive":110,"date":"2026-09-05","end":"","hours":"8:00a-3:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Mansfield Sports Card Show","city":"Mansfield, OH","venue":"Richland County Fairgrounds","drive":135,"date":"2026-09-05","end":"","hours":"10:00a-3:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Sports Cards & TCG Show","city":"Piqua, OH","venue":"Crooked Handle Brewing Co.","drive":15,"date":"2026-09-06","end":"","hours":"11:00a-3:00p","focus":"mixed","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Darke County Card Show","city":"Greenville, OH","venue":"Greenville Middle School","drive":30,"date":"2026-09-06","end":"","hours":"9:30a-3:30p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Grove City Card Fest","city":"Grove City, OH","venue":"Central Crossing High School","drive":85,"date":"2026-09-06","end":"","hours":"8:00a-3:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"listed on hobbyhub.pro","src":"tcdb.com","conf":"listed"},{"name":"Toledo Sports Card Show","city":"Holland, OH","venue":"The Bunker Bar & Banquet Hall","drive":125,"date":"2026-09-06","end":"","hours":"10:00a-3:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Norwalk Card Show","city":"Norwalk, OH","venue":"Huron County Fairgrounds","drive":150,"date":"2026-09-06","end":"","hours":"10:00a-3:00p","focus":"sports","tables":55,"cost":35,"adm":"Free","contact":"Tony 419-706-6915","src":"allohiocardshows.com","conf":"confirmed"},{"name":"Outerbelt Card Show","city":"Pickerington, OH","venue":"Grace Fellowship Church","drive":95,"date":"2026-09-07","end":"","hours":"9:00a-3:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"Labor Day","src":"tcdb.com","conf":"listed"},{"name":"Sports Memorabilia & Trading Card Show","city":"Xenia, OH","venue":"Greene County Fairgrounds / Expo Center","drive":45,"date":"2026-09-12","end":"","hours":"10:00a-3:00p","focus":"sports","tables":150,"cost":40,"adm":"Free (free parking)","contact":"SportsCardShow@gmail.com","src":"sportscardradio.com","conf":"confirmed"},{"name":"Queen City Card Show","city":"Mason, OH","venue":"Hilton Garden Inn","drive":55,"date":"2026-09-12","end":"","hours":"9:00a-3:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Sports Cards & Memorabilia Show","city":"Cincinnati, OH","venue":"Oak Hills United Methodist Church","drive":70,"date":"2026-09-12","end":"","hours":"9:00a-3:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Columbus Card Show","city":"Hilliard, OH","venue":"Franklin County Fairgrounds","drive":80,"date":"2026-09-12","end":"2026-09-13","hours":"10:00a-4:00p","focus":"mixed","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Collectors Palooza 2026","city":"Indianapolis, IN","venue":"Indiana State Fairgrounds","drive":110,"date":"2026-09-13","end":"","hours":"9:00a-5:00p","focus":"mixed","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Jumbo's Champion Mill Card Show","city":"Hamilton, OH","venue":"Spooky Nook Sports Complex","drive":60,"date":"2026-09-18","end":"2026-09-19","hours":"Fri 4-8p, Sat 10a-4p","focus":"mixed","tables":700,"cost":null,"adm":null,"contact":"JumbosCards.com - tables sold online","src":"jumboscards.com","conf":"listed"},{"name":"Bigfoot Card Expo","city":"Celina, OH","venue":"Mercer County Fairgrounds","drive":50,"date":"2026-09-19","end":"","hours":"9:00a-3:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Card Collectors & Memorabilia Show","city":"Plain City, OH","venue":"Plain City Elementary School","drive":70,"date":"2026-09-19","end":"","hours":"10:00a-2:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Card Show, Memorabilia & Pokemon Expo","city":"Cincinnati, OH","venue":"Eastgate Mall","drive":85,"date":"2026-09-19","end":"","hours":"10:00a-6:00p","focus":"mixed","tables":null,"cost":null,"adm":"Free","contact":"City2City Card Show (FB)","src":"tcdb.com","conf":"listed"},{"name":"Southern Ohio Sports Card Spectacular","city":"Chillicothe, OH","venue":"Ross County Fairgrounds","drive":120,"date":"2026-09-19","end":"","hours":"9:00a-3:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Card Show at the Square","city":"St. Marys, OH","venue":"St Marys Square","drive":50,"date":"2026-09-26","end":"","hours":"9:00a-3:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Sports Card & Pokemon Show","city":"Cincinnati, OH","venue":"Northgate Mall","drive":65,"date":"2026-09-26","end":"","hours":"11:00a-6:00p","focus":"mixed","tables":250,"cost":null,"adm":"Free","contact":"City2City Card Show (FB)","src":"tcdb.com","conf":"listed"},{"name":"Sports Cards & TCG Show","city":"Delaware, OH","venue":"Delaware Christian Church","drive":95,"date":"2026-09-26","end":"","hours":"11:00a-3:00p","focus":"mixed","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Grab a Centerpiece Card Show","city":"Newark, OH","venue":"VFW Club","drive":120,"date":"2026-09-26","end":"","hours":"9:00a-4:00p","focus":"mixed","tables":60,"cost":50,"adm":null,"contact":"","src":"allohiocardshows.com","conf":"confirmed"},{"name":"PokePop","city":"Dayton, OH","venue":"Dayton Mall","drive":25,"date":"2026-10-03","end":"2026-10-04","hours":"10:00a-8:00p","focus":"pokemon","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Buckeye Card Show","city":"Columbus, OH","venue":"Stars Indoor Sports","drive":80,"date":"2026-10-03","end":"","hours":"10:00a-8:00p","focus":"mixed","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Indy Sports Card Show","city":"Indianapolis, IN","venue":"LaQuinta Inn","drive":110,"date":"2026-10-03","end":"","hours":"8:00a-2:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Darke County Card Show","city":"Greenville, OH","venue":"Greenville Middle School","drive":30,"date":"2026-10-04","end":"","hours":"9:30a-3:30p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Toledo Sports Card Show","city":"Holland, OH","venue":"The Bunker Bar & Banquet Hall","drive":125,"date":"2026-10-04","end":"","hours":"10:00a-3:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Sports Memorabilia & Trading Card Show","city":"Xenia, OH","venue":"Greene County Fairgrounds / Expo Center","drive":45,"date":"2026-10-10","end":"","hours":"10:00a-3:00p","focus":"sports","tables":150,"cost":40,"adm":"Free","contact":"SportsCardShow@gmail.com","src":"sportscardradio.com","conf":"confirmed"},{"name":"Celina Card Show","city":"Celina, OH","venue":"Celina Eagles","drive":50,"date":"2026-10-10","end":"","hours":"10:00a-3:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"The Findlay Card Show","city":"Findlay, OH","venue":"The Crest","drive":95,"date":"2026-10-16","end":"2026-10-17","hours":"Fri 5-9p, Sat 10a-3p","focus":"mixed","tables":80,"cost":110,"adm":null,"contact":"JumbosCards.com - 8ft tables from $110","src":"jumboscards.com","conf":"confirmed"},{"name":"Sportscard Spectacular Card Show","city":"Troy, OH","venue":"Miami County Fairgrounds","drive":0,"date":"2026-10-17","end":"2026-10-18","hours":"10:00a-3:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Mega Card & Collectibles Expo","city":"London, OH","venue":"Madison County Fairgrounds","drive":70,"date":"2026-10-17","end":"2026-10-18","hours":"10:00a-3:30p","focus":"mixed","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Buckeye Card Show","city":"Columbus, OH","venue":"Stars Indoor Sports","drive":80,"date":"2026-10-17","end":"","hours":"10:00a-7:00p","focus":"mixed","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Southway American Legion Show","city":"Columbus, OH","venue":"American Legion Post 144","drive":80,"date":"2026-10-17","end":"","hours":"9:00a-2:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Card Show, Memorabilia & Pokemon Expo","city":"Cincinnati, OH","venue":"Eastgate Mall","drive":85,"date":"2026-10-17","end":"","hours":"10:00a-6:00p","focus":"mixed","tables":null,"cost":null,"adm":"Free","contact":"City2City Card Show (FB)","src":"tcdb.com","conf":"listed"},{"name":"Sports Cards & TCG Show","city":"Delaware, OH","venue":"Delaware Christian Church","drive":95,"date":"2026-10-17","end":"","hours":"11:00a-3:00p","focus":"mixed","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Mansfield Sports Card Show","city":"Mansfield, OH","venue":"Richland County Fairgrounds","drive":135,"date":"2026-10-17","end":"","hours":"10:00a-3:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Collectors Palooza 2026","city":"Indianapolis, IN","venue":"Indiana State Fairgrounds","drive":110,"date":"2026-10-18","end":"","hours":"9:00a-5:00p","focus":"mixed","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Sports Card & Pokemon Show","city":"Cincinnati, OH","venue":"Northgate Mall","drive":65,"date":"2026-10-24","end":"","hours":"11:00a-6:00p","focus":"mixed","tables":250,"cost":null,"adm":"Free","contact":"City2City Card Show (FB)","src":"tcdb.com","conf":"listed"},{"name":"Sports Cards & TCG Show","city":"Piqua, OH","venue":"Crooked Handle Brewing Co.","drive":15,"date":"2026-10-25","end":"","hours":"11:00a-3:00p","focus":"mixed","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Eastgate Sports & Pokemon Show","city":"Cincinnati, OH","venue":"Eastgate Holiday Inn","drive":85,"date":"2026-10-25","end":"","hours":"9:00a-3:00p","focus":"mixed","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Grab a Centerpiece Card Show","city":"Newark, OH","venue":"VFW Club","drive":120,"date":"2026-10-31","end":"","hours":"9:00a-4:00p","focus":"mixed","tables":60,"cost":50,"adm":null,"contact":"","src":"allohiocardshows.com","conf":"confirmed"},{"name":"Toledo Sports Card Show","city":"Holland, OH","venue":"The Bunker Bar & Banquet Hall","drive":125,"date":"2026-11-01","end":"","hours":"10:00a-3:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"allohiocardshows.com","conf":"listed"},{"name":"Sports Memorabilia & Trading Card Show","city":"Xenia, OH","venue":"Greene County Fairgrounds / Expo Center","drive":45,"date":"2026-11-07","end":"","hours":"10:00a-3:00p","focus":"sports","tables":150,"cost":40,"adm":"Free","contact":"SportsCardShow@gmail.com","src":"sportscardradio.com","conf":"confirmed"},{"name":"Card Show at the Square","city":"St. Marys, OH","venue":"Hallmark","drive":50,"date":"2026-11-07","end":"","hours":"9:00a-3:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Columbus Card Show","city":"Hilliard, OH","venue":"Franklin County Fairgrounds","drive":80,"date":"2026-11-07","end":"2026-11-08","hours":"10:00a-4:00p","focus":"mixed","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Norwalk Card Show","city":"Norwalk, OH","venue":"Huron County Fairgrounds","drive":150,"date":"2026-11-08","end":"","hours":"10:00a-3:00p","focus":"sports","tables":55,"cost":35,"adm":"Free","contact":"Tony 419-706-6915","src":"allohiocardshows.com","conf":"confirmed"},{"name":"PokePop","city":"Dayton, OH","venue":"Dayton Mall","drive":25,"date":"2026-11-14","end":"2026-11-15","hours":"10:00a-8:00p","focus":"pokemon","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Sports Cards & Memorabilia Show","city":"Cincinnati, OH","venue":"Oak Hills United Methodist Church","drive":70,"date":"2026-11-14","end":"","hours":"9:00a-3:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Darke County Card Show","city":"Greenville, OH","venue":"Greenville Middle School","drive":30,"date":"2026-11-15","end":"","hours":"9:30a-3:30p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Card Collectors & Memorabilia Show","city":"Plain City, OH","venue":"Plain City Elementary School","drive":70,"date":"2026-11-21","end":"","hours":"10:00a-2:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Southway American Legion Show","city":"Columbus, OH","venue":"American Legion","drive":80,"date":"2026-11-21","end":"","hours":"9:00a-2:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Card Show, Memorabilia & Pokemon Expo","city":"Cincinnati, OH","venue":"Eastgate Mall","drive":85,"date":"2026-11-21","end":"","hours":"10:00a-6:00p","focus":"mixed","tables":null,"cost":null,"adm":"Free","contact":"City2City Card Show (FB)","src":"tcdb.com","conf":"listed"},{"name":"Sports Card & Pokemon Show","city":"Cincinnati, OH","venue":"Northgate Mall","drive":65,"date":"2026-11-28","end":"","hours":"11:00a-6:00p","focus":"mixed","tables":250,"cost":null,"adm":"Free","contact":"City2City Card Show (FB)","src":"tcdb.com","conf":"listed"},{"name":"Grab a Centerpiece Card Show","city":"Newark, OH","venue":"VFW Club","drive":120,"date":"2026-11-28","end":"","hours":"9:00a-4:00p","focus":"mixed","tables":60,"cost":50,"adm":null,"contact":"","src":"tcdb.com","conf":"confirmed"},{"name":"PokePop","city":"Dayton, OH","venue":"Dayton Mall","drive":25,"date":"2026-12-05","end":"2026-12-06","hours":"10:00a-8:00p","focus":"pokemon","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Columbus Sports Card Show","city":"Hilliard, OH","venue":"Franklin County Fairgrounds","drive":80,"date":"2026-12-05","end":"","hours":"10:00a-4:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Southern Ohio Sports Card Spectacular","city":"Chillicothe, OH","venue":"Ross County Fairgrounds","drive":120,"date":"2026-12-05","end":"","hours":"9:00a-3:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Darke County Card Show","city":"Greenville, OH","venue":"Greenville Middle School","drive":30,"date":"2026-12-06","end":"","hours":"9:30a-3:30p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Toledo Sports Card Show","city":"Holland, OH","venue":"The Bunker Bar & Banquet Hall","drive":125,"date":"2026-12-06","end":"","hours":"10:00a-3:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Sports Memorabilia & Trading Card Show","city":"Xenia, OH","venue":"Greene County Fairgrounds / Expo Center","drive":45,"date":"2026-12-12","end":"","hours":"10:00a-3:00p","focus":"sports","tables":150,"cost":40,"adm":"Free","contact":"SportsCardShow@gmail.com","src":"tcdb.com","conf":"confirmed"},{"name":"Celina Card Show","city":"Celina, OH","venue":"Celina Eagles","drive":50,"date":"2026-12-12","end":"","hours":"10:00a-3:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Mega Card & Collectibles Expo","city":"London, OH","venue":"Madison County Fairgrounds","drive":70,"date":"2026-12-19","end":"","hours":"10:00a-3:30p","focus":"mixed","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Card Show, Memorabilia & Pokemon Expo","city":"Cincinnati, OH","venue":"Eastgate Mall","drive":85,"date":"2026-12-19","end":"","hours":"10:00a-6:00p","focus":"mixed","tables":null,"cost":null,"adm":"Free","contact":"City2City Card Show (FB)","src":"tcdb.com","conf":"listed"},{"name":"Grab a Centerpiece Card Show","city":"Newark, OH","venue":"VFW Club","drive":120,"date":"2026-12-19","end":"","hours":"9:00a-4:00p","focus":"mixed","tables":60,"cost":50,"adm":null,"contact":"","src":"tcdb.com","conf":"confirmed"},{"name":"Sportscard Spectacular Card Show","city":"Troy, OH","venue":"Miami County Fairgrounds","drive":0,"date":"2026-12-26","end":"2026-12-27","hours":"10:00a-3:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Sports Card & Pokemon Show","city":"Cincinnati, OH","venue":"Northgate Mall","drive":65,"date":"2026-12-26","end":"","hours":"11:00a-6:00p","focus":"mixed","tables":250,"cost":null,"adm":"Free","contact":"City2City Card Show (FB)","src":"tcdb.com","conf":"listed"},{"name":"Jumbo's Lima Card Show (6th Anniversary)","city":"Lima, OH","venue":"Veterans Civic Center","drive":50,"date":"2027-01-23","end":"2027-01-24","hours":"10:00a-3:00p","focus":"mixed","tables":47,"cost":120,"adm":null,"contact":"JumbosCards.com - 8ft tables from $120","src":"jumboscards.com","conf":"confirmed"},{"name":"Mega Card & Collectibles Expo","city":"London, OH","venue":"Madison County Fairgrounds","drive":70,"date":"2027-03-20","end":"2027-03-21","hours":"10:00a-3:30p","focus":"mixed","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"National Sports Collectors Convention #47","city":"Rosemont, IL","venue":"Donald E. Stephens Convention Center","drive":300,"date":"2027-07-28","end":"2027-08-01","hours":"","focus":"sports","tables":1000,"cost":null,"adm":null,"contact":"nsccdealerinfo@gmail.com | nsccshow.com","src":"nsccshow.com","conf":"confirmed"}];
@@ -229,9 +251,15 @@ const TODAY=new Date('2026-08-18T12:00:00');
 const F={r:'all',c:'all',m:'all',t:'all',q:''};
 let SORT={k:'date',d:1};
 const SKEY='psr-status-v1';
-var STORE_OK=(function(){try{localStorage.setItem('__t','1');localStorage.removeItem('__t');return true}catch(e){return false}})();
+var STORE_OK=(function(){try{var k='__psr_probe';localStorage.setItem(k,'1');
+  var ok=localStorage.getItem(k)==='1';localStorage.removeItem(k);return ok}catch(e){return false}})();
 var ST=(function(){try{return JSON.parse(localStorage.getItem(SKEY))||{}}catch(e){return {}}})();
-function save(){if(!STORE_OK)return;try{localStorage.setItem(SKEY,JSON.stringify(ST))}catch(e){}}
+var UNDO=null;
+function save(){
+  if(!STORE_OK)return false;
+  try{localStorage.setItem(SKEY,JSON.stringify(ST));return true}
+  catch(e){STORE_OK=false;return false}}
+window.addEventListener('beforeunload',save);
 const MN=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const DW=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 SHOWS.forEach(function(s,i){s.id=i;s.key=s.date+'|'+s.name+'|'+s.city;var d=new Date(s.date+'T12:00:00');s._d=d;
@@ -278,6 +306,17 @@ function evTip(s){
   L.push('  risk      x'+e.risk+'   (data is "'+s.conf+'")');
   L.push('  = $'+e.ev);
   return L.join('\n');}
+function importPicks(txt){
+  var byKey={};SHOWS.forEach(function(s){byKey[s.key]=s});
+  var n=0;
+  txt.split(/\r?\n/).forEach(function(line){
+    var m=line.match(/^\s*(BOOKED|APPLIED|INTERESTED|PASS)\s+(\d{4}-\d{2}-\d{2})\s+(.+?)\s+\u2014\s+([^(]+?)(?:\s*\(.*)?$/i);
+    if(!m)return;
+    var st=m[1][0].toUpperCase()+m[1].slice(1).toLowerCase();
+    var key=m[2]+'|'+m[3].trim()+'|'+m[4].trim();
+    if(byKey[key]){ST[key]=st;n++;}
+  });
+  return n;}
 function money(n){return (n<0?'\u2212$':'$')+Math.abs(n);}
 function esc(v){return String(v).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');}
 function pad(n){return String(n).padStart(2,'0')}
@@ -376,9 +415,10 @@ function render(){
       '<option value="">&mdash;</option><option value="Booked">Booked</option>'+
       '<option value="Applied">Applied</option><option value="Interested">Interested</option>'+
       '<option value="Pass">Pass</option></select>'+
+      (sv?'<button class="rmv" data-k="'+encodeURIComponent(s.key)+'" title="Remove this mark">&times; clear</button>':'')+
       '<a class="cal" href="'+gcal(s)+'" target="_blank" rel="noopener">&#43; Calendar</a></td></tr>';}).join('');
   document.getElementById('empty').style.display=rows.length?'none':'block';
-  topPicks(rows); calendar(rows);
+  topPicks(rows); weekly(rows); calendar(rows);
   document.getElementById('scope').textContent=
     rows.filter(function(s){return s.days>=0}).length+' shows in view'+(F.r!=='all'?' within '+F.r+' min':'');
   Array.prototype.forEach.call(tb.querySelectorAll('select.st'),function(el){
@@ -398,7 +438,9 @@ function stats(rows){
   var booked=Object.keys(ST).filter(function(k){return ST[k]==='Booked'||ST[k]==='Applied'}).length;
   var sb=document.getElementById('stor');
   sb.className='badge '+(STORE_OK?'b-on':'b-off');
-  sb.textContent=STORE_OK?'saved in this browser':'not saved - storage blocked here';
+  sb.textContent=STORE_OK?'saved in this browser':'preview only - marks vanish on refresh';
+  sb.title=STORE_OK?'Your marks are stored in this browser and survive reloads and file updates.'
+    :'This page cannot write to browser storage here (a sandboxed preview or private window). Marks still work for this session - use Copy picks to keep them, or open the hosted page.';
   var cells=[['Upcoming shows',up.length],['Within 45 min',near],['Next 30 days',n30],
     ['Median table','$'+med],['Booked / applied',booked],['Showing',rows.length]];
   document.getElementById('stats').innerHTML=cells.map(function(c){
@@ -414,6 +456,14 @@ function picks(){
     .sort(function(a,b){return order[a.v]-order[b.v]||a.s._d-b.s._d})
     .map(function(r){return (r.v.toUpperCase()+'           ').slice(0,11)+' '+r.s.date+'  '+r.s.name+' — '+r.s.city+(r.s.cost?' ($'+r.s.cost+'/table)':'')}).join('\n');}
 
+function weekStart(d){var x=new Date(d.getFullYear(),d.getMonth(),d.getDate());
+  x.setDate(x.getDate()-((x.getDay()+6)%7));return x;}          /* Monday, so Sat+Sun stay together */
+function wkey(d){var w=weekStart(d);return w.getFullYear()+'-'+pad(w.getMonth()+1)+'-'+pad(w.getDate());}
+function weekLabel(k){var p=k.split('-'),d=new Date(+p[0],+p[1]-1,+p[2]);
+  var e=new Date(d);e.setDate(e.getDate()+6);
+  return MN[d.getMonth()]+' '+d.getDate()+'\u2013'+(e.getMonth()!==d.getMonth()?MN[e.getMonth()]+' ':'')+e.getDate();}
+function bestByWeek(rows){
+  var m={};rankable(rows).forEach(function(s){var k=wkey(s._d);if(!m[k])m[k]=s;});return m;}
 function rankable(rows){return rows.filter(function(s){return !s._ev.na&&s.days>=0})
   .sort(function(a,b){return b._ev.ev-a._ev.ev||a._d-b._d});}
 
@@ -434,11 +484,29 @@ function topPicks(rows){
       '<div class="pv">'+money(s._ev.ev)+' <span class="sub" style="font-size:11px;font-weight:500">est. margin'+(s._ev.est?'*':'')+'</span></div>'+
       '</div>';}).join('');}
 
+function weekly(rows){
+  var el=document.getElementById('weekly');
+  var bw=bestByWeek(rows), best=rankable(rows)[0];
+  var keys=Object.keys(bw).sort().filter(function(k){return bw[k].days>=-1}).slice(0,10);
+  if(!keys.length){el.innerHTML='';return;}
+  var cnt={};rows.forEach(function(s){if(s.days>=-1){var k=wkey(s._d);cnt[k]=(cnt[k]||0)+1}});
+  el.innerHTML='<div class="wkbox"><h3>Best show each week &mdash; if you only work one</h3>'+
+    '<table class="wktab"><tbody>'+keys.map(function(k){
+      var s=bw[k],top=best&&s.key===best.key;
+      var others=(cnt[k]||1)-1;
+      return '<tr'+(top?' class="tw"':'')+' title="'+esc(evTip(s))+'">'+
+        '<td class="wkw">'+weekLabel(k)+(top?' <span class="mtag">best overall</span>':'')+'</td>'+
+        '<td class="wkn"><b>'+s.name+'</b><div class="mt">'+MN[s._d.getMonth()]+' '+s._d.getDate()+' &middot; '+s.city+
+          ' &middot; '+(s.drive===0?'home':s.drive+' min')+(others>0?' &middot; '+others+' other'+(others>1?'s':'')+' that week':'')+'</div></td>'+
+        '<td class="wkv">'+money(s._ev.ev)+(s._ev.est?'<div class="est">est.</div>':'')+'</td></tr>';}).join('')+
+    '</tbody></table></div>';}
+
 function calendar(rows){
-  var el=document.getElementById('v-cal');
+  var el=document.getElementById('months2');
   var up=rows.filter(function(s){return s.days>=-1});
   if(!up.length){el.innerHTML='<div class="empty">Nothing to show.</div>';return;}
   var best=rankable(rows)[0];
+  var bw=bestByWeek(rows);
   var months=[];up.forEach(function(s){if(months.indexOf(s.mk)<0)months.push(s.mk)});
   months.sort();
   var byDay={};
@@ -457,9 +525,10 @@ function calendar(rows){
       list.sort(function(a,b){return (b._ev.na?-1e9:b._ev.ev)-(a._ev.na?-1e9:a._ev.ev)});
       list.forEach(function(s){
         var isBest=best&&s.key===best.key;
+        var isWk=!isBest&&bw[wkey(s._d)]&&bw[wkey(s._d)].key===s.key;
         var mine=ST[s.key]&&ST[s.key]!=='Pass';
-        inner+='<span class="ch'+(isBest?' best':'')+(mine?' mine':'')+'" title="'+esc(s.name+' - '+s.venue+', '+s.city+'\n'+evTip(s))+'">'+
-          (isBest?'<span class="mtag">best</span>':'')+
+        inner+='<span class="ch'+(isBest?' best':(isWk?' wk':''))+(mine?' mine':'')+'" title="'+esc(s.name+' - '+s.venue+', '+s.city+'\n'+evTip(s))+'">'+
+          (isBest?'<span class="mtag">best</span>':(isWk?'<span class="mtag wtag">week</span>':''))+
           '<b>'+s.name+'</b><i>'+(s.drive===0?'home':s.drive+'m')+(s._ev.na?'':' &middot; '+money(s._ev.ev))+'</i></span>';});
       var isPast=new Date(Y,M,day)<new Date(TODAY.getFullYear(),TODAY.getMonth(),TODAY.getDate());
       cells.push('<div class="cell'+(list.length?' has':'')+(isPast&&!list.length?' gone':'')+'">'+inner+'</div>');
@@ -486,6 +555,8 @@ function calendar(rows){
    '<b>Read the ranking as cost-to-attend, not earning power.</b> With three data points the model discriminates on what a show costs you, because nothing in the venue data predicts what you will make. Log more shows and that changes.</div>';}
 
 document.addEventListener('click',function(e){
+  var rm=e.target.closest('.rmv');
+  if(rm){var k=decodeURIComponent(rm.dataset.k);delete ST[k];save();render();picks();return;}
   var vb=e.target.closest('.vsw button');
   if(vb){Array.prototype.forEach.call(document.querySelectorAll('.vsw button'),function(x){x.classList.remove('on')});
     vb.classList.add('on');
@@ -507,11 +578,36 @@ document.addEventListener('click',function(e){
     document.getElementById('cs').textContent=picked.length+' event'+(picked.length>1?'s':'')+' downloaded';
     setTimeout(function(){document.getElementById('cs').textContent=''},2600);return;}
   if(b.id==='clear'){
-    if(!Object.keys(ST).length)return;
-    if(!confirm('Clear every status mark?'))return;
+    var n=Object.keys(ST).length;
+    if(!n){document.getElementById('cs').textContent='nothing marked';
+      setTimeout(function(){document.getElementById('cs').textContent=''},1600);return;}
+    if(!b.classList.contains('arm')){                       /* two-step, no native dialog */
+      b.classList.add('arm');b.textContent='Click again to clear '+n;
+      clearTimeout(b._t);b._t=setTimeout(function(){b.classList.remove('arm');b.textContent='Clear all'},4000);
+      return;}
+    clearTimeout(b._t);b.classList.remove('arm');b.textContent='Clear all';
+    UNDO=JSON.parse(JSON.stringify(ST));
     Object.keys(ST).forEach(function(k){delete ST[k]});save();render();picks();
-    document.getElementById('cs').textContent='cleared';
+    document.getElementById('undo').style.display='';
+    document.getElementById('cs').textContent='cleared '+n;
+    setTimeout(function(){document.getElementById('cs').textContent=''},2200);return;}
+  if(b.id==='undo'){
+    if(UNDO){Object.keys(UNDO).forEach(function(k){ST[k]=UNDO[k]});UNDO=null;save();render();picks();}
+    b.style.display='none';
+    document.getElementById('cs').textContent='restored';
     setTimeout(function(){document.getElementById('cs').textContent=''},1800);return;}
+  if(b.id==='showimp'){
+    var ta=document.getElementById('imp'),bar=document.getElementById('impbar');
+    var open=ta.style.display!=='none';
+    ta.style.display=open?'none':'';bar.style.display=open?'none':'';
+    if(!open)ta.focus();return;}
+  if(b.id==='doimp'){
+    var ta=document.getElementById('imp');
+    var n=importPicks(ta.value);
+    save();render();picks();
+    document.getElementById('cs').textContent=n?('restored '+n+' pick'+(n>1?'s':'')):'nothing matched';
+    if(n){ta.value='';ta.style.display='none';document.getElementById('impbar').style.display='none';}
+    setTimeout(function(){document.getElementById('cs').textContent=''},2600);return;}
   if(b.id==='copy'){var t=document.getElementById('out').textContent;
     if(navigator.clipboard)navigator.clipboard.writeText(t);
     document.getElementById('cs').textContent='copied';
