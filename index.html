@@ -1,996 +1,526 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pandashade Card Show Radar</title>
-<meta name="theme-color" content="#FF8200">
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Card Show Radar — Pandashade's Card Shop</title>
+<link rel="icon" href="data:image/png;base64,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">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<meta name="theme-color" content="#FF8200" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#17130F" media="(prefers-color-scheme: dark)">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Card Radar">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23FF8200'/%3E%3Ctext x='16' y='23' font-size='19' font-family='Georgia,serif' font-weight='bold' text-anchor='middle' fill='%231B1B1B'%3EP%3C/text%3E%3C/svg%3E">
+<meta name="description" content="Upcoming sports card shows within driving range of Troy, OH — vendor table costs, deadlines and contacts.">
 <style>
 :root{
-  --or:#FF8200; --or-ink:#A8480A; --or-deep:#8A3D00;
-  --r1:#FF8200; --r2:#FFB877; --r3:#FFE0C2; --r4:#FFF4EA;
-  --bg:#FFFFFF; --panel:#FFFFFF; --panel2:#FDF6EF; --line:#E9E1D8;
-  --txt:#1B1B1B; --dim:#6E6259;
-  --ok:#0F7A57; --mid:#5B6CC4; --bad:#B3261E;
-  --shadow:0 1px 2px rgba(27,27,27,.06),0 4px 14px rgba(27,27,27,.05);
+ --or:#FF8200;        /* Tennessee orange - fills only, never text on white */
+ --or-ink:#A8480A;    /* text-safe orange  5.8:1 on white */
+ --or-deep:#8A3D00;
+ --or-1:#FFF4EA; --or-2:#FFE0C2; --or-3:#FFB877; --or-4:#FF8200;  /* sequential ramp */
+ --bg:#FFFFFF; --panel:#FFFFFF; --panel2:#FDF6EF; --line:#E9E1D8; --line2:#F3EDE6;
+ --txt:#1B1B1B; --dim:#6E6259;
+ --ok:#0F7A57; --info:#5B6CC4; --bad:#B3261E;
+ --shadow:0 1px 2px rgba(27,27,27,.05),0 1px 8px rgba(138,61,0,.04);
 }
-:root:not([data-theme="light"]) { }
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --or:#D97918; --or-ink:#FFA24D; --or-deep:#FFB877;
-    --r1:#D97918; --r2:#6B4A22; --r3:#3A2A1A; --r4:#241C15;
-    --bg:#17130F; --panel:#17130F; --panel2:#261F17; --line:#372E24;
-    --txt:#F0E9E2; --dim:#A2968B;
-    --ok:#199C68; --mid:#6B7ACF; --bad:#D9524A;
-    --shadow:0 1px 2px rgba(0,0,0,.4),0 4px 14px rgba(0,0,0,.3);
-  }
-}
-:root[data-theme="dark"]{
-  --or:#D97918; --or-ink:#FFA24D; --or-deep:#FFB877;
-  --r1:#D97918; --r2:#6B4A22; --r3:#3A2A1A; --r4:#241C15;
-  --bg:#17130F; --panel:#17130F; --panel2:#261F17; --line:#372E24;
-  --txt:#F0E9E2; --dim:#A2968B;
-  --ok:#199C68; --mid:#6B7ACF; --bad:#D9524A;
-  --shadow:0 1px 2px rgba(0,0,0,.4),0 4px 14px rgba(0,0,0,.3);
-}
+@media(prefers-color-scheme:dark){:root{
+ --or:#D97918; --or-ink:#FFA24D; --or-deep:#FFB877;
+ --or-1:#241C15; --or-2:#3A2A1A; --or-3:#6B4A22; --or-4:#D97918;
+ --bg:#17130F; --panel:#1E1913; --panel2:#261F17; --line:#372E24; --line2:#2B241B;
+ --txt:#F0E9E2; --dim:#A2968B;
+ --ok:#199C68; --info:#6B7ACF; --bad:#D9524A;
+ --shadow:none;}}
 *{box-sizing:border-box}
-html,body{margin:0;padding:0}
-body{
-  background:var(--bg); color:var(--txt);
-  font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  -webkit-text-size-adjust:100%;
+body{margin:0;background:var(--bg);color:var(--txt);font:14px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,sans-serif}
+.wrap{max-width:1300px;margin:0 auto;padding:0 18px 60px}
+.topbar{height:5px;background:var(--or);margin:0 -18px 18px}
+header{display:flex;align-items:center;gap:14px;padding:6px 0 2px;flex-wrap:wrap}
+.logo{width:52px;height:52px;border-radius:12px;flex:none;box-shadow:var(--shadow)}
+h1{font-size:21px;margin:0;letter-spacing:-.02em;line-height:1.15}
+.brand{font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--or-ink);margin-bottom:1px}
+.sub{color:var(--dim);font-size:12.5px;margin-top:3px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:10px;margin:20px 0}
+.stat{background:var(--panel);border:1px solid var(--line);border-top:3px solid var(--or);border-radius:10px;padding:12px 14px;box-shadow:var(--shadow)}
+.stat .v{font-size:24px;font-weight:700;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.stat .k{color:var(--dim);font-size:10.5px;text-transform:uppercase;letter-spacing:.07em;margin-top:3px;font-weight:600}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:14px 0;padding:12px;background:var(--panel2);border:1px solid var(--line);border-radius:10px}
+.grp{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.lbl{color:var(--dim);font-size:10.5px;text-transform:uppercase;letter-spacing:.07em;font-weight:700;margin-right:2px}
+button.chip{background:var(--panel);border:1px solid var(--line);color:var(--txt);padding:5px 12px;border-radius:99px;cursor:pointer;font-size:12.5px;font-family:inherit;font-weight:500}
+button.chip:hover{border-color:var(--or);color:var(--or-ink)}
+button.chip.on{background:var(--or);border-color:var(--or);color:#1B1B1B;font-weight:700}
+input[type=search]{background:var(--panel);border:1px solid var(--line);color:var(--txt);padding:6px 12px;border-radius:8px;font-size:13px;min-width:180px;font-family:inherit}
+input[type=search]:focus{outline:2px solid var(--or);outline-offset:1px;border-color:var(--or)}
+table{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:var(--shadow)}
+th{text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--or-deep);padding:11px 10px;border-bottom:2px solid var(--or);cursor:pointer;white-space:nowrap;user-select:none;background:var(--panel2);font-weight:800}
+th:hover{color:var(--or-ink);background:var(--or-1)}
+th .ar{opacity:.45;font-size:9px}
+td{padding:11px 10px;border-bottom:1px solid var(--line2);vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr.row:hover{background:var(--panel2)}
+tr.row.mk td:first-child{box-shadow:inset 3px 0 0 var(--or)}
+.nm{font-weight:650;letter-spacing:-.01em}
+.mt{color:var(--dim);font-size:12px;margin-top:2px}
+.dt{font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:700}
+.dow{color:var(--dim);font-weight:400;font-size:11.5px;letter-spacing:.03em}
+.pill{display:inline-block;padding:3px 9px;border-radius:6px;font-size:11px;font-weight:700;letter-spacing:.02em;white-space:nowrap;color:#1B1B1B}
+.q1{background:var(--or-4)}.q2{background:var(--or-3)}.q3{background:var(--or-2)}.q4{background:var(--or-1)}
+.q5{background:transparent;border:1px dashed var(--or);color:var(--or-ink)}
+@media(prefers-color-scheme:dark){.pill{color:#F0E9E2}.q1{color:#1B1B1B}}
+.cst{font-variant-numeric:tabular-nums;font-weight:700}
+.conf{font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;font-weight:800}
+.conf::before{margin-right:3px}
+.c-confirmed{color:var(--ok)}.c-confirmed::before{content:"\2713"}
+.c-listed{color:var(--info)}.c-listed::before{content:"\25CB"}
+.c-unverified{color:var(--bad)}.c-unverified::before{content:"\26A0"}
+.days{font-variant-numeric:tabular-nums;font-size:12px;font-weight:600}
+.d-hot{color:var(--bad);font-weight:800}
+.d-soon{color:var(--or-ink);font-weight:700}
+select.st{background:var(--panel);border:1px solid var(--line);color:var(--txt);border-radius:6px;padding:4px 6px;font-size:12px;font-family:inherit;width:100%}
+select.st:focus{outline:2px solid var(--or);outline-offset:1px}
+select.st.s1{border-color:var(--ok);color:var(--ok);font-weight:700}
+select.st.s2{border-color:var(--or);color:var(--or-ink);font-weight:700}
+select.st.s3{border-color:var(--info);color:var(--info);font-weight:600}
+.foot{margin-top:22px;color:var(--dim);font-size:12px;line-height:1.75}
+.foot b{color:var(--txt)}
+.picks{margin-top:16px;background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--or);border-radius:10px;padding:14px;box-shadow:var(--shadow)}
+.picks h3{margin:0 0 9px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--or-deep);font-weight:800}
+pre#out{background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:11px;font-size:12px;white-space:pre-wrap;margin:0;max-height:240px;overflow:auto;color:var(--txt);font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.empty{padding:34px;text-align:center;color:var(--dim)}
+.badge{font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:2px 7px;border-radius:5px}
+.b-on{background:rgba(15,122,87,.12);color:var(--ok)}
+.b-off{background:rgba(179,38,30,.1);color:var(--bad)}
+/* view switch */
+.vsw{display:inline-flex;border:1px solid var(--line);border-radius:99px;overflow:hidden;background:var(--panel)}
+.vsw button{background:transparent;border:0;padding:6px 16px;font:inherit;font-size:12.5px;font-weight:600;color:var(--dim);cursor:pointer}
+.vsw button.on{background:var(--or);color:#1B1B1B;font-weight:800}
+/* EV */
+.ev{font-variant-numeric:tabular-nums;font-weight:800;white-space:nowrap}
+.ev-na{color:var(--dim);font-weight:400}
+.est{font-size:9px;font-weight:700;color:var(--dim);letter-spacing:.04em}
+/* top picks */
+.picksbar{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin:16px 0 4px}
+.pk{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 13px;box-shadow:var(--shadow);position:relative}
+.pk.top{border:2px solid var(--or);background:var(--or-1)}
+.pk .rk{font-size:9.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--dim)}
+.pk.top .rk{color:var(--or-deep)}
+.pk .pn{font-weight:700;font-size:13.5px;margin:3px 0 1px;line-height:1.25}
+.pk .pd{font-size:11.5px;color:var(--dim)}
+.pk .pv{font-size:19px;font-weight:800;letter-spacing:-.02em;margin-top:6px;font-variant-numeric:tabular-nums}
+/* calendar */
+.mon{margin:22px 0 0}
+.mon h3{margin:0 0 8px;font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--or-deep);font-weight:800}
+.grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.dow7{background:var(--panel2);text-align:center;font-size:9.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--dim);padding:6px 2px}
+.cell{background:var(--panel);min-height:82px;padding:5px 5px 6px;min-width:0;overflow:hidden}
+.dfull{display:none}
+.cell.pad{background:var(--panel2);opacity:.45}
+.cell.gone{background:var(--panel2);opacity:.5}
+.cell .dnum{font-size:11px;font-weight:700;color:var(--dim);font-variant-numeric:tabular-nums}
+.cell.has .dnum{color:var(--txt)}
+.ch{display:block;margin-top:3px;padding:3px 5px;border-radius:5px;font-size:10.5px;line-height:1.25;background:var(--panel2);border:1px solid var(--line);color:var(--txt);cursor:default;overflow:hidden}
+.ch b{display:block;font-weight:650;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ch i{font-style:normal;color:var(--dim);font-size:9.5px}
+.ch.best{background:var(--or);border-color:var(--or);color:#1B1B1B}
+.ch.best i{color:#5A3200}
+.ch.mine{border-color:var(--ok);border-width:1.5px}
+.mtag{float:right;font-size:8.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--or-deep);background:var(--or-2);padding:1px 4px;border-radius:3px}
+.how{margin-top:14px;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:13px 15px;font-size:12px;color:var(--dim);line-height:1.7}
+.how b{color:var(--txt)}
+.how code{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:1px 5px;font-size:11.5px;color:var(--or-ink)}
+.cal{display:inline-flex;align-items:center;gap:4px;margin-top:6px;background:transparent;border:1px solid var(--line);color:var(--or-ink);border-radius:6px;padding:3px 8px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;text-decoration:none;white-space:nowrap}
+.cal:hover{border-color:var(--or);background:var(--or-1)}
+.foc{display:inline-block;white-space:nowrap;font-size:9.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:1px 5px;border-radius:4px;border:1px solid var(--line);color:var(--dim);margin-left:6px;vertical-align:1px}
+.f-pokemon{color:var(--info);border-color:var(--info)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;margin:10px 0 0;font-size:11.5px;color:var(--dim);align-items:center}
+.legend .sw{display:inline-block;width:13px;height:13px;border-radius:4px;vertical-align:-2px;margin-right:4px}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:10px}
+.m-only{display:none}
+@media(max-width:860px){.hide-s{display:none}.wrap{padding:0 10px 50px}}
+@media(max-width:700px){
+ /* a 7-column month grid is unusable at phone width - switch to an agenda list */
+ .grid{display:block;border:0;background:transparent;border-radius:0}
+ .dow7{display:none}
+ .cell{display:none}
+ .cell.has{display:block;min-height:0;margin-bottom:7px;border:1px solid var(--line);border-radius:9px;padding:9px 10px}
+ .dnum{display:none}
+ .dfull{display:block;font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--or-deep);margin-bottom:4px}
+ .ch{padding:5px 7px;font-size:12px}
+ .ch b{white-space:normal}
+ .ch i{font-size:10.5px}
+ .mon h3{position:sticky;top:0;background:var(--bg);padding:6px 0;z-index:2}
 }
-.wrap{max-width:1340px;margin:0 auto;padding:18px 16px 64px}
-
-/* ---------- header ---------- */
-header.top{display:flex;align-items:center;gap:14px;margin-bottom:6px;flex-wrap:wrap}
-.logo{width:52px;height:52px;border-radius:12px;display:block;flex:0 0 auto}
-h1{font-size:22px;line-height:1.15;margin:0;letter-spacing:-.01em}
-h1 small{display:block;font-size:12px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--or-deep);margin-bottom:3px}
-.sub{color:var(--dim);font-size:13px;margin:2px 0 16px}
-.themebtn{margin-left:auto;background:var(--panel2);border:1px solid var(--line);color:var(--txt);
-  border-radius:999px;padding:7px 13px;font-size:12.5px;font-weight:600;cursor:pointer}
-
-/* ---------- tiles ---------- */
-.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));gap:10px;margin-bottom:16px}
-.tile{background:var(--panel2);border:1px solid var(--line);border-top:3px solid var(--or);
-  border-radius:10px;padding:10px 12px;box-shadow:var(--shadow)}
-.tile b{display:block;font-size:21px;line-height:1.2;font-variant-numeric:tabular-nums}
-.tile span{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;font-weight:600}
-
-/* ---------- picks bar ---------- */
-.picks{margin:0 0 16px}
-.picks h2{font-size:11.5px;text-transform:uppercase;letter-spacing:.09em;color:var(--or-deep);margin:0 0 8px}
-.pickrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px}
-.pick{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:11px 12px;box-shadow:var(--shadow);position:relative}
-.pick.one{border:2px solid var(--or);padding:10px 11px}
-.pick .rk{font-size:10.5px;font-weight:700;color:var(--or-deep);letter-spacing:.07em}
-.pick .nm{font-weight:650;font-size:13.5px;margin:3px 0 2px;line-height:1.3}
-.pick .mt{font-size:12px;color:var(--dim)}
-.pick .vv{font-size:15px;font-weight:700;margin-top:5px;font-variant-numeric:tabular-nums}
-
-/* ---------- filter bar ---------- */
-.bar{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:11px 12px;margin-bottom:14px}
-.grp{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:5px 0}
-.grp .lbl{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--or-deep);min-width:60px}
-.chip{background:var(--panel);border:1px solid var(--line);color:var(--txt);border-radius:999px;
-  padding:5px 11px;font-size:12.5px;cursor:pointer;font-weight:550;white-space:nowrap}
-.chip:hover{border-color:var(--or-ink)}
-.chip[aria-pressed="true"]{background:var(--or);border-color:var(--or);color:#1B1B1B;font-weight:700}
-.acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:9px;padding-top:9px;border-top:1px solid var(--line)}
-.btn{background:var(--panel);border:1px solid var(--line);color:var(--txt);border-radius:8px;
-  padding:6px 11px;font-size:12.5px;cursor:pointer;font-weight:600}
-.btn:hover{border-color:var(--or-ink);color:var(--or-ink)}
-.btn.pri{background:var(--or);border-color:var(--or);color:#1B1B1B}
-.seg{display:inline-flex;background:var(--panel);border:1px solid var(--line);border-radius:8px;overflow:hidden}
-.seg button{background:none;border:0;color:var(--txt);padding:6px 15px;font-size:12.5px;font-weight:650;cursor:pointer}
-.seg button[aria-pressed="true"]{background:var(--or);color:#1B1B1B}
-
-/* ---------- table ---------- */
-.tblwrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--panel);box-shadow:var(--shadow)}
-table{border-collapse:collapse;width:100%;min-width:1080px;font-size:13px}
-th{background:var(--panel2);text-align:left;padding:9px 9px;font-size:10.5px;text-transform:uppercase;
-  letter-spacing:.06em;color:var(--or-deep);border-bottom:1px solid var(--line);white-space:nowrap;position:sticky;top:0;z-index:2}
-th.s{cursor:pointer;user-select:none}
-th.s:hover{color:var(--or-ink)}
-th .ar{opacity:.35;font-size:9px}
-th.act .ar{opacity:1}
-td{padding:8px 9px;border-bottom:1px solid var(--line);vertical-align:top}
-tbody tr:hover{background:var(--panel2)}
-tr.marked td:first-child{box-shadow:inset 3px 0 0 var(--or)}
-tr.passed{opacity:.5}
-tr.passed td:first-child{box-shadow:inset 3px 0 0 var(--dim)}
-tr.passed .nm{text-decoration:line-through;text-decoration-color:var(--dim)}
-.nm{font-weight:600}
-.vn{font-size:11.5px;color:var(--dim);margin-top:1px}
-.dt{white-space:nowrap;font-variant-numeric:tabular-nums;font-weight:600}
-.dd{font-size:11px;color:var(--dim);font-weight:500}
-.u14{color:var(--bad);font-weight:700}
-.u30{color:var(--or-ink);font-weight:700}
-.pill{display:inline-block;padding:2px 8px;border-radius:999px;font-size:11.5px;font-weight:650;color:#1B1B1B;white-space:nowrap}
-.d1{background:var(--r1)}.d2{background:var(--r2)}.d3{background:var(--r3)}.d4{background:var(--r4)}
-:root[data-theme="dark"] .d2,:root[data-theme="dark"] .d3,:root[data-theme="dark"] .d4{color:#F0E9E2}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .d2,:root:not([data-theme="light"]) .d3,:root:not([data-theme="light"]) .d4{color:#F0E9E2}}
-.cf{font-size:11.5px;font-weight:650;white-space:nowrap}
-.cf.confirmed{color:var(--ok)}.cf.listed{color:var(--mid)}.cf.unverified{color:var(--bad)}
-.val{font-variant-numeric:tabular-nums;font-weight:700;white-space:nowrap;cursor:help;border-bottom:1px dotted var(--dim)}
-.val.neg{color:var(--bad)}
-.val .sc{font-weight:600;color:var(--dim);font-size:11.5px}
-.est{font-size:10px;color:var(--dim);font-weight:600;text-transform:uppercase;letter-spacing:.04em}
-.foc{font-size:11.5px;color:var(--dim)}
-.mk{display:flex;gap:3px;flex-wrap:wrap}
-.mk button{background:var(--panel2);border:1px solid var(--line);color:var(--dim);border-radius:6px;
-  padding:2px 6px;font-size:10.5px;cursor:pointer;font-weight:650}
-.mk button[aria-pressed="true"]{background:var(--or);border-color:var(--or);color:#1B1B1B}
-.gc{display:inline-block;font-size:11px;font-weight:650;color:var(--or-ink);text-decoration:none;white-space:nowrap;margin-top:3px}
-.gc:hover{text-decoration:underline}
-.ct{font-size:11.5px;color:var(--dim);max-width:210px}
-
-/* ---------- calendar ---------- */
-.cal{display:none}
-.cal.on{display:block}
-.tbl.off{display:none}
-.mon{margin-bottom:20px}
-.mon h3{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--or-deep);margin:0 0 7px}
-.dow{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-bottom:5px}
-.dow div{font-size:10px;font-weight:700;letter-spacing:.06em;color:var(--dim);text-align:center;text-transform:uppercase}
-.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
-.cell{min-height:88px;border:1px solid var(--line);border-radius:8px;padding:5px;background:var(--panel);overflow:hidden}
-.cell.pad{background:transparent;border-color:transparent}
-.cell.past{opacity:.42}
-.cell .dn{font-size:11px;font-weight:700;color:var(--dim);margin-bottom:3px;font-variant-numeric:tabular-nums}
-.cell .dlabel{display:none}
-.cell .ev{display:block;font-size:11px;line-height:1.28;padding:3px 5px;border-radius:5px;margin-bottom:3px;
-  background:var(--panel2);border:1px solid var(--line);color:var(--dim);text-decoration:none;overflow:hidden}
-.cell .ev b{display:block;font-weight:600;color:var(--txt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.cell .ev.best{background:var(--or);border-color:var(--or);color:#1B1B1B}
-.cell .ev.passed{opacity:.5}
-.cell .ev.passed b{text-decoration:line-through;text-decoration-color:var(--dim)}
-.cell .ev.best b{color:#1B1B1B;font-weight:750}
-.cell .ev .tag{display:inline-block;font-size:9px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
-  background:#1B1B1B;color:var(--or);border-radius:3px;padding:0 4px;margin-top:2px}
-.cell .ev .vv{font-variant-numeric:tabular-nums}
-.wkcollapse{grid-column:1/-1;font-size:11px;color:var(--dim);text-align:center;padding:3px;
-  border:1px dashed var(--line);border-radius:6px;background:transparent}
-
-/* ---------- misc ---------- */
-.note{background:var(--panel2);border:1px solid var(--line);border-left:3px solid var(--or);
-  border-radius:8px;padding:11px 13px;font-size:12.5px;color:var(--dim);margin:14px 0}
-.note b{color:var(--txt)}
-details.how{margin:16px 0;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:11px 13px}
-details.how summary{cursor:pointer;font-weight:700;font-size:13px;color:var(--or-deep)}
-details.how div{font-size:12.5px;color:var(--dim);margin-top:9px}
-details.how code{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:1px 4px;font-size:11.5px}
-.out{width:100%;min-height:150px;margin-top:9px;font:11px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace;
-  background:var(--panel);color:var(--txt);border:1px solid var(--line);border-radius:8px;padding:9px;display:none}
-.out.on{display:block}
-footer{margin-top:26px;padding-top:14px;border-top:1px solid var(--line);font-size:11.5px;color:var(--dim)}
-.empty{padding:36px 16px;text-align:center;color:var(--dim);font-size:13.5px}
-.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--or);color:#1B1B1B;
-  font-weight:700;font-size:13px;padding:9px 17px;border-radius:999px;box-shadow:var(--shadow);z-index:50;display:none}
-.toast.on{display:block}
-
-/* ---------- phone: calendar becomes an agenda list ---------- */
-@media (max-width:700px){
-  .wrap{padding:14px 11px 56px}
-  h1{font-size:19px}
-  .tiles{grid-template-columns:repeat(auto-fit,minmax(104px,1fr))}
-  .tile b{font-size:18px}
-  .dow{display:none}
-  .grid{display:block}
-  .cell{display:none;min-height:0;margin-bottom:7px;border-radius:8px}
-  .cell.has{display:block}
-  .cell.pad{display:none}
-  .cell.past{display:none}
-  .wkcollapse{display:none}
-  .cell .dn{display:none}
-  .cell .dlabel{display:block;font-size:10.5px;font-weight:800;letter-spacing:.09em;
-    text-transform:uppercase;color:var(--or-deep);margin-bottom:5px}
-  .cell .ev{font-size:12.5px;padding:6px 8px}
-  .cell .ev b{white-space:normal}
-  .grp .lbl{min-width:100%}
+@media(max-width:560px){
+ .hide-m{display:none}
+ .m-only{display:flex;gap:8px;align-items:center;margin-top:6px}
+ .stats{grid-template-columns:repeat(3,1fr);gap:7px}
+ .stat{padding:9px 10px;border-top-width:2px}
+ .stat .v{font-size:17px}.stat .k{font-size:9px;letter-spacing:.04em}
+ td{padding:10px 8px}th{padding:9px 8px}
+ .nm{font-size:13.5px}
+ h1{font-size:19px}
+ .legend{font-size:11px;gap:9px}
 }
-</style>
-</head>
-<body>
-<div class="wrap">
-
-<header class="top">
-  <img class="logo" alt="Pandashade's Card Shop" src="data:image/png;base64,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">
-  <h1><small>Pandashade's Card Shop</small>Card Show Radar</h1>
-  <button class="themebtn" id="themebtn" type="button">Theme</button>
-</header>
-<p class="sub">Troy, OH 45373 &middot; 2 tables per show &middot; scanned <b id="scandate">Aug 25, 2026</b> &middot; <span id="cnt"></span></p>
-
-<div class="tiles" id="tiles"></div>
-
-<section class="picks">
-  <h2>Top picks by expected value</h2>
-  <div class="pickrow" id="pickrow"></div>
-</section>
-
+</style></head><body><div class="wrap">
+<div class="topbar"></div>
+<header><img class="logo" src="data:image/png;base64,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" alt="Pandashade's Card Shop">
+<div><div class="brand">Pandashade&rsquo;s Card Shop</div><h1>Card Show Radar</h1>
+<div class="sub">Troy, OH 45373 &nbsp;&middot;&nbsp; vendor view &nbsp;&middot;&nbsp; updated Aug 18, 2026</div></div></header>
+<div class="stats" id="stats"></div>
+<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-top:16px">
+<div class="vsw"><button class="on" data-view="table">Table</button><button data-view="cal">Calendar</button></div>
+<span class="sub" id="scope"></span></div>
+<div class="picksbar" id="picks"></div>
 <div class="bar">
-  <div class="grp"><span class="lbl">Radius</span>
-    <button class="chip" data-f="rad" data-v="30" type="button">&le; 30 min</button>
-    <button class="chip" data-f="rad" data-v="60" type="button">&le; 60 min</button>
-    <button class="chip" data-f="rad" data-v="90" type="button">&le; 90 min</button>
-    <button class="chip" data-f="rad" data-v="120" type="button">&le; 2 hrs</button>
-    <button class="chip" data-f="rad" data-v="999" aria-pressed="true" type="button">Any</button>
-  </div>
-  <div class="grp"><span class="lbl">Month</span><span id="months"></span></div>
-  <div class="grp"><span class="lbl">Type</span>
-    <button class="chip" data-f="typ" data-v="all" type="button">All</button>
-    <button class="chip" data-f="typ" data-v="sports" type="button">Sports only</button>
-    <button class="chip" data-f="typ" data-v="nopoke" aria-pressed="true" type="button">No Pok&eacute;mon-only</button>
-  </div>
-  <div class="grp"><span class="lbl">Cost</span>
-    <button class="chip" data-f="cc" data-v="1" type="button">Confirmed cost only</button>
-    <button class="chip" data-f="mk" data-v="1" type="button">My marked shows</button>
-    <button class="chip" data-f="sp" data-v="1" id="spChip" type="button">Show passed</button>
-  </div>
-  <div class="acts">
-    <span class="seg"><button id="vTable" aria-pressed="true" type="button">Table</button><button id="vCal" type="button">Calendar</button></span>
-    <button class="btn pri" id="copyPicks" type="button">Copy picks</button>
-    <button class="btn" id="dlIcs" type="button">Download .ics</button>
-    <button class="btn" id="cpIcs" type="button">Copy .ics text</button>
-    <button class="btn" id="clearAll" type="button">Clear all</button>
-  </div>
-  <textarea class="out" id="out" readonly spellcheck="false"></textarea>
+<div class="grp"><span class="lbl">Radius</span>
+<button class="chip on" data-f="r" data-v="all">All</button>
+<button class="chip" data-f="r" data-v="45">&le;45 min</button>
+<button class="chip" data-f="r" data-v="90">&le;90 min</button>
+<button class="chip" data-f="r" data-v="150">&le;2.5 hr</button></div>
+<div class="grp"><span class="lbl">Month</span><span id="months"></span></div>
+<div class="grp"><span class="lbl">Type</span>
+<button class="chip on" data-f="t" data-v="all">All</button>
+<button class="chip" data-f="t" data-v="sports">Sports</button>
+<button class="chip" data-f="t" data-v="nopoke">No Pok&eacute;mon-only</button></div>
+<div class="grp"><span class="lbl">Data</span>
+<button class="chip on" data-f="c" data-v="all">All</button>
+<button class="chip" data-f="c" data-v="confirmed">Table $ known</button></div>
+<input type="search" id="q" placeholder="Search show / city...">
 </div>
+<div class="legend"><b style="color:var(--txt)">Drive:</b>
+<span><i class="sw" style="background:var(--or-4)"></i>home</span>
+<span><i class="sw" style="background:var(--or-3)"></i>&le;45m</span>
+<span><i class="sw" style="background:var(--or-2)"></i>&le;90m</span>
+<span><i class="sw" style="background:var(--or-1);border:1px solid var(--line)"></i>&le;2.5h</span>
+<span><i class="sw" style="border:1px dashed var(--or)"></i>road trip</span>
+<span style="margin-left:6px"><b style="color:var(--txt)">Data:</b></span>
+<span class="conf c-confirmed">confirmed</span>
+<span class="conf c-listed">listed</span>
+<span class="conf c-unverified">unverified</span></div>
+<div id="v-table"><div class="tw" style="margin-top:12px"><table><thead><tr>
+<th data-s="date">Date</th><th data-s="days" class="hide-s">In</th><th data-s="name">Show</th>
+<th data-s="ev">Value</th><th data-s="drive" class="hide-m">Drive</th><th data-s="cost" class="hide-m">Table</th><th class="hide-s">Tables</th>
+<th class="hide-s">Contact / booking</th><th data-s="status">Status</th>
+</tr></thead><tbody id="tb"></tbody></table></div></div>
+<div id="v-cal" style="display:none"></div>
+<div class="empty" id="empty" style="display:none">No shows match those filters.</div>
 
-<div class="note">
-  <b>Calendar import:</b> the .ics carries <code>X-WR-CALNAME:Pandashade Cards</code> but Google ignores it &mdash;
-  you still have to pick <b>Pandashade Cards</b> in the import dialog or it lands in your default calendar.
-  Everything marked except <b>Pass</b> is included. If the download button does nothing (artifact viewer blocks
-  page-initiated downloads), use <b>Copy .ics text</b> and paste into a file named <code>card-shows.ics</code>.
+<div class="picks"><h3>Your picks &mdash; copy this back to me and I'll save it to the project</h3>
+<pre id="out">Nothing marked yet.</pre>
+<div style="margin-top:9px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+<button class="chip" id="copy">Copy picks</button>
+<button class="chip" id="ics">Download .ics</button>
+<button class="chip" id="clear">Clear all</button>
+<span class="badge" id="stor"></span>
+<span class="sub" id="cs"></span></div></div>
+
+<div class="foot">
+<b>Reading the table.</b> Drive times are estimates from Troy &mdash; darker orange is closer to home.
+<span class="conf c-confirmed">confirmed</span> table cost and/or promoter contact verified on a primary source &middot;
+<span class="conf c-listed">listed</span> date and venue from a show calendar, table cost not published, you'll need to email &middot;
+<span class="conf c-unverified">unverified</span> aggregator listing with no venue detail; a lead, not a plan.<br>
+<b>Calendar.</b> <b style="color:var(--or-ink)">+ Calendar</b> on any row opens Google Calendar with the date, venue, table cost and promoter contact already filled in &mdash; you just hit Save. <b>Download .ics</b> exports everything you've marked (except Pass) as one file you can import into Google Calendar, Apple Calendar or Outlook in one go. Both create all-day events.<br>
+<b>Status marks save in this browser</b> and survive reloads and weekly file updates &mdash; they're keyed to the show, not the row position. They do not sync between your phone and desktop; use Copy picks to move them across, or paste the block to me and I'll fold it into the project.
 </div>
-
-<div class="tbl" id="tblView">
-  <div class="tblwrap">
-    <table>
-      <thead><tr>
-        <th class="s" data-k="date">Date <span class="ar">&#9650;</span></th>
-        <th class="s" data-k="name">Show <span class="ar">&#9650;</span></th>
-        <th class="s" data-k="drive">Drive <span class="ar">&#9650;</span></th>
-        <th class="s" data-k="ev">Value <span class="ar">&#9650;</span></th>
-        <th class="s" data-k="cost">Table $ <span class="ar">&#9650;</span></th>
-        <th class="s" data-k="tables">Tables <span class="ar">&#9650;</span></th>
-        <th>Adm</th>
-        <th>Hours</th>
-        <th class="s" data-k="focus">Focus <span class="ar">&#9650;</span></th>
-        <th class="s" data-k="conf">Conf <span class="ar">&#9650;</span></th>
-        <th>Contact</th>
-        <th>Mark</th>
-      </tr></thead>
-      <tbody id="tbody"></tbody>
-    </table>
-  </div>
-  <div class="empty" id="empty" style="display:none">Nothing matches those filters.</div>
 </div>
-
-<div class="cal" id="calView"></div>
-
-<details class="how">
-  <summary>How the value is calculated (model v3 &mdash; dollars per hour)</summary>
-  <div>
-    <p><code>sizeAdj = 0.75 + 0.25 &times; min(tables/150, 1.6)</code> &middot;
-       <code>dayMult = min(1 + 0.6&times;(days&minus;1), 2.2)</code> &middot;
-       audience: sports 1.00 / mixed 0.80 / Pok&eacute;mon 0.25 &middot;
-       risk: confirmed 1.00 / listed 0.90 / unverified 0.65</p>
-    <p><code>cardMargin = $290 &times; sizeAdj &times; dayMult &times; audience &times; risk</code>.
-       $290 is calibrated against your own logged results from two 2026 shows (figures kept off this page).
-       Table cost is <b>2 tables</b>, using the 2-for price where one is published.
-       Mileage is <code>drive &times; 0.85 mi/min &times; 2 &times; $0.30/mi</code>; $140 lodging only if multi-day and over 2 hours out.
-       Hours are open hours + 1.5 h setup per day + round-trip drive. The headline is
-       <code>net &divide; hours</code>; the score is <code>10 &times; (1 &minus; e^(&minus;$/hr / 18))</code>.</p>
-    <p>Defaults when unpublished: 80 tables, $50/table &mdash; those rows are flagged <span class="est">est.</span>
-       Shows over 150 minutes away with no published booth cost are not scored at all.
-       Nothing currently inside the radius clears 7/10; Xenia is the ceiling at about $23/hr.</p>
-  </div>
-</details>
-
-<footer>
-  Sources: TCDb (OH + IN state pages), allohiocardshows.com, Sports Collectors Digest, jumboscards.com,
-  sportscardradio.com, cardshows.io, cardfestevents.com, gametimesportscollect.com, jjallstarsportscards.com,
-  nsccshow.com. <b>hobbyhub.pro must be checked manually</b> &mdash; it renders client-side and cannot be scanned.
-  Marks are stored in this browser only, under <code>psr-status-v1</code>, keyed by date|name|city &mdash;
-  they survive a file swap but do not sync between devices or between the artifact and the GitHub Pages copy.
-</footer>
-
-</div>
-<div class="toast" id="toast"></div>
-
 <script>
-"use strict";
-var SHOWS = [
-{"date":"2026-08-26","name":"Pokemon, TCG & Sports Card Show","city":"Columbus, OH","venue":"Counter Balance Brewing Company","drive":80,"hours":"5:00p-9:00p","focus":"mixed","src":"tcdb.com","conf":"listed"},
-{"date":"2026-08-29","name":"Cards And Cold Ones","city":"Cincinnati, OH","venue":"High Grain Brewery - Brentwood","drive":70,"hours":"4:00p-9:00p","focus":"mixed","src":"tcdb.com","conf":"listed"},
-{"date":"2026-08-29","name":"Coffee & Cards","city":"Lebanon, OH","venue":"Script Coffee","drive":55,"hours":"9:00a-2:00p","focus":"sports","src":"tcdb.com","conf":"listed"},
-{"date":"2026-08-29","name":"Grab a Centerpiece Card Show","city":"Newark, OH","venue":"Veterans of Foreign Wars Club, 469 Forry St","drive":120,"tables":60,"cost":50,"cost2":80,"adm":"Free","hours":"9:00a-4:00p","focus":"mixed","contact":"Don Jones 614-592-0458 — $50, 2 for $80","src":"sportscollectorsdigest.com","conf":"confirmed"},
-{"date":"2026-08-29","name":"PokePop","city":"Dayton, OH","venue":"Dayton Mall","drive":25,"hours":"10:00a-8:00p","focus":"pokemon","src":"tcdb.com","conf":"listed"},
-{"date":"2026-08-30","name":"Oakley Greens Card Party","city":"Cincinnati, OH","venue":"Oakley Greens, 3065 Vandercar Way","drive":70,"tables":40,"hours":"10:00a-3:00p","focus":"mixed","src":"allohiocardshows.com","conf":"listed"},
-{"date":"2026-08-30","name":"PokePop","city":"Dayton, OH","venue":"Dayton Mall","drive":25,"hours":"12:00p-6:00p","focus":"pokemon","src":"tcdb.com","conf":"listed"},
-{"date":"2026-09-02","name":"Pokemon, TCG & Sports Card Show","city":"Columbus, OH","venue":"Counter Balance Brewing Company","drive":80,"hours":"5:00p-9:00p","focus":"mixed","src":"tcdb.com","conf":"listed"},
-{"date":"2026-09-05","name":"Card Collector Fellowship","city":"Greenfield, IN","venue":"Hancock County Fairgrounds, 576 N Apple St","drive":110,"tables":65,"adm":"$5 early bird 8-10a","hours":"8:00a-3:00p","focus":"mixed","src":"tcdb.com","conf":"listed"},
-{"date":"2026-09-05","name":"Columbus Sports Card Show","city":"Hilliard, OH","venue":"Franklin County Fairgrounds","drive":80,"adm":"Free","hours":"10:00a-4:00p","focus":"sports","src":"tcdb.com","conf":"listed"},
-{"date":"2026-09-05","end":"2026-09-06","name":"Columbus TCG Convention","city":"Newark, OH","venue":"Cherry Valley Hotel & Ohio Event Center","drive":120,"hours":"Sat 10:00a-7:00p, Sun 10:00a-6:00p","focus":"pokemon","src":"tcdb.com","conf":"listed"},
-{"date":"2026-09-05","name":"D'Ork Fest","city":"Mansfield, OH","venue":"Richland Fairgrounds","drive":135,"hours":"10:00a-4:00p","focus":"mixed","src":"tcdb.com","conf":"listed"},
-{"date":"2026-09-05","name":"Indy Sports Card Show","city":"Indianapolis, IN","venue":"La Quinta Inn, 5120 Victory Dr","drive":110,"tables":50,"adm":"Free","hours":"8:00a-2:00p","focus":"sports","contact":"Patrick Segura 765-637-1100","src":"tcdb.com","conf":"listed"},
-{"date":"2026-09-05","name":"Jay County Fair Collectibles Show","city":"Portland, IN","venue":"Jay County Fairgrounds, 806 E Votaw St","drive":60,"hours":"9:00a-2:00p","focus":"mixed","contact":"Jason 260-251-0414","src":"tcdb.com","conf":"listed"},
-{"date":"2026-09-05","name":"Mansfield Sports Card Show","city":"Mansfield, OH","venue":"Richland County Fairgrounds","drive":135,"hours":"10:00a-3:00p","focus":"sports","src":"tcdb.com","conf":"listed"},
-{"date":"2026-09-05","end":"2026-09-06","name":"PokePop","city":"Dayton, OH","venue":"Dayton Mall","drive":25,"hours":"Sat 10:00a-8:00p, Sun 12:00p-6:00p","focus":"pokemon","src":"tcdb.com","conf":"listed"},
-{"date":"2026-09-05","name":"Rockford Community Card Show","city":"Rockford, OH","venue":"Shanes Park - Parks & Community Bldgs, 420 Holly St","drive":55,"tables":70,"hours":"9:00a-3:00p","focus":"mixed","contact":"Travis Bransteter 614-800-9060 — reserving tables now","src":"tcdb.com","conf":"listed"},
-{"date":"2026-09-05","name":"Sportscard Shopping Spree","city":"Beavercreek, OH","venue":"Fairfield Commons Mall","drive":35,"hours":"11:00a-6:30p","focus":"sports","src":"cardshows.io","conf":"unverified"},
-{"date":"2026-09-06","name":"Cincinnati Pokemon Show","city":"Cincinnati, OH","venue":"Greenhills Volunteer Fire Department","drive":70,"hours":"9:00a-3:00p","focus":"pokemon","src":"tcdb.com","conf":"listed"},
-{"date":"2026-09-06","name":"Darke County Card Show","city":"Greenville, OH","venue":"Greenville Middle School, 1111 N Ohio St","drive":30,"hours":"9:30a-3:30p","focus":"sports","contact":"937-474-3113","src":"tcdb.com","conf":"listed"},
-{"date":"2026-09-06","name":"Grove City Card Fest","city":"Grove City, OH","venue":"Central Crossing High School","drive":85,"adm":"$5 early bird / $2 GA","hours":"8:00a-3:00p","focus":"sports","contact":"TABLES SOLD OUT - waitlist: cardcollector2events@gmail.com","src":"cardfestevents.com","conf":"confirmed"},
-{"date":"2026-09-06","name":"Indy Card Show at Beech Grove Moose","city":"Beech Grove, IN","venue":"Beech Grove Moose Lodge, 3320 S Emerson Ave","drive":115,"adm":"Free","hours":"8:00a-6:00p","focus":"mixed","src":"tcdb.com","conf":"unverified"},
-{"date":"2026-09-06","name":"Lancaster Pokemon Only Show","city":"Lancaster, OH","venue":"Lancaster Camp Ground","drive":130,"hours":"10:00a-3:00p","focus":"pokemon","src":"tcdb.com","conf":"listed"},
-{"date":"2026-09-06","name":"Newark High School Sports and Pokemon Show","city":"Newark, OH","venue":"Newark High School Cafeteria","drive":120,"hours":"10:00a-3:00p","focus":"mixed","src":"tcdb.com","conf":"listed"},
-{"date":"2026-09-06","name":"Norwalk Card Show","city":"Norwalk, OH","venue":"Huron County Fairgrounds","drive":150,"tables":55,"cost":35,"adm":"Free","hours":"10:00a-3:00p","focus":"sports","contact":"Tony 419-706-6915","src":"allohiocardshows.com","conf":"confirmed"},
-{"date":"2026-09-06","name":"Sports Cards & TCG Show","city":"Piqua, OH","venue":"Crooked Handle Brewing Co., 123 N Main St","drive":15,"tables":30,"adm":"Free","hours":"11:00a-3:00p","focus":"mixed","contact":"Austin Robertson (TCDb listing) — FEW TABLES LEFT, 50/50 sports/Pokemon split","src":"tcdb.com","conf":"listed"},
-{"date":"2026-09-06","name":"Toledo Sports Card Show","city":"Holland, OH","venue":"The Bunker Bar & Banquet Hall, 1950 S Eber Rd","drive":125,"adm":"Free","hours":"10:00a-3:00p","focus":"sports","src":"tcdb.com","conf":"listed"},
-{"date":"2026-09-07","name":"Outerbelt Card Show","city":"Pickerington, OH","venue":"Grace Fellowship Church","drive":95,"hours":"9:00a-3:00p","focus":"sports","contact":"Labor Day","src":"tcdb.com","conf":"listed"},
-{"date":"2026-09-09","name":"Pokemon, TCG & Sports Card Show","city":"Columbus, OH","venue":"Counter Balance Brewing Company","drive":80,"hours":"5:00p-9:00p","focus":"mixed","src":"tcdb.com","conf":"listed"},
-{"date":"2026-09-12","end":"2026-09-13","name":"Columbus Card Show","city":"Hilliard, OH","venue":"Franklin County Fairgrounds","drive":80,"hours":"Sat 10:00a-4:00p, Sun 10:00a-3:00p","focus":"mixed","src":"tcdb.com","conf":"listed"},
-{"date":"2026-09-12","name":"Noblesville Card Show","city":"Noblesville, IN","venue":"Moose Lodge #540, 950 Field Dr","drive":125,"hours":"9:00a-3:00p","focus":"mixed","contact":"Brad & Travis 463-673-6073 (text preferred)","src":"tcdb.com","conf":"listed"},
-{"date":"2026-09-12","name":"Queen City Card Show","city":"Mason, OH","venue":"Hilton Garden Inn Mason, 5200 Natorp Blvd","drive":55,"hours":"9:00a-3:00p","focus":"sports","src":"tcdb.com","conf":"listed"},
-{"date":"2026-09-12","name":"Sports Cards & Memorabilia Show","city":"Cincinnati, OH","venue":"Oak Hills United Methodist Church","drive":70,"hours":"9:00a-3:00p","focus":"sports","src":"tcdb.com","conf":"listed"},
-{"date":"2026-09-12","name":"Sports Memorabilia & Trading Card Show","city":"Xenia, OH","venue":"Greene County Fairgrounds / Expo Center, 120 Fairgrounds Rd","drive":45,"tables":150,"cost":40,"adm":"Free (free parking)","hours":"10:00a-3:00p","focus":"sports","contact":"Ken Ludington 937-671-0516 / SportsCardShow@gmail.com","src":"sportscardradio.com","conf":"confirmed"},
-{"date":"2026-09-12","name":"TD's Cards, Collectibles & More","city":"Chillicothe, OH","venue":"Ohio University Chillicothe, Shoemaker Center","drive":120,"hours":"9:00a-4:00p","focus":"mixed","src":"tcdb.com","conf":"listed"},
-{"date":"2026-09-12","end":"2026-09-13","name":"The Toledo Card Show at TOCA","city":"Rossford, OH","venue":"TOCA Rossford","drive":130,"tables":300,"cost":200,"adm":"$5","hours":"Sat 10:00a-6:00p, Sun 10:00a-4:00p","focus":"mixed","contact":"info@clocktowercomix.com / 419-469-9117","src":"toledosportscardshow.com","conf":"confirmed"},
-{"date":"2026-09-13","name":"Collectors Palooza 2026","city":"Indianapolis, IN","venue":"Indiana State Fairgrounds, Ag/Hort Bldg","drive":110,"tables":125,"hours":"9:00a-5:00p","focus":"pokemon","contact":"Pokemon + One Piece, NOT sports","src":"tcdb.com","conf":"listed"},
-{"date":"2026-09-16","name":"Pokemon, TCG & Sports Card Show","city":"Columbus, OH","venue":"Counter Balance Brewing Company","drive":80,"hours":"5:00p-9:00p","focus":"mixed","src":"tcdb.com","conf":"listed"},
-{"date":"2026-09-18","end":"2026-09-19","name":"Jumbo's Champion Mill Card Show","city":"Hamilton, OH","venue":"Spooky Nook Sports Complex","drive":60,"tables":700,"adm":"$5","hours":"Fri 4:00p-8:00p, Sat 10:00a-4:00p","focus":"mixed","contact":"Jumbo's 567-294-4018 — SOLD OUT to vendors, not cancelled; ask for waitlist","src":"jumboscards.com","conf":"listed"},
-{"date":"2026-09-19","name":"Bigfoot Card Expo","city":"Celina, OH","venue":"Mercer County Fairgrounds, 1001 W Market St","drive":50,"tables":80,"cost":25,"adm":"Free","hours":"9:00a-3:00p","focus":"mixed","contact":"Email for table availability (TCDb listing) — $25/table","src":"tcdb.com","conf":"confirmed"},
-{"date":"2026-09-19","name":"Card Collectors & Memorabilia Show","city":"Plain City, OH","venue":"Plain City Elementary School","drive":70,"tables":85,"cost":35,"adm":"Free","hours":"10:00a-2:00p","focus":"sports","contact":"Kevin - plaincitycardcollectors@gmail.com ($30-40/table)","src":"sportscollectorsdigest.com","conf":"confirmed"},
-{"date":"2026-09-19","name":"Card Show, Memorabilia & Pokemon Expo","city":"Cincinnati, OH","venue":"Eastgate Mall","drive":85,"adm":"Free","hours":"10:00a-6:00p","focus":"mixed","contact":"City2City Card Show (FB)","src":"tcdb.com","conf":"listed"},
-{"date":"2026-09-19","name":"J&J All Stars Card Show","city":"Fishers, IN","venue":"American Legion Post 470, 9091 E 126th St","drive":120,"tables":60,"cost":40,"adm":"Free","hours":"8:00a-2:00p","focus":"sports","contact":"Jeff Meyrose 317-504-8110 — $40/table","src":"sportscollectorsdigest.com","conf":"confirmed"},
-{"date":"2026-09-19","name":"Southern Ohio Sports Card Spectacular","city":"Chillicothe, OH","venue":"Ross County Fairgrounds Multi-purpose Bldg","drive":120,"tables":55,"adm":"Free","hours":"9:00a-3:00p","focus":"sports","contact":"Rob Dolby 740-601-6090 — Sep 19 confirmed (promoter site typo said Sep 17, a Thursday)","src":"gametimesportscollect.com","conf":"listed"},
-{"date":"2026-09-19","name":"Sports Cards and Collectible Show","city":"Columbus, OH","venue":"Columbus, OH","drive":80,"hours":"9:00a-3:00p","focus":"sports","src":"tcdb.com","conf":"listed"},
-{"date":"2026-09-20","name":"Blue Ribbon Coin & Card Show","city":"Rossford, OH","venue":"Blue Ribbon Coins","drive":130,"hours":"9:00a-3:00p","focus":"mixed","src":"tcdb.com","conf":"listed"},
-{"date":"2026-09-23","name":"Pokemon, TCG & Sports Card Show","city":"Columbus, OH","venue":"Counter Balance Brewing Company","drive":80,"hours":"5:00p-9:00p","focus":"mixed","src":"tcdb.com","conf":"listed"},
-{"date":"2026-09-24","name":"Collectors Night","city":"Cincinnati, OH","venue":"American Legion, 11100 Winton Rd","drive":70,"hours":"6:00p-9:30p","focus":"mixed","src":"tcdb.com","conf":"listed"},
-{"date":"2026-09-26","name":"Black Swamp Card Show","city":"Tiffin, OH","venue":"Tiffin Moose Lodge #84","drive":125,"tables":40,"cost":30,"adm":"Free","hours":"10:00a-4:00p","focus":"sports","contact":"$30 per 6ft table","src":"allohiocardshows.com","conf":"confirmed"},
-{"date":"2026-09-26","name":"Card Show at the Square","city":"St. Marys, OH","venue":"St Marys Square, 1244 Indiana Ave","drive":50,"cost":40,"hours":"9:00a-3:00p","focus":"sports","contact":"419-305-4163 — $40/table","src":"tcdb.com","conf":"confirmed"},
-{"date":"2026-09-26","name":"Carmel Sports Card Show","city":"Carmel, IN","venue":"American Legion Post 155, 852 W Main St","drive":120,"tables":75,"hours":"9:00a-3:00p","focus":"sports","src":"tcdb.com","conf":"listed"},
-{"date":"2026-09-26","name":"Grab a Centerpiece Card Show","city":"Newark, OH","venue":"Veterans of Foreign Wars Club, 469 Forry St","drive":120,"tables":60,"cost":50,"cost2":80,"adm":"Free","hours":"9:00a-4:00p","focus":"mixed","contact":"Don Jones 614-592-0458 — $50, 2 for $80","src":"sportscollectorsdigest.com","conf":"confirmed"},
-{"date":"2026-09-26","name":"Sports Card & Pokemon Show","city":"Cincinnati, OH","venue":"Northgate Mall","drive":65,"tables":250,"adm":"Free","hours":"11:00a-6:00p","focus":"mixed","contact":"City2City Card Show (FB)","src":"cardshows.io","conf":"listed"},
-{"date":"2026-09-26","name":"Sports Cards & TCG Show","city":"Delaware, OH","venue":"Delaware Christian Church","drive":95,"hours":"11:00a-3:00p","focus":"mixed","src":"tcdb.com","conf":"listed"},
-{"date":"2026-09-27","name":"Carmel Pokemon Show","city":"Carmel, IN","venue":"American Legion Post 155","drive":120,"tables":75,"hours":"9:00a-3:00p","focus":"pokemon","src":"tcdb.com","conf":"listed"},
-{"date":"2026-09-27","name":"Findlay Ohio Sports Card Show","city":"Findlay, OH","venue":"Hancock County Fairgrounds","drive":95,"hours":"10:00a-3:00p","focus":"sports","src":"tcdb.com","conf":"listed"},
-{"date":"2026-09-27","name":"Sports Cards and Collectible Show","city":"Westerville, OH","venue":"Grizzly Bird Brewing Company","drive":85,"hours":"9:00a-3:00p","focus":"mixed","src":"tcdb.com","conf":"listed"},
-{"date":"2026-09-30","name":"Pokemon, TCG & Sports Card Show","city":"Columbus, OH","venue":"Counter Balance Brewing Company","drive":80,"hours":"5:00p-9:00p","focus":"mixed","src":"tcdb.com","conf":"listed"},
-{"date":"2026-10-02","end":"2026-10-03","name":"J&J All Star Midwest Monster","city":"Fishers, IN","venue":"Best Choice Fieldhouse, 11825 Technology Dr","drive":120,"tables":450,"adm":"$10 GA / $25 VIP","hours":"Fri 12:00p-7:00p, Sat 10:00a-5:00p","focus":"mixed","contact":"Jeff Meyrose 317-504-8110","src":"jjallstarsportscards.com","conf":"listed"},
-{"date":"2026-10-03","name":"Buckeye Card Show","city":"Columbus, OH","venue":"Stars Indoor Sports","drive":80,"hours":"10:00a-8:00p","focus":"mixed","src":"tcdb.com","conf":"listed"},
-{"date":"2026-10-03","name":"Indy Sports Card Show","city":"Indianapolis, IN","venue":"La Quinta Inn, 5120 Victory Dr","drive":110,"tables":50,"adm":"Free","hours":"8:00a-2:00p","focus":"sports","contact":"Patrick Segura 765-637-1100","src":"tcdb.com","conf":"listed"},
-{"date":"2026-10-03","name":"Jay County Fair Collectibles Show","city":"Portland, IN","venue":"Jay County Fairgrounds","drive":60,"hours":"9:00a-2:00p","focus":"mixed","contact":"Jason 260-251-0414","src":"tcdb.com","conf":"listed"},
-{"date":"2026-10-03","name":"Noblesville Card Show","city":"Noblesville, IN","venue":"Moose Lodge #540","drive":125,"hours":"9:00a-3:00p","focus":"mixed","contact":"Brad & Travis 463-673-6073","src":"tcdb.com","conf":"listed"},
-{"date":"2026-10-03","end":"2026-10-04","name":"PokePop","city":"Dayton, OH","venue":"Dayton Mall","drive":25,"hours":"Sat 10:00a-8:00p, Sun 12:00p-6:00p","focus":"pokemon","src":"tcdb.com","conf":"listed"},
-{"date":"2026-10-04","name":"Darke County Card Show","city":"Greenville, OH","venue":"Greenville Middle School","drive":30,"hours":"9:30a-3:30p","focus":"sports","contact":"937-474-3113","src":"tcdb.com","conf":"listed"},
-{"date":"2026-10-04","name":"Toledo Sports Card Show","city":"Holland, OH","venue":"The Bunker Bar & Banquet Hall","drive":125,"adm":"Free","hours":"10:00a-3:00p","focus":"sports","src":"tcdb.com","conf":"listed"},
-{"date":"2026-10-07","name":"Pokemon, TCG & Sports Card Show","city":"Columbus, OH","venue":"Counter Balance Brewing Company","drive":80,"hours":"5:00p-9:00p","focus":"mixed","src":"tcdb.com","conf":"listed"},
-{"date":"2026-10-10","name":"Celina Card Show","city":"Celina, OH","venue":"Celina Eagles","drive":50,"hours":"10:00a-3:00p","focus":"sports","src":"tcdb.com","conf":"listed"},
-{"date":"2026-10-10","end":"2026-10-11","name":"I-69 Bronco Bash Card & Collectible Show","city":"Daleville, IN","venue":"Daleville High School, 8600 S Bronco Dr","drive":100,"tables":300,"adm":"$5 GA / $10 VIP","hours":"Sat 11:00a-6:00p, Sun 10:00a-3:00p","focus":"mixed","contact":"H&H Card Shows + Three Strikes + Gem Mint (FB)","src":"tcdb.com","conf":"listed"},
-{"date":"2026-10-10","name":"Sports Memorabilia & Trading Card Show","city":"Xenia, OH","venue":"Greene County Fairgrounds / Expo Center","drive":45,"tables":150,"cost":40,"adm":"Free (free parking)","hours":"10:00a-3:00p","focus":"sports","contact":"Ken Ludington 937-671-0516 / SportsCardShow@gmail.com","src":"sportscardradio.com","conf":"confirmed"},
-{"date":"2026-10-11","name":"The Findlay TCG Card Show","city":"Findlay, OH","venue":"Hancock County Fairgrounds","drive":95,"hours":"10:00a-3:00p","focus":"pokemon","src":"tcdb.com","conf":"listed"},
-{"date":"2026-10-14","name":"Pokemon, TCG & Sports Card Show","city":"Columbus, OH","venue":"Counter Balance Brewing Company","drive":80,"hours":"5:00p-9:00p","focus":"mixed","src":"tcdb.com","conf":"listed"},
-{"date":"2026-10-16","end":"2026-10-17","name":"The Findlay Card Show (Jumbo's)","city":"Findlay, OH","venue":"The Crest","drive":95,"tables":80,"cost":110,"cost2":210,"hours":"Fri 5:00p-9:00p, Sat 10:00a-3:00p","focus":"mixed","contact":"Jumbo's 567-294-4018 — 8ft from $110, 2 for $210, 80 in stock; setup Fri 11a-1p or Sat 7-8a only","src":"jumboscards.com","conf":"confirmed"},
-{"date":"2026-10-17","name":"Buckeye Card Show","city":"Columbus, OH","venue":"Stars Indoor Sports","drive":80,"hours":"10:00a-7:00p","focus":"mixed","src":"tcdb.com","conf":"listed"},
-{"date":"2026-10-17","name":"Card Show, Memorabilia & Pokemon Expo","city":"Cincinnati, OH","venue":"Eastgate Mall","drive":85,"adm":"Free","hours":"10:00a-6:00p","focus":"mixed","contact":"City2City Card Show (FB)","src":"tcdb.com","conf":"listed"},
-{"date":"2026-10-17","name":"J&J All Stars Card Show","city":"Fishers, IN","venue":"American Legion Post 470","drive":120,"tables":60,"cost":40,"adm":"Free","hours":"8:00a-2:00p","focus":"sports","contact":"Jeff Meyrose 317-504-8110 — $40/table","src":"sportscollectorsdigest.com","conf":"confirmed"},
-{"date":"2026-10-17","name":"Mansfield Sports Card Show","city":"Mansfield, OH","venue":"Richland County Fairgrounds","drive":135,"hours":"10:00a-3:00p","focus":"sports","src":"tcdb.com","conf":"listed"},
-{"date":"2026-10-17","end":"2026-10-18","name":"Mega Card & Collectibles Expo","city":"London, OH","venue":"Madison County Fairgrounds","drive":70,"adm":"Free","hours":"10:00a-3:30p","focus":"mixed","src":"tcdb.com","conf":"listed"},
-{"date":"2026-10-17","name":"Rec & Collect Expo","city":"Marion, OH","venue":"Marion Family YMCA","drive":100,"hours":"10:00a-4:00p","focus":"mixed","src":"tcdb.com","conf":"listed"},
-{"date":"2026-10-17","name":"Southway American Legion Show","city":"Columbus, OH","venue":"American Legion Post 144, 3253 S High St","drive":80,"tables":25,"adm":"Free (free parking)","hours":"9:00a-2:00p","focus":"sports","contact":"Rob Dolby 740-601-6090","src":"gametimesportscollect.com","conf":"listed"},
-{"date":"2026-10-17","name":"Sports Cards & TCG Show","city":"Delaware, OH","venue":"Delaware Christian Church","drive":95,"hours":"11:00a-3:00p","focus":"mixed","src":"tcdb.com","conf":"listed"},
-{"date":"2026-10-17","end":"2026-10-18","name":"Sportscard Spectacular Card Show","city":"Troy, OH","venue":"Miami County Fairgrounds Bldg 610, 650 N County Rd 25A","drive":0,"tables":100,"adm":"Free","hours":"10:00a-3:00p","focus":"sports","contact":"Mike 937-301-7903 — home market, no travel","src":"cardstoresnearme.com","conf":"listed"},
-{"date":"2026-10-18","name":"Collectors Palooza 2026","city":"Indianapolis, IN","venue":"Indiana State Fairgrounds, Ag/Hort Bldg","drive":110,"tables":125,"hours":"9:00a-5:00p","focus":"pokemon","contact":"Pokemon + One Piece, NOT sports","src":"tcdb.com","conf":"listed"},
-{"date":"2026-10-18","name":"Lancaster Ohio Sports Card Show","city":"Lancaster, OH","venue":"Lancaster Campground - activity bldg","drive":130,"hours":"10:00a-3:00p","focus":"sports","src":"tcdb.com","conf":"listed"},
-{"date":"2026-10-18","name":"Southside Sports Card Show","city":"Greenwood, IN","venue":"American Legion Post 252","drive":120,"tables":40,"hours":"10:00a-3:30p","focus":"sports","contact":"Tim Welch 317-797-5971","src":"tcdb.com","conf":"listed"},
-{"date":"2026-10-21","name":"Pokemon, TCG & Sports Card Show","city":"Columbus, OH","venue":"Counter Balance Brewing Company","drive":80,"hours":"5:00p-9:00p","focus":"mixed","src":"tcdb.com","conf":"listed"},
-{"date":"2026-10-22","name":"Collectors Night","city":"Cincinnati, OH","venue":"American Legion","drive":70,"hours":"6:00p-9:30p","focus":"mixed","src":"tcdb.com","conf":"listed"},
-{"date":"2026-10-23","end":"2026-10-24","name":"Carmel Card Show 2-Year Anniversary","city":"Carmel, IN","venue":"Aletto Family Sports Center, 5465 E Main St","drive":120,"tables":350,"adm":"Free GA / $5 early entry","hours":"Fri to 8:00p, Sat 9:00a-5:00p","focus":"mixed","src":"tcdb.com","conf":"listed"},
-{"date":"2026-10-24","name":"MVP Card Club Sport Card Show","city":"Cincinnati, OH","venue":"St. Antoninus Parish","drive":70,"hours":"9:00a-2:00p","focus":"sports","src":"tcdb.com","conf":"listed"},
-{"date":"2026-10-24","name":"Sports Card & Pokemon Show","city":"Cincinnati, OH","venue":"Northgate Mall","drive":65,"tables":250,"adm":"Free","hours":"11:00a-6:00p","focus":"mixed","contact":"City2City Card Show (FB)","src":"cardshows.io","conf":"listed"},
-{"date":"2026-10-24","name":"Sports Cards & TCG Show","city":"Marion, OH","venue":"Marion Centre Mall","drive":100,"hours":"11:00a-3:00p","focus":"mixed","src":"tcdb.com","conf":"listed"},
-{"date":"2026-10-25","name":"Eastgate Sports & Pokemon Show","city":"Cincinnati, OH","venue":"Eastgate Holiday Inn","drive":85,"hours":"9:00a-3:00p","focus":"mixed","src":"tcdb.com","conf":"listed"},
-{"date":"2026-10-25","name":"Sports Cards & TCG Show","city":"Piqua, OH","venue":"Crooked Handle Brewing Co., 123 N Main St","drive":15,"tables":30,"adm":"Free","hours":"11:00a-3:00p","focus":"mixed","contact":"Austin Robertson (TCDb listing) — FEW TABLES LEFT","src":"tcdb.com","conf":"listed"},
-{"date":"2026-10-28","name":"Pokemon, TCG & Sports Card Show","city":"Columbus, OH","venue":"Counter Balance Brewing Company","drive":80,"hours":"5:00p-9:00p","focus":"mixed","src":"tcdb.com","conf":"listed"},
-{"date":"2026-10-31","name":"Grab a Centerpiece Card Show","city":"Newark, OH","venue":"Veterans of Foreign Wars Club","drive":120,"tables":60,"cost":50,"cost2":80,"adm":"Free","hours":"9:00a-4:00p","focus":"mixed","contact":"Don Jones 614-592-0458 — $50, 2 for $80","src":"sportscollectorsdigest.com","conf":"confirmed"},
-{"date":"2026-10-31","name":"Greensburg Card Show","city":"Greensburg, IN","venue":"St. Mary's Catholic Church gym, 1331 E Hunter Robbins Way","drive":130,"hours":"9:00a-2:00p","focus":"mixed","src":"tcdb.com","conf":"unverified"},
-{"date":"2026-10-31","name":"H & H Card Show","city":"Daleville, IN","venue":"Daleville Elementary, 8600 S Bronco Dr","drive":100,"hours":"10:00a-3:00p","focus":"mixed","contact":"Tyler 765-425-3363","src":"tcdb.com","conf":"listed"},
-{"date":"2026-10-31","name":"Liberty Collective Card Show","city":"Liberty Township, OH","venue":"Liberty Collective, 6735 Lakota Ln","drive":55,"hours":"10:00a-3:00p","focus":"mixed","src":"tcdb.com","conf":"listed"},
-{"date":"2026-11-01","name":"Toledo Sports Card Show","city":"Holland, OH","venue":"The Bunker Bar & Banquet Hall","drive":125,"adm":"Free","hours":"10:00a-3:00p","focus":"sports","src":"allohiocardshows.com","conf":"listed"},
-{"date":"2026-11-04","name":"Pokemon, TCG & Sports Card Show","city":"Columbus, OH","venue":"Counter Balance Brewing Company","drive":80,"hours":"5:00p-9:00p","focus":"mixed","src":"tcdb.com","conf":"listed"},
-{"date":"2026-11-06","end":"2026-11-07","name":"Cards, Kicks & Collectibles","city":"Noblesville, IN","venue":"Finch Creek Fieldhouse, 16289 Boden Rd","drive":125,"tables":400,"hours":"Fri 4:00p-8:00p, Sat 9:00a-3:00p","focus":"mixed","src":"tcdb.com","conf":"listed"},
-{"date":"2026-11-07","name":"Card Show at the Square","city":"St. Marys, OH","venue":"Hallmark / St Marys Square","drive":50,"cost":40,"hours":"9:00a-3:00p","focus":"sports","contact":"419-305-4163 — $40/table","src":"tcdb.com","conf":"confirmed"},
-{"date":"2026-11-07","end":"2026-11-08","name":"Columbus Card Show","city":"Hilliard, OH","venue":"Franklin County Fairgrounds","drive":80,"hours":"Sat 10:00a-4:00p, Sun 10:00a-3:00p","focus":"mixed","src":"tcdb.com","conf":"listed"},
-{"date":"2026-11-07","name":"Indy Sports Card Show","city":"Indianapolis, IN","venue":"La Quinta Inn, 5120 Victory Dr","drive":110,"tables":50,"adm":"Free","hours":"8:00a-2:00p","focus":"sports","contact":"Patrick Segura 765-637-1100","src":"tcdb.com","conf":"listed"},
-{"date":"2026-11-07","name":"Jay County Fair Collectibles Show","city":"Portland, IN","venue":"Jay County Fairgrounds","drive":60,"hours":"9:00a-2:00p","focus":"mixed","contact":"Jason 260-251-0414","src":"tcdb.com","conf":"listed"},
-{"date":"2026-11-07","name":"Sports Memorabilia & Trading Card Show","city":"Xenia, OH","venue":"Greene County Fairgrounds / Expo Center","drive":45,"tables":150,"cost":40,"adm":"Free (free parking)","hours":"10:00a-3:00p","focus":"sports","contact":"Ken Ludington 937-671-0516 / SportsCardShow@gmail.com","src":"sportscardradio.com","conf":"confirmed"},
-{"date":"2026-11-08","name":"Norwalk Card Show","city":"Norwalk, OH","venue":"Huron County Fairgrounds","drive":150,"tables":55,"cost":35,"adm":"Free","hours":"10:00a-3:00p","focus":"sports","contact":"Tony 419-706-6915","src":"allohiocardshows.com","conf":"confirmed"},
-{"date":"2026-11-11","name":"Pokemon, TCG & Sports Card Show","city":"Columbus, OH","venue":"Counter Balance Brewing Company","drive":80,"hours":"5:00p-9:00p","focus":"mixed","src":"tcdb.com","conf":"listed"},
-{"date":"2026-11-14","end":"2026-11-15","name":"PokePop","city":"Dayton, OH","venue":"Dayton Mall","drive":25,"hours":"Sat 10:00a-8:00p, Sun 12:00p-6:00p","focus":"pokemon","src":"tcdb.com","conf":"listed"},
-{"date":"2026-11-14","name":"Sports Cards & Memorabilia Show","city":"Cincinnati, OH","venue":"Oak Hills United Methodist Church","drive":70,"hours":"9:00a-3:00p","focus":"sports","src":"tcdb.com","conf":"listed"},
-{"date":"2026-11-15","name":"Blue Ribbon Coin & Card Show","city":"Rossford, OH","venue":"Blue Ribbon Coins","drive":130,"hours":"9:00a-3:00p","focus":"mixed","src":"tcdb.com","conf":"listed"},
-{"date":"2026-11-15","name":"Cincinnati Pokemon Show","city":"Cincinnati, OH","venue":"American Legion","drive":70,"hours":"9:00a-3:00p","focus":"pokemon","src":"tcdb.com","conf":"listed"},
-{"date":"2026-11-15","name":"Collectors Palooza 2026","city":"Indianapolis, IN","venue":"Indiana State Fairgrounds, Ag/Hort Bldg","drive":110,"tables":125,"hours":"9:00a-5:00p","focus":"pokemon","contact":"Pokemon + One Piece, NOT sports","src":"tcdb.com","conf":"listed"},
-{"date":"2026-11-15","name":"Darke County Card Show","city":"Greenville, OH","venue":"Greenville Middle School","drive":30,"hours":"9:30a-3:30p","focus":"sports","contact":"937-474-3113","src":"tcdb.com","conf":"listed"},
-{"date":"2026-11-18","name":"Pokemon, TCG & Sports Card Show","city":"Columbus, OH","venue":"Counter Balance Brewing Company","drive":80,"hours":"5:00p-9:00p","focus":"mixed","src":"tcdb.com","conf":"listed"},
-{"date":"2026-11-19","name":"Collectors Night","city":"Cincinnati, OH","venue":"American Legion","drive":70,"hours":"6:00p-9:30p","focus":"mixed","src":"tcdb.com","conf":"listed"},
-{"date":"2026-11-21","name":"Card Collectors & Memorabilia Show","city":"Plain City, OH","venue":"Plain City Elementary School","drive":70,"tables":85,"cost":35,"adm":"Free","hours":"10:00a-2:00p","focus":"sports","contact":"Kevin - plaincitycardcollectors@gmail.com ($30-40/table)","src":"sportscollectorsdigest.com","conf":"confirmed"},
-{"date":"2026-11-21","name":"Card Show, Memorabilia & Pokemon Expo","city":"Cincinnati, OH","venue":"Eastgate Mall","drive":85,"adm":"Free","hours":"10:00a-6:00p","focus":"mixed","contact":"City2City Card Show (FB)","src":"tcdb.com","conf":"listed"},
-{"date":"2026-11-21","name":"Carmel Sports Card Show","city":"Carmel, IN","venue":"American Legion Post 155","drive":120,"tables":75,"hours":"9:00a-3:00p","focus":"sports","src":"tcdb.com","conf":"listed"},
-{"date":"2026-11-21","name":"J&J All Stars Card Show","city":"Fishers, IN","venue":"American Legion Post 470","drive":120,"tables":60,"cost":40,"adm":"Free","hours":"8:00a-2:00p","focus":"sports","contact":"Jeff Meyrose 317-504-8110 — $40/table","src":"sportscollectorsdigest.com","conf":"confirmed"},
-{"date":"2026-11-21","name":"Lancaster Pokemon Only Show","city":"Lancaster, OH","venue":"Lancaster Camp Ground","drive":130,"hours":"10:00a-3:00p","focus":"pokemon","src":"tcdb.com","conf":"listed"},
-{"date":"2026-11-21","name":"Southway American Legion Show","city":"Columbus, OH","venue":"American Legion Post 144","drive":80,"tables":25,"adm":"Free","hours":"9:00a-2:00p","focus":"sports","contact":"Rob Dolby 740-601-6090","src":"gametimesportscollect.com","conf":"listed"},
-{"date":"2026-11-21","name":"Sports Cards & TCG Show","city":"Delaware, OH","venue":"Delaware Christian Church","drive":95,"hours":"11:00a-3:00p","focus":"mixed","src":"tcdb.com","conf":"listed"},
-{"date":"2026-11-22","name":"Carmel Pokemon Show","city":"Carmel, IN","venue":"American Legion Post 155","drive":120,"tables":75,"hours":"9:00a-3:00p","focus":"pokemon","src":"tcdb.com","conf":"listed"},
-{"date":"2026-11-22","name":"Eastgate Sports & Pokemon Show","city":"Cincinnati, OH","venue":"Eastgate Holiday Inn","drive":85,"hours":"9:00a-3:00p","focus":"mixed","src":"tcdb.com","conf":"listed"},
-{"date":"2026-11-22","name":"Findlay Ohio Sports Card Show","city":"Findlay, OH","venue":"Hancock County Fairgrounds","drive":95,"hours":"10:00a-3:00p","focus":"sports","src":"tcdb.com","conf":"listed"},
-{"date":"2026-11-25","name":"Pokemon, TCG & Sports Card Show","city":"Columbus, OH","venue":"Counter Balance Brewing Company","drive":80,"hours":"5:00p-9:00p","focus":"mixed","src":"tcdb.com","conf":"listed"},
-{"date":"2026-11-27","name":"Muncie Card Show","city":"Muncie, IN","venue":"Delaware County Fairgrounds","drive":85,"hours":"10:00a-3:00p","focus":"sports","contact":"Tyler 765-425-3363 / Jimmy 765-730-3628","src":"dpmsportcards.com","conf":"listed"},
-{"date":"2026-11-28","name":"Grab a Centerpiece Card Show","city":"Newark, OH","venue":"Veterans of Foreign Wars Club","drive":120,"tables":60,"cost":50,"cost2":80,"adm":"Free","hours":"9:00a-4:00p","focus":"mixed","contact":"Don Jones 614-592-0458 — $50, 2 for $80","src":"sportscollectorsdigest.com","conf":"confirmed"},
-{"date":"2026-11-28","name":"Sports Card & Pokemon Show","city":"Cincinnati, OH","venue":"Northgate Mall","drive":65,"tables":250,"adm":"Free","hours":"11:00a-6:00p","focus":"mixed","contact":"City2City Card Show (FB)","src":"cardshows.io","conf":"listed"},
-{"date":"2026-12-02","name":"Pokemon, TCG & Sports Card Show","city":"Columbus, OH","venue":"Counter Balance Brewing Company","drive":80,"hours":"5:00p-9:00p","focus":"mixed","src":"tcdb.com","conf":"listed"},
-{"date":"2026-12-04","end":"2026-12-05","name":"Indy Sports Card Show","city":"Indianapolis, IN","venue":"La Quinta Inn, 5120 Victory Dr","drive":110,"tables":50,"adm":"Free","hours":"8:00a-2:00p","focus":"sports","contact":"Patrick Segura 765-637-1100","src":"tcdb.com","conf":"listed"},
-{"date":"2026-12-05","name":"Columbus Sports Card Show","city":"Hilliard, OH","venue":"Franklin County Fairgrounds","drive":80,"hours":"10:00a-4:00p","focus":"sports","src":"tcdb.com","conf":"listed"},
-{"date":"2026-12-05","name":"Jay County Fair Collectibles Show","city":"Portland, IN","venue":"Jay County Fairgrounds","drive":60,"hours":"9:00a-2:00p","focus":"mixed","contact":"Jason 260-251-0414","src":"tcdb.com","conf":"listed"},
-{"date":"2026-12-05","name":"Liberty Collective Card Show","city":"Liberty Township, OH","venue":"Liberty Collective","drive":55,"hours":"10:00a-3:00p","focus":"mixed","src":"tcdb.com","conf":"listed"},
-{"date":"2026-12-05","end":"2026-12-06","name":"PokePop","city":"Dayton, OH","venue":"Dayton Mall","drive":25,"hours":"Sat 10:00a-8:00p, Sun 12:00p-6:00p","focus":"pokemon","src":"tcdb.com","conf":"listed"},
-{"date":"2026-12-05","name":"Southern Ohio Sports Card Spectacular","city":"Chillicothe, OH","venue":"Ross County Fairgrounds Multi-purpose Bldg","drive":120,"tables":55,"adm":"Free","hours":"9:00a-3:00p","focus":"sports","contact":"Rob Dolby 740-601-6090","src":"gametimesportscollect.com","conf":"listed"},
-{"date":"2026-12-06","name":"Darke County Card Show","city":"Greenville, OH","venue":"Greenville Middle School","drive":30,"hours":"9:30a-3:30p","focus":"sports","contact":"937-474-3113","src":"tcdb.com","conf":"listed"},
-{"date":"2026-12-06","name":"Toledo Sports Card Show","city":"Holland, OH","venue":"The Bunker Bar & Banquet Hall","drive":125,"adm":"Free","hours":"10:00a-3:00p","focus":"sports","src":"tcdb.com","conf":"listed"},
-{"date":"2026-12-09","name":"Pokemon, TCG & Sports Card Show","city":"Columbus, OH","venue":"Counter Balance Brewing Company","drive":80,"hours":"5:00p-9:00p","focus":"mixed","src":"tcdb.com","conf":"listed"},
-{"date":"2026-12-12","name":"Black Swamp Card Show","city":"Tiffin, OH","venue":"Tiffin Moose Lodge #84","drive":125,"tables":40,"cost":30,"adm":"Free","hours":"10:00a-4:00p","focus":"sports","src":"allohiocardshows.com","conf":"confirmed"},
-{"date":"2026-12-12","name":"Celina Card Show","city":"Celina, OH","venue":"Celina Eagles","drive":50,"hours":"10:00a-3:00p","focus":"sports","src":"tcdb.com","conf":"listed"},
-{"date":"2026-12-12","name":"H & H Card Show - All TCG","city":"Daleville, IN","venue":"Daleville Elementary, 8600 S Bronco Dr","drive":100,"hours":"8:00a-2:00p","focus":"pokemon","contact":"Tyler 765-425-3363","src":"tcdb.com","conf":"listed"},
-{"date":"2026-12-12","name":"Noblesville Card Show","city":"Noblesville, IN","venue":"Moose Lodge #540","drive":125,"hours":"9:00a-3:00p","focus":"mixed","contact":"Brad & Travis 463-673-6073","src":"tcdb.com","conf":"listed"},
-{"date":"2026-12-12","name":"Sports Memorabilia & Trading Card Show","city":"Xenia, OH","venue":"Greene County Fairgrounds / Expo Center","drive":45,"tables":150,"cost":40,"adm":"Free (free parking)","hours":"10:00a-3:00p","focus":"sports","contact":"Ken Ludington 937-671-0516 / SportsCardShow@gmail.com","src":"sportscardradio.com","conf":"confirmed"},
-{"date":"2026-12-13","name":"Collectors Palooza 2026","city":"Indianapolis, IN","venue":"Indiana State Fairgrounds, Ag/Hort Bldg","drive":110,"tables":125,"hours":"9:00a-5:00p","focus":"pokemon","contact":"Pokemon + One Piece, NOT sports","src":"tcdb.com","conf":"listed"},
-{"date":"2026-12-13","name":"Eastgate Sports & Pokemon Show","city":"Cincinnati, OH","venue":"Eastgate Holiday Inn","drive":85,"hours":"9:00a-3:00p","focus":"mixed","src":"tcdb.com","conf":"listed"},
-{"date":"2026-12-13","name":"H & H Card Show - All Sports","city":"Daleville, IN","venue":"Daleville Elementary, 8600 S Bronco Dr","drive":100,"hours":"8:00a-2:00p","focus":"sports","contact":"Tyler 765-425-3363","src":"tcdb.com","conf":"listed"},
-{"date":"2026-12-16","name":"Pokemon, TCG & Sports Card Show","city":"Columbus, OH","venue":"Counter Balance Brewing Company","drive":80,"hours":"5:00p-9:00p","focus":"mixed","src":"tcdb.com","conf":"listed"},
-{"date":"2026-12-17","name":"Collectors Night","city":"Cincinnati, OH","venue":"American Legion","drive":70,"hours":"6:00p-9:30p","focus":"mixed","src":"tcdb.com","conf":"listed"},
-{"date":"2026-12-19","name":"Card Show, Memorabilia & Pokemon Expo","city":"Cincinnati, OH","venue":"Eastgate Mall","drive":85,"adm":"Free","hours":"10:00a-6:00p","focus":"mixed","contact":"City2City Card Show (FB)","src":"tcdb.com","conf":"listed"},
-{"date":"2026-12-19","name":"Grab a Centerpiece Card Show","city":"Newark, OH","venue":"Veterans of Foreign Wars Club","drive":120,"tables":60,"cost":50,"cost2":80,"adm":"Free","hours":"9:00a-4:00p","focus":"mixed","contact":"Don Jones 614-592-0458 — $50, 2 for $80","src":"sportscollectorsdigest.com","conf":"confirmed"},
-{"date":"2026-12-19","name":"J&J All Stars Card Show","city":"Fishers, IN","venue":"American Legion Post 470","drive":120,"tables":60,"cost":40,"adm":"Free","hours":"8:00a-2:00p","focus":"sports","contact":"Jeff Meyrose 317-504-8110 — $40/table","src":"sportscollectorsdigest.com","conf":"confirmed"},
-{"date":"2026-12-19","name":"Mega Card & Collectibles Expo","city":"London, OH","venue":"Madison County Fairgrounds","drive":70,"hours":"10:00a-3:30p","focus":"mixed","src":"tcdb.com","conf":"listed"},
-{"date":"2026-12-19","name":"MVP Card Club Sport Card Show","city":"Cincinnati, OH","venue":"St. Antoninus Parish","drive":70,"hours":"9:00a-2:00p","focus":"sports","src":"tcdb.com","conf":"listed"},
-{"date":"2026-12-19","name":"The Findlay TCG Card Show","city":"Findlay, OH","venue":"Hancock County Fairgrounds","drive":95,"hours":"10:00a-3:00p","focus":"pokemon","src":"tcdb.com","conf":"listed"},
-{"date":"2026-12-20","name":"Blue Ribbon Coin & Card Show","city":"Rossford, OH","venue":"Blue Ribbon Coins","drive":130,"hours":"9:00a-3:00p","focus":"mixed","src":"tcdb.com","conf":"listed"},
-{"date":"2026-12-20","name":"Carmel Pokemon Show","city":"Carmel, IN","venue":"American Legion Post 155","drive":120,"tables":75,"hours":"9:00a-3:00p","focus":"pokemon","src":"tcdb.com","conf":"listed"},
-{"date":"2026-12-20","name":"R&D Cards & Collectibles Show","city":"Newark, OH","venue":"Cherry Valley Hotel Event Center","drive":120,"hours":"9:00a-4:00p","focus":"mixed","src":"tcdb.com","conf":"listed"},
-{"date":"2026-12-20","name":"Southside Sports Card Show","city":"Greenwood, IN","venue":"American Legion Post 252","drive":120,"tables":40,"hours":"10:00a-3:30p","focus":"sports","contact":"Tim Welch 317-797-5971","src":"tcdb.com","conf":"listed"},
-{"date":"2026-12-26","name":"Mansfield Sports Card Show","city":"Mansfield, OH","venue":"Richland County Fairgrounds","drive":135,"hours":"10:00a-3:00p","focus":"sports","src":"tcdb.com","conf":"listed"},
-{"date":"2026-12-26","name":"Sports Card & Pokemon Show","city":"Cincinnati, OH","venue":"Northgate Mall","drive":65,"tables":250,"adm":"Free","hours":"11:00a-6:00p","focus":"mixed","contact":"City2City Card Show (FB)","src":"cardshows.io","conf":"listed"},
-{"date":"2026-12-26","end":"2026-12-27","name":"Sportscard Spectacular Card Show","city":"Troy, OH","venue":"Miami County Fairgrounds Bldg 610","drive":0,"tables":100,"adm":"Free","hours":"10:00a-3:00p","focus":"sports","contact":"Mike 937-301-7903 — home market, no travel","src":"cardstoresnearme.com","conf":"listed"},
-{"date":"2026-12-27","name":"Lancaster Ohio Sports Card Show","city":"Lancaster, OH","venue":"Lancaster Campground - activity bldg","drive":130,"hours":"10:00a-3:00p","focus":"sports","src":"tcdb.com","conf":"listed"},
-{"date":"2027-01-16","name":"Card Show, Memorabilia & Pokemon Expo","city":"Cincinnati, OH","venue":"Eastgate Mall","drive":85,"adm":"Free","hours":"10:00a-6:00p","focus":"mixed","contact":"City2City Card Show (FB)","src":"tcdb.com","conf":"listed"},
-{"date":"2027-01-23","end":"2027-01-24","name":"Jumbo's Lima Card Show (6th Anniversary)","city":"Lima, OH","venue":"Veterans Civic Center","drive":50,"tables":47,"cost":120,"cost2":250,"hours":"10:00a-3:00p","focus":"mixed","contact":"Jumbo's 567-294-4018 — 8ft from $120, 2 for $250, 47 in stock; setup Fri 4-7p or Sat 8-9a","src":"jumboscards.com","conf":"confirmed"},
-{"date":"2027-02-20","name":"Card Show, Memorabilia & Pokemon Expo","city":"Cincinnati, OH","venue":"Eastgate Mall","drive":85,"adm":"Free","hours":"10:00a-6:00p","focus":"mixed","contact":"City2City Card Show (FB)","src":"tcdb.com","conf":"listed"},
-{"date":"2027-02-21","name":"The Findlay TCG Card Show","city":"Findlay, OH","venue":"Hancock County Fairgrounds","drive":95,"hours":"10:00a-3:00p","focus":"pokemon","src":"tcdb.com","conf":"listed"},
-{"date":"2027-03-20","end":"2027-03-21","name":"Mega Card & Collectibles Expo","city":"London, OH","venue":"Madison County Fairgrounds","drive":70,"hours":"10:00a-3:30p","focus":"mixed","src":"tcdb.com","conf":"listed"},
-{"date":"2027-03-27","name":"MVP Card Club Sport Card Show","city":"Cincinnati, OH","venue":"St. Antoninus Parish","drive":70,"hours":"9:00a-2:00p","focus":"sports","src":"tcdb.com","conf":"listed"},
-{"date":"2027-06-26","end":"2027-06-27","name":"Mega Card & Collectibles Expo","city":"London, OH","venue":"Madison County Fairgrounds","drive":70,"hours":"10:00a-3:30p","focus":"mixed","src":"tcdb.com","conf":"listed"},
-{"date":"2027-07-28","end":"2027-08-01","name":"National Sports Collectors Convention #47","city":"Rosemont, IL","venue":"Donald E. Stephens Convention Center","drive":300,"tables":1000,"hours":"5-day show","focus":"sports","contact":"nsccdealerinfo@gmail.com — 2027 booth pricing not yet published","src":"nsccshow.com","conf":"confirmed"},
-{"date":"2027-09-25","end":"2027-09-26","name":"Mega Card & Collectibles Expo","city":"London, OH","venue":"Madison County Fairgrounds","drive":70,"hours":"10:00a-3:30p","focus":"mixed","src":"tcdb.com","conf":"listed"}
-];
-var TODAY = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+const SHOWS=[{"name":"Dyehard Card Show","city":"Connersville, IN","venue":"Moore Sports & Rec Center","drive":75,"date":"2026-08-22","end":"","hours":"11:00a-3:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Sports Cards & TCG Show","city":"Piqua, OH","venue":"Crooked Handle Brewing Co.","drive":15,"date":"2026-08-23","end":"","hours":"11:00a-3:00p","focus":"mixed","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Hoosier Card Show","city":"New Castle, IN","venue":"Parker Elementary","drive":85,"date":"2026-08-23","end":"","hours":"10:00a-4:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Coffee & Cards","city":"Lebanon, OH","venue":"Script Coffee","drive":55,"date":"2026-08-29","end":"","hours":"9:00a-2:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Cards And Cold Ones","city":"Cincinnati, OH","venue":"High Grain Brewery","drive":70,"date":"2026-08-29","end":"","hours":"4:00p-9:00p","focus":"mixed","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Grab a Centerpiece Card Show","city":"Newark, OH","venue":"VFW Club","drive":120,"date":"2026-08-29","end":"","hours":"9:00a-4:00p","focus":"mixed","tables":60,"cost":50,"adm":null,"contact":"","src":"tcdb.com","conf":"confirmed"},{"name":"Oakley Greens Card Party","city":"Cincinnati, OH","venue":"Oakley Greens","drive":70,"date":"2026-08-30","end":"","hours":"10:00a-3:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Columbus Trading Card & Collectibles Show","city":"Hilliard, OH","venue":"Franklin County Fairgrounds","drive":80,"date":"2026-08-30","end":"","hours":"10:00a-4:00p","focus":"mixed","tables":null,"cost":null,"adm":null,"contact":"columbuscardshopevents.com","src":"tcdb.com","conf":"listed"},{"name":"PokePop","city":"Dayton, OH","venue":"Dayton Mall","drive":25,"date":"2026-09-05","end":"2026-09-06","hours":"10:00a-8:00p","focus":"pokemon","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Rockford Community Card Show","city":"Rockford, OH","venue":"Parks & Community Buildings","drive":55,"date":"2026-09-05","end":"","hours":"9:00a-3:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Columbus Sports Card Show","city":"Hilliard, OH","venue":"Franklin County Fairgrounds","drive":80,"date":"2026-09-05","end":"","hours":"10:00a-4:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Indy Sports Card Show","city":"Indianapolis, IN","venue":"LaQuinta Inn","drive":110,"date":"2026-09-05","end":"","hours":"8:00a-2:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Card Collector Fellowship","city":"Greenfield, IN","venue":"Hancock County Fairgrounds","drive":110,"date":"2026-09-05","end":"","hours":"8:00a-3:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Mansfield Sports Card Show","city":"Mansfield, OH","venue":"Richland County Fairgrounds","drive":135,"date":"2026-09-05","end":"","hours":"10:00a-3:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Sports Cards & TCG Show","city":"Piqua, OH","venue":"Crooked Handle Brewing Co.","drive":15,"date":"2026-09-06","end":"","hours":"11:00a-3:00p","focus":"mixed","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Darke County Card Show","city":"Greenville, OH","venue":"Greenville Middle School","drive":30,"date":"2026-09-06","end":"","hours":"9:30a-3:30p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Grove City Card Fest","city":"Grove City, OH","venue":"Central Crossing High School","drive":85,"date":"2026-09-06","end":"","hours":"8:00a-3:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"listed on hobbyhub.pro","src":"tcdb.com","conf":"listed"},{"name":"Toledo Sports Card Show","city":"Holland, OH","venue":"The Bunker Bar & Banquet Hall","drive":125,"date":"2026-09-06","end":"","hours":"10:00a-3:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Norwalk Card Show","city":"Norwalk, OH","venue":"Huron County Fairgrounds","drive":150,"date":"2026-09-06","end":"","hours":"10:00a-3:00p","focus":"sports","tables":55,"cost":35,"adm":"Free","contact":"Tony 419-706-6915","src":"allohiocardshows.com","conf":"confirmed"},{"name":"Outerbelt Card Show","city":"Pickerington, OH","venue":"Grace Fellowship Church","drive":95,"date":"2026-09-07","end":"","hours":"9:00a-3:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"Labor Day","src":"tcdb.com","conf":"listed"},{"name":"Sports Memorabilia & Trading Card Show","city":"Xenia, OH","venue":"Greene County Fairgrounds / Expo Center","drive":45,"date":"2026-09-12","end":"","hours":"10:00a-3:00p","focus":"sports","tables":150,"cost":40,"adm":"Free (free parking)","contact":"SportsCardShow@gmail.com","src":"sportscardradio.com","conf":"confirmed"},{"name":"Queen City Card Show","city":"Mason, OH","venue":"Hilton Garden Inn","drive":55,"date":"2026-09-12","end":"","hours":"9:00a-3:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Sports Cards & Memorabilia Show","city":"Cincinnati, OH","venue":"Oak Hills United Methodist Church","drive":70,"date":"2026-09-12","end":"","hours":"9:00a-3:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Columbus Card Show","city":"Hilliard, OH","venue":"Franklin County Fairgrounds","drive":80,"date":"2026-09-12","end":"2026-09-13","hours":"10:00a-4:00p","focus":"mixed","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Collectors Palooza 2026","city":"Indianapolis, IN","venue":"Indiana State Fairgrounds","drive":110,"date":"2026-09-13","end":"","hours":"9:00a-5:00p","focus":"mixed","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Jumbo's Champion Mill Card Show","city":"Hamilton, OH","venue":"Spooky Nook Sports Complex","drive":60,"date":"2026-09-18","end":"2026-09-19","hours":"Fri 4-8p, Sat 10a-4p","focus":"mixed","tables":700,"cost":null,"adm":null,"contact":"JumbosCards.com - tables sold online","src":"jumboscards.com","conf":"listed"},{"name":"Bigfoot Card Expo","city":"Celina, OH","venue":"Mercer County Fairgrounds","drive":50,"date":"2026-09-19","end":"","hours":"9:00a-3:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Card Collectors & Memorabilia Show","city":"Plain City, OH","venue":"Plain City Elementary School","drive":70,"date":"2026-09-19","end":"","hours":"10:00a-2:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Card Show, Memorabilia & Pokemon Expo","city":"Cincinnati, OH","venue":"Eastgate Mall","drive":85,"date":"2026-09-19","end":"","hours":"10:00a-6:00p","focus":"mixed","tables":null,"cost":null,"adm":"Free","contact":"City2City Card Show (FB)","src":"tcdb.com","conf":"listed"},{"name":"Southern Ohio Sports Card Spectacular","city":"Chillicothe, OH","venue":"Ross County Fairgrounds","drive":120,"date":"2026-09-19","end":"","hours":"9:00a-3:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Card Show at the Square","city":"St. Marys, OH","venue":"St Marys Square","drive":50,"date":"2026-09-26","end":"","hours":"9:00a-3:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Sports Card & Pokemon Show","city":"Cincinnati, OH","venue":"Northgate Mall","drive":65,"date":"2026-09-26","end":"","hours":"11:00a-6:00p","focus":"mixed","tables":250,"cost":null,"adm":"Free","contact":"City2City Card Show (FB)","src":"tcdb.com","conf":"listed"},{"name":"Sports Cards & TCG Show","city":"Delaware, OH","venue":"Delaware Christian Church","drive":95,"date":"2026-09-26","end":"","hours":"11:00a-3:00p","focus":"mixed","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Grab a Centerpiece Card Show","city":"Newark, OH","venue":"VFW Club","drive":120,"date":"2026-09-26","end":"","hours":"9:00a-4:00p","focus":"mixed","tables":60,"cost":50,"adm":null,"contact":"","src":"allohiocardshows.com","conf":"confirmed"},{"name":"PokePop","city":"Dayton, OH","venue":"Dayton Mall","drive":25,"date":"2026-10-03","end":"2026-10-04","hours":"10:00a-8:00p","focus":"pokemon","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Buckeye Card Show","city":"Columbus, OH","venue":"Stars Indoor Sports","drive":80,"date":"2026-10-03","end":"","hours":"10:00a-8:00p","focus":"mixed","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Indy Sports Card Show","city":"Indianapolis, IN","venue":"LaQuinta Inn","drive":110,"date":"2026-10-03","end":"","hours":"8:00a-2:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Darke County Card Show","city":"Greenville, OH","venue":"Greenville Middle School","drive":30,"date":"2026-10-04","end":"","hours":"9:30a-3:30p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Toledo Sports Card Show","city":"Holland, OH","venue":"The Bunker Bar & Banquet Hall","drive":125,"date":"2026-10-04","end":"","hours":"10:00a-3:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Sports Memorabilia & Trading Card Show","city":"Xenia, OH","venue":"Greene County Fairgrounds / Expo Center","drive":45,"date":"2026-10-10","end":"","hours":"10:00a-3:00p","focus":"sports","tables":150,"cost":40,"adm":"Free","contact":"SportsCardShow@gmail.com","src":"sportscardradio.com","conf":"confirmed"},{"name":"Celina Card Show","city":"Celina, OH","venue":"Celina Eagles","drive":50,"date":"2026-10-10","end":"","hours":"10:00a-3:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"The Findlay Card Show","city":"Findlay, OH","venue":"The Crest","drive":95,"date":"2026-10-16","end":"2026-10-17","hours":"Fri 5-9p, Sat 10a-3p","focus":"mixed","tables":80,"cost":110,"adm":null,"contact":"JumbosCards.com - 8ft tables from $110","src":"jumboscards.com","conf":"confirmed"},{"name":"Sportscard Spectacular Card Show","city":"Troy, OH","venue":"Miami County Fairgrounds","drive":0,"date":"2026-10-17","end":"2026-10-18","hours":"10:00a-3:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Mega Card & Collectibles Expo","city":"London, OH","venue":"Madison County Fairgrounds","drive":70,"date":"2026-10-17","end":"2026-10-18","hours":"10:00a-3:30p","focus":"mixed","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Buckeye Card Show","city":"Columbus, OH","venue":"Stars Indoor Sports","drive":80,"date":"2026-10-17","end":"","hours":"10:00a-7:00p","focus":"mixed","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Southway American Legion Show","city":"Columbus, OH","venue":"American Legion Post 144","drive":80,"date":"2026-10-17","end":"","hours":"9:00a-2:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Card Show, Memorabilia & Pokemon Expo","city":"Cincinnati, OH","venue":"Eastgate Mall","drive":85,"date":"2026-10-17","end":"","hours":"10:00a-6:00p","focus":"mixed","tables":null,"cost":null,"adm":"Free","contact":"City2City Card Show (FB)","src":"tcdb.com","conf":"listed"},{"name":"Sports Cards & TCG Show","city":"Delaware, OH","venue":"Delaware Christian Church","drive":95,"date":"2026-10-17","end":"","hours":"11:00a-3:00p","focus":"mixed","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Mansfield Sports Card Show","city":"Mansfield, OH","venue":"Richland County Fairgrounds","drive":135,"date":"2026-10-17","end":"","hours":"10:00a-3:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Collectors Palooza 2026","city":"Indianapolis, IN","venue":"Indiana State Fairgrounds","drive":110,"date":"2026-10-18","end":"","hours":"9:00a-5:00p","focus":"mixed","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Sports Card & Pokemon Show","city":"Cincinnati, OH","venue":"Northgate Mall","drive":65,"date":"2026-10-24","end":"","hours":"11:00a-6:00p","focus":"mixed","tables":250,"cost":null,"adm":"Free","contact":"City2City Card Show (FB)","src":"tcdb.com","conf":"listed"},{"name":"Sports Cards & TCG Show","city":"Piqua, OH","venue":"Crooked Handle Brewing Co.","drive":15,"date":"2026-10-25","end":"","hours":"11:00a-3:00p","focus":"mixed","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Eastgate Sports & Pokemon Show","city":"Cincinnati, OH","venue":"Eastgate Holiday Inn","drive":85,"date":"2026-10-25","end":"","hours":"9:00a-3:00p","focus":"mixed","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Grab a Centerpiece Card Show","city":"Newark, OH","venue":"VFW Club","drive":120,"date":"2026-10-31","end":"","hours":"9:00a-4:00p","focus":"mixed","tables":60,"cost":50,"adm":null,"contact":"","src":"allohiocardshows.com","conf":"confirmed"},{"name":"Toledo Sports Card Show","city":"Holland, OH","venue":"The Bunker Bar & Banquet Hall","drive":125,"date":"2026-11-01","end":"","hours":"10:00a-3:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"allohiocardshows.com","conf":"listed"},{"name":"Sports Memorabilia & Trading Card Show","city":"Xenia, OH","venue":"Greene County Fairgrounds / Expo Center","drive":45,"date":"2026-11-07","end":"","hours":"10:00a-3:00p","focus":"sports","tables":150,"cost":40,"adm":"Free","contact":"SportsCardShow@gmail.com","src":"sportscardradio.com","conf":"confirmed"},{"name":"Card Show at the Square","city":"St. Marys, OH","venue":"Hallmark","drive":50,"date":"2026-11-07","end":"","hours":"9:00a-3:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Columbus Card Show","city":"Hilliard, OH","venue":"Franklin County Fairgrounds","drive":80,"date":"2026-11-07","end":"2026-11-08","hours":"10:00a-4:00p","focus":"mixed","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Norwalk Card Show","city":"Norwalk, OH","venue":"Huron County Fairgrounds","drive":150,"date":"2026-11-08","end":"","hours":"10:00a-3:00p","focus":"sports","tables":55,"cost":35,"adm":"Free","contact":"Tony 419-706-6915","src":"allohiocardshows.com","conf":"confirmed"},{"name":"PokePop","city":"Dayton, OH","venue":"Dayton Mall","drive":25,"date":"2026-11-14","end":"2026-11-15","hours":"10:00a-8:00p","focus":"pokemon","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Sports Cards & Memorabilia Show","city":"Cincinnati, OH","venue":"Oak Hills United Methodist Church","drive":70,"date":"2026-11-14","end":"","hours":"9:00a-3:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Darke County Card Show","city":"Greenville, OH","venue":"Greenville Middle School","drive":30,"date":"2026-11-15","end":"","hours":"9:30a-3:30p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Card Collectors & Memorabilia Show","city":"Plain City, OH","venue":"Plain City Elementary School","drive":70,"date":"2026-11-21","end":"","hours":"10:00a-2:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Southway American Legion Show","city":"Columbus, OH","venue":"American Legion","drive":80,"date":"2026-11-21","end":"","hours":"9:00a-2:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Card Show, Memorabilia & Pokemon Expo","city":"Cincinnati, OH","venue":"Eastgate Mall","drive":85,"date":"2026-11-21","end":"","hours":"10:00a-6:00p","focus":"mixed","tables":null,"cost":null,"adm":"Free","contact":"City2City Card Show (FB)","src":"tcdb.com","conf":"listed"},{"name":"Sports Card & Pokemon Show","city":"Cincinnati, OH","venue":"Northgate Mall","drive":65,"date":"2026-11-28","end":"","hours":"11:00a-6:00p","focus":"mixed","tables":250,"cost":null,"adm":"Free","contact":"City2City Card Show (FB)","src":"tcdb.com","conf":"listed"},{"name":"Grab a Centerpiece Card Show","city":"Newark, OH","venue":"VFW Club","drive":120,"date":"2026-11-28","end":"","hours":"9:00a-4:00p","focus":"mixed","tables":60,"cost":50,"adm":null,"contact":"","src":"tcdb.com","conf":"confirmed"},{"name":"PokePop","city":"Dayton, OH","venue":"Dayton Mall","drive":25,"date":"2026-12-05","end":"2026-12-06","hours":"10:00a-8:00p","focus":"pokemon","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Columbus Sports Card Show","city":"Hilliard, OH","venue":"Franklin County Fairgrounds","drive":80,"date":"2026-12-05","end":"","hours":"10:00a-4:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Southern Ohio Sports Card Spectacular","city":"Chillicothe, OH","venue":"Ross County Fairgrounds","drive":120,"date":"2026-12-05","end":"","hours":"9:00a-3:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Darke County Card Show","city":"Greenville, OH","venue":"Greenville Middle School","drive":30,"date":"2026-12-06","end":"","hours":"9:30a-3:30p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Toledo Sports Card Show","city":"Holland, OH","venue":"The Bunker Bar & Banquet Hall","drive":125,"date":"2026-12-06","end":"","hours":"10:00a-3:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Sports Memorabilia & Trading Card Show","city":"Xenia, OH","venue":"Greene County Fairgrounds / Expo Center","drive":45,"date":"2026-12-12","end":"","hours":"10:00a-3:00p","focus":"sports","tables":150,"cost":40,"adm":"Free","contact":"SportsCardShow@gmail.com","src":"tcdb.com","conf":"confirmed"},{"name":"Celina Card Show","city":"Celina, OH","venue":"Celina Eagles","drive":50,"date":"2026-12-12","end":"","hours":"10:00a-3:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Mega Card & Collectibles Expo","city":"London, OH","venue":"Madison County Fairgrounds","drive":70,"date":"2026-12-19","end":"","hours":"10:00a-3:30p","focus":"mixed","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Card Show, Memorabilia & Pokemon Expo","city":"Cincinnati, OH","venue":"Eastgate Mall","drive":85,"date":"2026-12-19","end":"","hours":"10:00a-6:00p","focus":"mixed","tables":null,"cost":null,"adm":"Free","contact":"City2City Card Show (FB)","src":"tcdb.com","conf":"listed"},{"name":"Grab a Centerpiece Card Show","city":"Newark, OH","venue":"VFW Club","drive":120,"date":"2026-12-19","end":"","hours":"9:00a-4:00p","focus":"mixed","tables":60,"cost":50,"adm":null,"contact":"","src":"tcdb.com","conf":"confirmed"},{"name":"Sportscard Spectacular Card Show","city":"Troy, OH","venue":"Miami County Fairgrounds","drive":0,"date":"2026-12-26","end":"2026-12-27","hours":"10:00a-3:00p","focus":"sports","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"Sports Card & Pokemon Show","city":"Cincinnati, OH","venue":"Northgate Mall","drive":65,"date":"2026-12-26","end":"","hours":"11:00a-6:00p","focus":"mixed","tables":250,"cost":null,"adm":"Free","contact":"City2City Card Show (FB)","src":"tcdb.com","conf":"listed"},{"name":"Jumbo's Lima Card Show (6th Anniversary)","city":"Lima, OH","venue":"Veterans Civic Center","drive":50,"date":"2027-01-23","end":"2027-01-24","hours":"10:00a-3:00p","focus":"mixed","tables":47,"cost":120,"adm":null,"contact":"JumbosCards.com - 8ft tables from $120","src":"jumboscards.com","conf":"confirmed"},{"name":"Mega Card & Collectibles Expo","city":"London, OH","venue":"Madison County Fairgrounds","drive":70,"date":"2027-03-20","end":"2027-03-21","hours":"10:00a-3:30p","focus":"mixed","tables":null,"cost":null,"adm":null,"contact":"","src":"tcdb.com","conf":"listed"},{"name":"National Sports Collectors Convention #47","city":"Rosemont, IL","venue":"Donald E. Stephens Convention Center","drive":300,"date":"2027-07-28","end":"2027-08-01","hours":"","focus":"sports","tables":1000,"cost":null,"adm":null,"contact":"nsccdealerinfo@gmail.com | nsccshow.com","src":"nsccshow.com","conf":"confirmed"}];
+var EVP={BASE:670, REF_TABLES:150, SIZE_EXP:0.25, MI_PER_MIN:0.85, PER_MI:0.30, PER_HR:25, MYTABLES:2,
+         DEF_TABLES:80, DEF_COST:50, MAXDAYS:2.0, LODGE:140,
+         FOC:{sports:1.0, mixed:0.75, pokemon:0.15},
+         CONF:{confirmed:1.0, listed:0.90, unverified:0.65}};
+const TODAY=new Date('2026-08-18T12:00:00');
+const F={r:'all',c:'all',m:'all',t:'all',q:''};
+let SORT={k:'date',d:1};
+const SKEY='psr-status-v1';
+var STORE_OK=(function(){try{localStorage.setItem('__t','1');localStorage.removeItem('__t');return true}catch(e){return false}})();
+var ST=(function(){try{return JSON.parse(localStorage.getItem(SKEY))||{}}catch(e){return {}}})();
+function save(){if(!STORE_OK)return;try{localStorage.setItem(SKEY,JSON.stringify(ST))}catch(e){}}
+const MN=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const DW=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+SHOWS.forEach(function(s,i){s.id=i;s.key=s.date+'|'+s.name+'|'+s.city;var d=new Date(s.date+'T12:00:00');s._d=d;
+  s.days=Math.round((d-TODAY)/864e5);s.mk=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');});
+SHOWS.forEach(function(s){s._ev=evOf(s)});
 
-/* ---------- status marks (never call this `status`) ---------- */
-var KEY = "psr-status-v1";
-var MARK = {};
-try { MARK = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch(e){ MARK = {}; }
-function slug(s){ return s.date + "|" + s.name + "|" + s.city; }
-function saveMark(){ try{ localStorage.setItem(KEY, JSON.stringify(MARK)); }catch(e){} }
+/* ---- Expected-value model. Assumptions are visible in the "How the pick is
+   calculated" panel so they can be argued with and tuned. ---- */
 
-/* ---------- value model v3 ---------- */
-var BASE = 290, AUD = {sports:1.0, mixed:0.8, pokemon:0.25}, RISK = {confirmed:1.0, listed:0.9, unverified:0.65};
-var DEF_TABLES = 80, DEF_COST = 50, SETUP = 1.5, MI_PER_MIN = 0.85, PER_MI = 0.30, LODGING = 140;
-
-function ymd(s){ var p = s.split("-"); return new Date(+p[0], +p[1]-1, +p[2]); }
-function dayCount(s){
-  if(!s.end) return 1;
-  return Math.round((ymd(s.end) - ymd(s.date)) / 86400000) + 1;
-}
-function openHours(s){
-  var days = dayCount(s), h = s.hours || "";
-  var re = /(\d{1,2})(?::(\d{2}))?\s*([ap])?\s*[-\u2013]\s*(\d{1,2})(?::(\d{2}))?\s*([ap])/gi, m, spans = [];
-  while((m = re.exec(h)) !== null){
-    var sh = +m[1] + (m[2] ? +m[2]/60 : 0), eh = +m[4] + (m[5] ? +m[5]/60 : 0);
-    var sm = (m[3]||"").toLowerCase(), em = (m[6]||"").toLowerCase();
-    if(em === "p" && eh < 12) eh += 12;
-    if(sm === "p" && sh < 12) sh += 12;
-    else if(!sm && eh > 12 && sh < eh - 12) sh += 12;
-    var d = eh - sh;
-    if(d > 0 && d <= 16) spans.push(d);
-  }
-  if(!spans.length) return 6 * days;
-  var tot = spans.reduce(function(a,b){return a+b;}, 0);
-  if(spans.length >= days) return tot;
-  return tot * days / spans.length;
-}
+function daysOf(s){if(!s.end)return 1;
+  return Math.round((new Date(s.end+'T12:00:00')-s._d)/864e5)+1;}
 function evOf(s){
-  var days = dayCount(s);
-  var estT = (s.tables == null), estC = (s.cost == null);
-  var tables = estT ? DEF_TABLES : s.tables;
-  var perTable = estC ? DEF_COST : s.cost;
-  if(s.drive > 150 && estC) return {scored:false, est:true};
-  var sizeAdj = 0.75 + 0.25 * Math.min(tables/150, 1.6);
-  var dayMult = Math.min(1 + 0.6*(days-1), 2.2);
-  var aud = AUD[s.focus] != null ? AUD[s.focus] : 0.8;
-  var risk = RISK[s.conf] != null ? RISK[s.conf] : 0.9;
-  var cardMargin = BASE * sizeAdj * dayMult * aud * risk;
-  var tableCost = (s.cost2 != null) ? s.cost2 : 2 * perTable;
-  var trips = (days > 1 && s.drive > 120) ? 1 : days;
-  var mileage = s.drive * MI_PER_MIN * 2 * PER_MI * trips;
-  var lodging = (days > 1 && s.drive > 120) ? LODGING : 0;
-  var net = cardMargin - tableCost - mileage - lodging;
-  var oh = openHours(s);
-  var hours = oh + SETUP*days + (s.drive*2/60)*trips;
-  var perHr = hours > 0 ? net/hours : 0;
-  var score = perHr <= 0 ? 0 : Math.min(10, Math.round(10 * (1 - Math.exp(-perHr/18))));
-  return {scored:true, est:(estT||estC), estT:estT, estC:estC, days:days, tables:tables,
-    revenue:cardMargin, tableCost:tableCost, mileage:mileage, lodging:lodging,
-    net:net, hours:hours, openHours:oh, perHr:perHr, score:score, risk:risk, aud:aud, trips:trips};
-}
-SHOWS.forEach(function(s){ s._ev = evOf(s); s._slug = slug(s); s._d = ymd(s.date); s._e = ymd(s.end || s.date); });
+  var d=daysOf(s);
+  var estT=s.tables==null, estC=s.cost==null;
+  /* the $50 default is a prior taken from local shows - it is meaningless for a
+     national convention, so refuse to score those rather than invent a number */
+  if(estC && s.drive>150) return {na:true,days:d};
+  var tbl=s.tables==null?EVP.DEF_TABLES:s.tables;
+  var cst=s.cost==null?EVP.DEF_COST:s.cost;
+  var mult=Math.min(1+0.5*(d-1),EVP.MAXDAYS);
+  /* v3: no size term worth the name. Three logged shows show NO relationship between
+     venue size or distance and what he actually made (corr(drive,margin) = -0.45,
+     corr(cards sold,margin) = +0.98). So revenue starts at his own running average and
+     table count only nudges it, heavily damped, and only when it is actually published. */
+  var nudge=estT?1:Math.max(0.75,Math.min(1.5,Math.pow(tbl/EVP.REF_TABLES,EVP.SIZE_EXP)));
+  var rev=EVP.BASE*nudge*mult*EVP.FOC[s.focus];
+  var tc=cst*EVP.MYTABLES;
+  var travel=s.drive*EVP.MI_PER_MIN*2*EVP.PER_MI;
+  var time=(s.drive*2/60)*EVP.PER_HR;
+  var lodge=(d>1&&s.drive>120)?EVP.LODGE:0;
+  var risk=EVP.CONF[s.conf];
+  return {na:false,days:d,est:estT||estC,estT:estT,estC:estC,risk:risk,nudge:nudge,
+    rev:Math.round(rev),tc:Math.round(tc),travel:Math.round(travel),
+    time:Math.round(time),lodge:lodge,
+    ev:Math.round((rev-tc-travel-time-lodge)*risk)};}
+function evTip(s){
+  var e=s._ev; if(e.na)return 'Not scored - booth cost unpublished and the show is outside normal range, so the local $50 table estimate does not apply.';
+  var L=['Expected margin on 2 tables',
+    '  revenue  +$'+e.rev+'   (your $'+EVP.BASE+' show average'+(e.estT?', size unknown':', size x'+e.nudge.toFixed(2))+(e.days>1?', '+e.days+' days':'')+', '+s.focus+')',
+    '  tables   -$'+e.tc+'   (2 x '+(e.estC?'~$'+EVP.DEF_COST+' est.':'$'+s.cost)+')',
+    '  mileage  -$'+e.travel+'   ('+Math.round(s.drive*EVP.MI_PER_MIN*2)+' mi round trip)',
+    '  your time-$'+e.time+'   ('+(s.drive*2/60).toFixed(1)+' hr @ $'+EVP.PER_HR+')'];
+  if(e.lodge)L.push('  lodging  -$'+e.lodge);
+  L.push('  risk      x'+e.risk+'   (data is "'+s.conf+'")');
+  L.push('  = $'+e.ev);
+  return L.join('\n');}
+function money(n){return (n<0?'\u2212$':'$')+Math.abs(n);}
+function esc(v){return String(v).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');}
+function pad(n){return String(n).padStart(2,'0')}
+function ymd(d){return d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate())}
+function endStamp(s){var e=s.end?new Date(s.end+'T12:00:00'):new Date(s._d.getTime());
+  e.setDate(e.getDate()+1);return ymd(e);}   /* Google/ICS all-day end is exclusive */
+function details(s){
+  var L=[];
+  L.push('Venue: '+s.venue+', '+s.city);
+  L.push('Drive from Troy: '+(s.drive===0?'home':s.drive+' min'));
+  if(s.hours)L.push('Hours: '+s.hours);
+  L.push('Table: '+(s.cost!=null?'$'+s.cost:'not published - ask promoter'));
+  if(s.tables)L.push('Tables: '+s.tables);
+  if(s.adm)L.push('Admission: '+s.adm);
+  if(s.contact)L.push('Contact: '+s.contact);
+  L.push('Data confidence: '+s.conf+' (via '+s.src+')');
+  return L.join('\n');}
+function gcal(s){
+  return 'https://calendar.google.com/calendar/render?action=TEMPLATE'+
+   '&text='+encodeURIComponent(s.name+' \u2014 '+s.city)+
+   '&dates='+ymd(s._d)+'/'+endStamp(s)+
+   '&location='+encodeURIComponent(s.venue+', '+s.city)+
+   '&details='+encodeURIComponent(details(s));}
+function icsFor(list){
+  var L=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Pandashade Card Show Radar//EN','CALSCALE:GREGORIAN'];
+  list.forEach(function(s,i){
+    L.push('BEGIN:VEVENT');
+    L.push('UID:psr-'+ymd(s._d)+'-'+i+'@pandashade');
+    L.push('DTSTAMP:'+ymd(TODAY)+'T000000Z');
+    L.push('DTSTART;VALUE=DATE:'+ymd(s._d));
+    L.push('DTEND;VALUE=DATE:'+endStamp(s));
+    L.push('SUMMARY:'+ics(s.name+' \u2014 '+s.city));
+    L.push('LOCATION:'+ics(s.venue+', '+s.city));
+    L.push('DESCRIPTION:'+ics(details(s)));
+    L.push('END:VEVENT');});
+  L.push('END:VCALENDAR');
+  return L.map(fold).join('\r\n')+'\r\n';}
+function fold(l){ /* RFC 5545: no content line over 75 octets */
+  if(l.length<=75)return l;
+  var out=l.slice(0,75),i=75;
+  while(i<l.length){out+='\r\n '+l.slice(i,i+74);i+=74;}
+  return out;}
+function ics(v){return String(v).replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,').replace(/\n/g,'\\n');}
+function dband(m){if(m===0)return['q1','Home'];if(m<=45)return['q2',m+' min'];
+  if(m<=90)return['q3',m+' min'];if(m<=150)return['q4',(m/60).toFixed(1).replace('.0','')+' hr'];
+  return['q5',(m/60).toFixed(1).replace('.0','')+' hr'];}
 
-/* ---------- helpers ---------- */
-var MN = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-var MFULL = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-var DW = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
-function daysOut(s){ return Math.round((s._d - TODAY)/86400000); }
-function fmtD(s){
-  var d = s._d, out = MN[d.getMonth()] + " " + d.getDate();
-  if(s.end){ var e = s._e; out += "\u2013" + (e.getMonth()!==d.getMonth() ? MN[e.getMonth()]+" " : "") + e.getDate(); }
-  return out;
-}
-function driveCls(m){ return m <= 30 ? "d1" : m <= 60 ? "d2" : m <= 100 ? "d3" : "d4"; }
-function esc(t){ return String(t==null?"":t).replace(/[&<>"']/g, function(c){
-  return ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c]; }); }
-var GLYPH = {confirmed:"\u2713", listed:"\u25CB", unverified:"\u26A0"};
-function money(n){ return (n<0?"-$":"$") + Math.abs(Math.round(n)); }
+var mset=[];SHOWS.forEach(function(s){if(mset.indexOf(s.mk)<0)mset.push(s.mk)});mset.sort();
+document.getElementById('months').innerHTML='<button class="chip on" data-f="m" data-v="all">All</button>'+
+  mset.map(function(m){var p=m.split('-');return '<button class="chip" data-f="m" data-v="'+m+'">'+MN[+p[1]-1]+' '+p[0].slice(2)+'</button>'}).join('');
 
-function tipFor(s){
-  var e = s._ev;
-  if(!e.scored) return "Not scored \u2014 over 150 min away with no published booth cost.";
-  var L = [];
-  L.push("Revenue (card margin): " + money(e.revenue));
-  L.push("  base $290 \u00d7 size " + e.sizeAdjTxt);
-  L.push("2 tables: -" + money(e.tableCost) + (e.estC ? " (est. $50/table)" : ""));
-  L.push("Mileage: -" + money(e.mileage) + " (" + s.drive + " min \u00d7 2" + (e.trips>1 ? " \u00d7 "+e.trips+" trips" : "") + ")");
-  L.push("Lodging: " + (e.lodging ? "-"+money(e.lodging) : "$0"));
-  L.push("Risk factor (" + s.conf + "): \u00d7" + e.risk.toFixed(2));
-  L.push("\u2014");
-  L.push("Net: " + money(e.net));
-  L.push("Time: " + e.hours.toFixed(1) + " h (" + e.openHours.toFixed(1) + " open + " + (1.5*e.days) + " setup + " + ((s.drive*2/60)*e.trips).toFixed(1) + " drive)");
-  L.push("= " + money(e.perHr) + "/hr \u2192 " + e.score + "/10");
-  if(e.estT) L.push("Table count assumed 80 \u2014 not published.");
-  return L.join("\n");
-}
-SHOWS.forEach(function(s){
-  if(s._ev.scored){
-    var tables = s._ev.tables;
-    s._ev.sizeAdjTxt = (0.75 + 0.25*Math.min(tables/150,1.6)).toFixed(2) + " (" + tables + (s._ev.estT?" est.":"") + " tables)"
-      + (s._ev.days>1 ? " \u00d7 days " + Math.min(1+0.6*(s._ev.days-1),2.2).toFixed(2) : "")
-      + " \u00d7 audience " + s._ev.aud.toFixed(2);
-  }
-});
+function pass(s){
+  if(F.r!=='all'&&s.drive>+F.r)return false;
+  if(F.c!=='all'&&s.conf!==F.c)return false;
+  if(F.t==='sports'&&s.focus!=='sports')return false;
+  if(F.t==='nopoke'&&s.focus==='pokemon')return false;
+  if(F.m!=='all'&&s.mk!==F.m)return false;
+  if(F.q&&(s.name+' '+s.city+' '+s.venue).toLowerCase().indexOf(F.q)<0)return false;
+  return true;}
 
-/* ---------- filter state ---------- */
-var F = {rad:999, mon:"all", typ:"nopoke", cc:false, mk:false, sp:false};
-var SORT = {k:"date", dir:1};
+function render(){
+  var rows=SHOWS.filter(pass);
+  var k=SORT.k;
+  rows.sort(function(a,b){var x,y;
+    if(k==='status'){x=ST[a.key]||'zz';y=ST[b.key]||'zz';}
+    else if(k==='cost'){x=a.cost==null?1e9:a.cost;y=b.cost==null?1e9:b.cost;}
+    else if(k==='ev'){x=a._ev.na?-1e9:a._ev.ev;y=b._ev.na?-1e9:b._ev.ev;}
+    else if(k==='name'){x=a.name;y=b.name;}
+    else{x=a[k];y=b[k];}
+    return (x>y?1:x<y?-1:0)*SORT.d||(a._d-b._d);});
 
-function isPassed(s){ return MARK[s._slug] === "pass"; }
-function passedCount(){ return SHOWS.filter(isPassed).length; }
+  var tb=document.getElementById('tb');
+  tb.innerHTML=rows.map(function(s){
+    var b=dband(s.drive),cl=b[0],lb=b[1];
+    var dcl=s.days<0?'':s.days<=14?'d-hot':s.days<=30?'d-soon':'';
+    var dtxt=s.days<0?'past':s.days===0?'today':s.days+'d';
+    var end='';if(s.end){var e=new Date(s.end+'T12:00:00');end=' &ndash; '+MN[e.getMonth()]+' '+e.getDate();}
+    var cost=s.cost!=null?'$'+s.cost:'<span style="color:var(--dim);font-weight:400">ask</span>';
+    var sv=ST[s.key]||'';
+    var scl=sv==='Booked'?'s1':sv==='Applied'?'s2':sv==='Interested'?'s3':'';
+    return '<tr class="row'+(sv&&sv!=='Pass'?' mk':'')+'">'+
+      '<td class="dt">'+MN[s._d.getMonth()]+' '+s._d.getDate()+end+'<div class="dow">'+DW[s._d.getDay()]+'</div></td>'+
+      '<td class="days '+dcl+' hide-s">'+dtxt+'</td>'+
+      '<td><div class="nm">'+s.name+(s.focus!=='sports'?'<span class="foc f-'+s.focus+'">'+(s.focus==='pokemon'?'TCG only':'sports + TCG')+'</span>':'')+'</div>'+
+      '<div class="mt">'+s.city+' &middot; '+s.venue+(s.hours?' &middot; '+s.hours:'')+'</div>'+
+      '<div class="mt"><span class="conf c-'+s.conf+'">'+s.conf+'</span> &middot; '+s.src+'</div>'+
+      '<div class="m-only"><span class="pill '+cl+'">'+lb+'</span><span class="cst">'+cost+'</span></div></td>'+
+      '<td class="ev'+(s._ev.na?' ev-na':'')+'" title="'+esc(evTip(s))+'">'+
+        (s._ev.na?'n/a':money(s._ev.ev))+
+        (s._ev.est&&!s._ev.na?'<div class="est">est.</div>':'')+'</td>'+
+      '<td class="hide-m"><span class="pill '+cl+'">'+lb+'</span></td>'+
+      '<td class="cst hide-m">'+cost+'</td>'+
+      '<td class="hide-s">'+(s.tables?s.tables+(s.tables>=250?'+':''):'&mdash;')+'<div class="mt">'+(s.adm?'adm '+s.adm:'')+'</div></td>'+
+      '<td class="hide-s" style="font-size:12px">'+(s.contact||'<span style="color:var(--dim)">not published</span>')+'</td>'+
+      '<td><select class="st '+scl+'" data-k="'+encodeURIComponent(s.key)+'" aria-label="status">'+
+      '<option value="">&mdash;</option><option value="Booked">Booked</option>'+
+      '<option value="Applied">Applied</option><option value="Interested">Interested</option>'+
+      '<option value="Pass">Pass</option></select>'+
+      '<a class="cal" href="'+gcal(s)+'" target="_blank" rel="noopener">&#43; Calendar</a></td></tr>';}).join('');
+  document.getElementById('empty').style.display=rows.length?'none':'block';
+  topPicks(rows); calendar(rows);
+  document.getElementById('scope').textContent=
+    rows.filter(function(s){return s.days>=0}).length+' shows in view'+(F.r!=='all'?' within '+F.r+' min':'');
+  Array.prototype.forEach.call(tb.querySelectorAll('select.st'),function(el){
+    var kk=decodeURIComponent(el.dataset.k);el.value=ST[kk]||'';
+    el.onchange=function(){ST[kk]=el.value;if(!el.value)delete ST[kk];save();render();picks();}});
+  Array.prototype.forEach.call(document.querySelectorAll('th[data-s]'),function(th){
+    var base=th.textContent.replace(/[ ▲▼]+$/,'');
+    th.innerHTML=base+(SORT.k===th.dataset.s?' <span class="ar">'+(SORT.d>0?'▲':'▼')+'</span>':'');});
+  stats(rows);}
 
-function passes(s){
-  // Passed shows are hidden everywhere unless "Show passed" is on.
-  if(isPassed(s) && !F.sp) return false;
-  if(s.drive > F.rad) return false;
-  if(F.mon !== "all" && s.date.slice(0,7) !== F.mon) return false;
-  if(F.typ === "sports" && s.focus !== "sports") return false;
-  if(F.typ === "nopoke" && s.focus === "pokemon") return false;
-  if(F.cc && s.cost == null) return false;
-  if(F.mk && !MARK[s._slug]) return false;
-  return true;
-}
-function visible(){ return SHOWS.filter(passes); }
-function upcoming(list){ return list.filter(function(s){ return s._e >= TODAY; }); }
+function stats(rows){
+  var up=SHOWS.filter(function(s){return s.days>=0});
+  var near=up.filter(function(s){return s.drive<=45}).length;
+  var n30=up.filter(function(s){return s.days<=30}).length;
+  var costs=up.filter(function(s){return s.cost!=null}).map(function(s){return s.cost}).sort(function(a,b){return a-b});
+  var med=costs.length?costs[Math.floor(costs.length/2)]:0;
+  var booked=Object.keys(ST).filter(function(k){return ST[k]==='Booked'||ST[k]==='Applied'}).length;
+  var sb=document.getElementById('stor');
+  sb.className='badge '+(STORE_OK?'b-on':'b-off');
+  sb.textContent=STORE_OK?'saved in this browser':'not saved - storage blocked here';
+  var cells=[['Upcoming shows',up.length],['Within 45 min',near],['Next 30 days',n30],
+    ['Median table','$'+med],['Booked / applied',booked],['Showing',rows.length]];
+  document.getElementById('stats').innerHTML=cells.map(function(c){
+    return '<div class="stat"><div class="v">'+c[1]+'</div><div class="k">'+c[0]+'</div></div>'}).join('');}
 
-function sortList(list){
-  var k = SORT.k, d = SORT.dir;
-  return list.slice().sort(function(a,b){
-    var x, y;
-    if(k === "ev"){ x = a._ev.scored ? a._ev.perHr : -1e9; y = b._ev.scored ? b._ev.perHr : -1e9; }
-    else if(k === "date"){ x = a._d.getTime(); y = b._d.getTime(); }
-    else if(k === "cost"){ x = a.cost == null ? 1e9 : a.cost; y = b.cost == null ? 1e9 : b.cost; }
-    else if(k === "tables"){ x = a.tables == null ? -1 : a.tables; y = b.tables == null ? -1 : b.tables; }
-    else if(k === "drive"){ x = a.drive; y = b.drive; }
-    else { x = String(a[k]||"").toLowerCase(); y = String(b[k]||"").toLowerCase(); }
-    if(x < y) return -1*d; if(x > y) return 1*d;
-    return a._d - b._d;
-  });
-}
+function picks(){
+  var byKey={};SHOWS.forEach(function(s){byKey[s.key]=s});
+  var ids=Object.keys(ST).filter(function(k){return byKey[k]});
+  var o=document.getElementById('out');
+  if(!ids.length){o.textContent='Nothing marked yet.';return;}
+  var order={Booked:0,Applied:1,Interested:2,Pass:3};
+  o.textContent=ids.map(function(k){return {s:byKey[k],v:ST[k]}})
+    .sort(function(a,b){return order[a.v]-order[b.v]||a.s._d-b.s._d})
+    .map(function(r){return (r.v.toUpperCase()+'           ').slice(0,11)+' '+r.s.date+'  '+r.s.name+' — '+r.s.city+(r.s.cost?' ($'+r.s.cost+'/table)':'')}).join('\n');}
 
-/* ---------- best pick / picks bar ---------- */
-function ranked(){
-  // a passed show is never a pick, even while "Show passed" is on
-  return upcoming(visible()).filter(function(s){ return s._ev.scored && !isPassed(s); })
-    .sort(function(a,b){ return b._ev.perHr - a._ev.perHr || a._d - b._d; });
-}
-function bestPick(){ var r = ranked(); return r.length ? r[0] : null; }
-function topPicks(n){
-  var seen = {}, out = [];
-  ranked().forEach(function(s){
-    var id = s.name + "|" + s.city;
-    if(seen[id]) return;
-    seen[id] = 1; out.push(s);
-  });
-  return out.slice(0, n);
-}
+function rankable(rows){return rows.filter(function(s){return !s._ev.na&&s.days>=0})
+  .sort(function(a,b){return b._ev.ev-a._ev.ev||a._d-b._d});}
 
-/* ---------- rendering ---------- */
-function renderTiles(){
-  var v = upcoming(visible());
-  var scored = v.filter(function(s){ return s._ev.scored; });
-  var best = bestPick();
-  var soon = v.filter(function(s){ var d = daysOut(s); return d >= 0 && d <= 21; });
-  var conf = v.filter(function(s){ return s.conf === "confirmed"; });
-  var marked = Object.keys(MARK).filter(function(k){ return MARK[k] && MARK[k] !== "pass"; }).length;
-  var t = [
-    ["Upcoming", v.length],
-    ["Next 21 days", soon.length],
-    ["Confirmed cost", conf.length],
-    ["Best $/hr", best ? money(best._ev.perHr) : "\u2014"],
-    ["Best score", best ? best._ev.score + "/10" : "\u2014"],
-    ["Marked", marked]
-  ];
-  document.getElementById("tiles").innerHTML = t.map(function(x){
-    return '<div class="tile"><b>' + x[1] + '</b><span>' + x[0] + '</span></div>';
-  }).join("");
-  document.getElementById("cnt").textContent = SHOWS.length + " shows tracked";
-}
+function topPicks(rows){
+  var seen={},r=[];
+  rankable(rows).forEach(function(s){var id=s.name+'|'+s.city;
+    if(!seen[id]){seen[id]=1;r.push(s);}});
+  r=r.slice(0,4);
+  var el=document.getElementById('picks');
+  if(!r.length){el.innerHTML='';return;}
+  var lbl=['Best pick','2nd','3rd','4th'];
+  el.innerHTML=r.map(function(s,i){
+    var when=MN[s._d.getMonth()]+' '+s._d.getDate();
+    return '<div class="pk'+(i===0?' top':'')+'" title="'+esc(evTip(s))+'">'+
+      '<div class="rk">'+lbl[i]+(i===0?' &#9733;':'')+'</div>'+
+      '<div class="pn">'+s.name+'</div>'+
+      '<div class="pd">'+when+' &middot; '+s.city+' &middot; '+(s.drive===0?'home':s.drive+' min')+'</div>'+
+      '<div class="pv">'+money(s._ev.ev)+' <span class="sub" style="font-size:11px;font-weight:500">est. margin'+(s._ev.est?'*':'')+'</span></div>'+
+      '</div>';}).join('');}
 
-function renderPicks(){
-  var p = topPicks(4), host = document.getElementById("pickrow");
-  if(!p.length){ host.innerHTML = '<div class="pick"><div class="mt">No scored shows match these filters.</div></div>'; return; }
-  host.innerHTML = p.map(function(s, i){
-    var e = s._ev;
-    return '<div class="pick' + (i===0 ? " one" : "") + '">' +
-      '<div class="rk">#' + (i+1) + (i===0 ? " \u00b7 BEST" : "") + '</div>' +
-      '<div class="nm">' + esc(s.name) + '</div>' +
-      '<div class="mt">' + fmtD(s) + " \u00b7 " + esc(s.city) + " \u00b7 " + s.drive + ' min</div>' +
-      '<div class="vv">' + money(e.perHr) + "/hr \u00b7 " + e.score + "/10" +
-      (e.est ? ' <span class="est">est.</span>' : "") + '</div></div>';
-  }).join("");
-}
+function calendar(rows){
+  var el=document.getElementById('v-cal');
+  var up=rows.filter(function(s){return s.days>=-1});
+  if(!up.length){el.innerHTML='<div class="empty">Nothing to show.</div>';return;}
+  var best=rankable(rows)[0];
+  var months=[];up.forEach(function(s){if(months.indexOf(s.mk)<0)months.push(s.mk)});
+  months.sort();
+  var byDay={};
+  up.forEach(function(s){var k=s.date;(byDay[k]=byDay[k]||[]).push(s);});
+  var html=months.map(function(mk){
+    var p=mk.split('-'),Y=+p[0],M=+p[1]-1;
+    var first=new Date(Y,M,1), lead=first.getDay(), dim=new Date(Y,M+1,0).getDate();
+    var head=DW.map(function(d){return '<div class="dow7">'+d.slice(0,1)+'</div>'}).join('');
+    var cells=[],meta=[];
+    for(var i=0;i<lead;i++){cells.push('<div class="cell pad"></div>');meta.push({past:true,has:false});}
+    for(var day=1;day<=dim;day++){
+      var ds=Y+'-'+pad(M+1)+'-'+pad(day);
+      var list=byDay[ds]||[];
+      var inner='<div class="dnum">'+day+'</div>'+
+        '<div class="dfull">'+DW[new Date(Y,M,day).getDay()]+' '+MN[M]+' '+day+'</div>';
+      list.sort(function(a,b){return (b._ev.na?-1e9:b._ev.ev)-(a._ev.na?-1e9:a._ev.ev)});
+      list.forEach(function(s){
+        var isBest=best&&s.key===best.key;
+        var mine=ST[s.key]&&ST[s.key]!=='Pass';
+        inner+='<span class="ch'+(isBest?' best':'')+(mine?' mine':'')+'" title="'+esc(s.name+' - '+s.venue+', '+s.city+'\n'+evTip(s))+'">'+
+          (isBest?'<span class="mtag">best</span>':'')+
+          '<b>'+s.name+'</b><i>'+(s.drive===0?'home':s.drive+'m')+(s._ev.na?'':' &middot; '+money(s._ev.ev))+'</i></span>';});
+      var isPast=new Date(Y,M,day)<new Date(TODAY.getFullYear(),TODAY.getMonth(),TODAY.getDate());
+      cells.push('<div class="cell'+(list.length?' has':'')+(isPast&&!list.length?' gone':'')+'">'+inner+'</div>');
+      meta.push({past:isPast,has:list.length>0});}
+    while(cells.length%7)  {cells.push('<div class="cell pad"></div>');meta.push({past:true,has:false});}
+    /* drop whole weeks that are entirely in the past with nothing in them */
+    var keep=[];
+    for(var w=0;w*7<cells.length;w++){
+      var slice=meta.slice(w*7,w*7+7);
+      var dead=slice.every(function(x){return x.past&&!x.has});
+      if(!dead)keep=keep.concat(cells.slice(w*7,w*7+7));}
+    if(!keep.length)return '';
+    return '<div class="mon"><h3>'+['January','February','March','April','May','June','July','August','September','October','November','December'][M]+' '+Y+'</h3>'+
+      '<div class="grid">'+head+keep.join('')+'</div></div>';}).join('');
+  el.innerHTML=html+
+   '<div class="how"><b>How the pick is calculated.</b> Expected margin on <b>2 tables</b>, in dollars:<br>'+
+   '<code>revenue = $'+EVP.BASE+' &times; size &times; days &times; audience</code> &minus; <code>2 &times; table cost</code> &minus; <code>mileage @ $'+EVP.PER_MI.toFixed(2)+'/mi</code> &minus; <code>drive time @ $'+EVP.PER_HR+'/hr</code> &minus; <code>lodging</code>, then &times; a risk factor.<br>'+
+   '<b style="color:var(--or-ink)">The $'+EVP.BASE+' is your own average, not a guess.</b> Three logged shows:<br>'+
+   '&nbsp;&nbsp;Xenia 7/11 &mdash; 43 cards, $2,210 gross, <b>$313 margin</b><br>'+
+   '&nbsp;&nbsp;Eastgate 7/25 &mdash; 80 cards, $3,605 gross, <b>$575 margin</b><br>'+
+   '&nbsp;&nbsp;Darke County 8/2 &mdash; 115 cards, $5,750 gross, <b>$1,121 margin</b><br>'+
+   '<b>Why there is barely a size term any more.</b> Across those three, distance and venue size predict nothing &mdash; correlation between drive time and margin is <b>&minus;0.45</b> (your closest show was your best), while correlation between cards sold and margin is <b>+0.98</b>. What you make is set by what you bring and move, not by the room. So revenue starts at your average and published table count only nudges it, damped to a fourth root and capped at &times;0.75&ndash;&times;1.5. Where table count is unpublished there is no nudge at all.<br>'+
+   '<b>audience</b> 1.0 sports / 0.75 sports+TCG / 0.15 TCG-only. <b>risk</b> 1.0 confirmed / 0.90 listed / 0.65 unverified. Second day of a two-day show counts half. Shows over 150 min with no published booth cost are left unscored rather than guessed at.<br>'+
+   '<b>Read the ranking as cost-to-attend, not earning power.</b> With three data points the model discriminates on what a show costs you, because nothing in the venue data predicts what you will make. Log more shows and that changes.</div>';}
 
-function markBtns(s){
-  var cur = MARK[s._slug] || "";
-  return ["interested","applied","booked","pass"].map(function(m){
-    return '<button type="button" data-mk="' + m + '" data-sl="' + esc(s._slug) + '" aria-pressed="' +
-      (cur === m ? "true" : "false") + '">' + m.charAt(0).toUpperCase() + m.slice(1,4) + "</button>";
-  }).join("");
-}
-
-function gcalUrl(s){
-  var st = s.date.replace(/-/g,"");
-  var endD = new Date(s._e.getTime() + 86400000);
-  var en = endD.getFullYear() + String(endD.getMonth()+1).padStart(2,"0") + String(endD.getDate()).padStart(2,"0");
-  var e = s._ev;
-  var det = [
-    "Venue: " + (s.venue || "\u2014"),
-    "Drive: " + s.drive + " min from Troy",
-    "Hours: " + (s.hours || "\u2014"),
-    "Table cost: " + (s.cost != null ? "$" + s.cost + (s.cost2 != null ? " ($" + s.cost2 + " for 2)" : " ea") : "not published \u2014 ask"),
-    "Contact: " + (s.contact || "\u2014"),
-    "Value: " + (e.scored ? money(e.perHr) + "/hr, " + e.score + "/10" : "not scored"),
-    "Source: " + s.src
-  ].join("\n");
-  return "https://calendar.google.com/calendar/render?action=TEMPLATE" +
-    "&text=" + encodeURIComponent(s.name + " \u2014 " + s.city) +
-    "&dates=" + st + "/" + en +
-    "&location=" + encodeURIComponent((s.venue ? s.venue + ", " : "") + s.city) +
-    "&details=" + encodeURIComponent(det);
-}
-
-function renderTable(){
-  var list = sortList(visible()), best = bestPick();
-  var em = document.getElementById("empty");
-  em.style.display = list.length ? "none" : "block";
-  if(!list.length){
-    var hidden = SHOWS.filter(function(s){ return isPassed(s); }).length;
-    em.textContent = (hidden && !F.sp)
-      ? "Nothing matches those filters. " + hidden + " passed show" + (hidden === 1 ? " is" : "s are") + " hidden — turn on “Show passed” to see them."
-      : "Nothing matches those filters.";
-  }
-  document.getElementById("tbody").innerHTML = list.map(function(s){
-    var e = s._ev, d = daysOut(s), past = s._e < TODAY;
-    var dcls = past ? "dd" : (d <= 14 ? "u14" : d <= 30 ? "u30" : "dd");
-    var dtxt = past ? "past" : (d === 0 ? "today" : d + " d");
-    var val = e.scored
-      ? '<span class="val' + (e.perHr < 0 ? " neg" : "") + '" title="' + esc(tipFor(s)) + '">' +
-        money(e.perHr) + "/hr <span class=\"sc\">" + e.score + "/10</span></span>" +
-        (e.est ? ' <span class="est">est.</span>' : "")
-      : '<span class="val" title="' + esc(tipFor(s)) + '" style="font-weight:600;color:var(--dim)">not scored</span>';
-    return '<tr class="' + (MARK[s._slug] ? "marked" : "") + (best && best._slug === s._slug ? " isbest" : "") +
-      (isPassed(s) ? " passed" : "") + '">' +
-      '<td><div class="dt">' + fmtD(s) + '</div><div class="' + dcls + '">' + DW[s._d.getDay()] + " \u00b7 " + dtxt + '</div></td>' +
-      '<td><div class="nm">' + esc(s.name) + '</div><div class="vn">' + esc(s.city) + (s.venue ? " \u00b7 " + esc(s.venue) : "") + '</div>' +
-        '<a class="gc" target="_blank" rel="noopener" href="' + gcalUrl(s) + '">+ Calendar</a></td>' +
-      '<td><span class="pill ' + driveCls(s.drive) + '">' + s.drive + ' min</span></td>' +
-      '<td>' + val + '</td>' +
-      '<td>' + (s.cost != null ? "$" + s.cost + (s.cost2 != null ? " <span class=\"est\">2/$" + s.cost2 + "</span>" : "") : '<span class="est">ask</span>') + '</td>' +
-      '<td>' + (s.tables != null ? s.tables : '<span class="est">\u2014</span>') + '</td>' +
-      '<td class="foc">' + esc(s.adm || "\u2014") + '</td>' +
-      '<td class="foc">' + esc(s.hours || "\u2014") + '</td>' +
-      '<td class="foc">' + esc(s.focus) + '</td>' +
-      '<td><span class="cf ' + s.conf + '">' + GLYPH[s.conf] + " " + s.conf + '</span></td>' +
-      '<td class="ct">' + esc(s.contact || "\u2014") + '</td>' +
-      '<td><div class="mk">' + markBtns(s) + '</div></td></tr>';
-  }).join("");
-}
-
-function renderCal(){
-  var list = visible(), best = bestPick();
-  var host = document.getElementById("calView");
-  if(!list.length){ host.innerHTML = '<div class="empty">Nothing matches those filters.</div>'; return; }
-  var byMonth = {};
-  list.forEach(function(s){
-    for(var t = s._d.getTime(); t <= s._e.getTime(); t += 86400000){
-      var dd = new Date(t), k = dd.getFullYear() + "-" + String(dd.getMonth()+1).padStart(2,"0");
-      (byMonth[k] = byMonth[k] || {})[dd.getDate()] = (byMonth[k][dd.getDate()] || []).concat([s]);
-    }
-  });
-  var keys = Object.keys(byMonth).sort();
-  host.innerHTML = keys.map(function(k){
-    var y = +k.slice(0,4), m = +k.slice(5,7) - 1;
-    var first = new Date(y, m, 1), nd = new Date(y, m+1, 0).getDate();
-    var lead = first.getDay(), cells = [], i;
-    for(i = 0; i < lead; i++) cells.push(null);
-    for(i = 1; i <= nd; i++) cells.push(i);
-    while(cells.length % 7) cells.push(null);
-    var weeks = [], w;
-    for(i = 0; i < cells.length; i += 7) weeks.push(cells.slice(i, i+7));
-    var runDead = 0;
-    var html = weeks.map(function(wk){
-      var anyEv = wk.some(function(dn){ return dn && byMonth[k][dn]; });
-      var allPast = wk.every(function(dn){ return !dn || new Date(y,m,dn) < TODAY; });
-      if(allPast && !anyEv){
-        runDead++;
-        // only the first of a consecutive run draws a strip
-        return runDead === 1 ? '<div class="wkcollapse" data-dead="1">&middot; &middot; &middot;</div>' : "";
-      }
-      runDead = 0;
-      return wk.map(function(dn){
-        if(!dn) return '<div class="cell pad"></div>';
-        var dt = new Date(y, m, dn), past = dt < TODAY, evs = byMonth[k][dn] || [];
-        var lbl = DW[dt.getDay()].toUpperCase() + " " + MN[m].toUpperCase() + " " + dn;
-        return '<div class="cell' + (past ? " past" : "") + (evs.length ? " has" : "") + '">' +
-          '<div class="dn">' + dn + '</div><div class="dlabel">' + lbl + '</div>' +
-          evs.map(function(s){
-            var isB = best && best._slug === s._slug;
-            var e = s._ev;
-            return '<span class="ev' + (isB ? " best" : "") + (isPassed(s) ? " passed" : "") +
-              '" data-sl="' + esc(s._slug) + '" title="' + esc(s.name + " \u2014 " + s.city + "\n" + tipFor(s)) + '">' +
-              "<b>" + esc(s.name) + "</b>" +
-              '<span class="vv">' + esc(s.city) + " \u00b7 " + s.drive + " min" +
-              (e.scored ? " \u00b7 " + money(e.perHr) + "/hr" : "") + "</span>" +
-              (isB ? '<span class="tag">best</span>' : "") + "</span>";
-          }).join("") + '</div>';
-      }).join("");
-    }).join("");
-    return '<div class="mon"><h3>' + MFULL[m] + " " + y + '</h3>' +
-      '<div class="dow">' + DW.map(function(d){ return "<div>" + d + "</div>"; }).join("") + '</div>' +
-      '<div class="grid">' + html + '</div></div>';
-  }).join("");
-}
-
-function renderChips(){
-  var n = passedCount(), c = document.getElementById("spChip");
-  c.textContent = n ? "Show passed (" + n + ")" : "Show passed";
-  c.disabled = !n && !F.sp;
-  c.style.opacity = c.disabled ? ".45" : "";
-  c.style.cursor = c.disabled ? "default" : "pointer";
-}
-function renderAll(){ renderTiles(); renderPicks(); renderTable(); renderCal(); renderChips(); }
-
-/* ---------- ICS ---------- */
-function icsEsc(t){ return String(t==null?"":t).replace(/\\/g,"\\\\").replace(/;/g,"\\;").replace(/,/g,"\\,").replace(/\r?\n/g,"\\n"); }
-function utf8len(s){ return unescape(encodeURIComponent(s)).length; }
-function fold(line){
-  var out = [], cur = "", n = 0;
-  for(var i = 0; i < line.length; i++){
-    var ch = line[i];
-    // surrogate pair safety
-    if(ch.charCodeAt(0) >= 0xD800 && ch.charCodeAt(0) <= 0xDBFF && i+1 < line.length){ ch += line[++i]; }
-    var b = utf8len(ch);
-    var limit = out.length === 0 ? 75 : 74; // continuation lines carry a leading space
-    if(n + b > limit){ out.push(cur); cur = ""; n = 0; }
-    cur += ch; n += b;
-  }
-  out.push(cur);
-  return out[0] + out.slice(1).map(function(x){ return "\r\n " + x; }).join("");
-}
-function stamp(){
-  var d = new Date();
-  function p(n){ return String(n).padStart(2,"0"); }
-  return d.getUTCFullYear() + p(d.getUTCMonth()+1) + p(d.getUTCDate()) + "T" +
-    p(d.getUTCHours()) + p(d.getUTCMinutes()) + p(d.getUTCSeconds()) + "Z";
-}
-function uidOf(s){ return "psr-" + s.date + "-" + s.name.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"") + "@pandashade"; }
-function buildIcs(){
-  var picks = SHOWS.filter(function(s){ var m = MARK[s._slug]; return m && m !== "pass"; });
-  var L = ["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Pandashade Card Shop//Card Show Radar//EN",
-    "CALSCALE:GREGORIAN","METHOD:PUBLISH","X-WR-CALNAME:Pandashade Cards"];
-  var ts = stamp();
-  picks.forEach(function(s){
-    var endD = new Date(s._e.getTime() + 86400000);
-    function p(n){ return String(n).padStart(2,"0"); }
-    var dtEnd = endD.getFullYear() + p(endD.getMonth()+1) + p(endD.getDate());
-    var e = s._ev;
-    var desc = [
-      "Status: " + MARK[s._slug],
-      "Venue: " + (s.venue || "-"),
-      "Drive: " + s.drive + " min from Troy",
-      "Hours: " + (s.hours || "-"),
-      "Table cost: " + (s.cost != null ? "$" + s.cost + (s.cost2 != null ? " ($" + s.cost2 + " for 2)" : " each") : "not published - ask"),
-      "Admission: " + (s.adm || "-"),
-      "Contact: " + (s.contact || "-"),
-      "Value: " + (e.scored ? money(e.perHr) + "/hr, " + e.score + "/10" : "not scored"),
-      "Source: " + s.src
-    ].join("\n");
-    L.push("BEGIN:VEVENT");
-    L.push("UID:" + uidOf(s));
-    L.push("DTSTAMP:" + ts);
-    L.push("DTSTART;VALUE=DATE:" + s.date.replace(/-/g,""));
-    L.push("DTEND;VALUE=DATE:" + dtEnd);
-    L.push("SUMMARY:" + icsEsc(s.name + " - " + s.city));
-    L.push("LOCATION:" + icsEsc((s.venue ? s.venue + ", " : "") + s.city));
-    L.push("DESCRIPTION:" + icsEsc(desc));
-    L.push("TRANSP:TRANSPARENT");
-    L.push("END:VEVENT");
-  });
-  L.push("END:VCALENDAR");
-  return L.map(fold).join("\r\n") + "\r\n";
-}
-
-/* ---------- actions ---------- */
-function toast(t){
-  var el = document.getElementById("toast");
-  el.textContent = t; el.classList.add("on");
-  setTimeout(function(){ el.classList.remove("on"); }, 2200);
-}
-function copyText(t, msg){
-  var done = function(){ toast(msg); };
-  if(navigator.clipboard && navigator.clipboard.writeText){
-    navigator.clipboard.writeText(t).then(done, function(){ showOut(t); });
-  } else showOut(t);
-}
-function showOut(t){
-  var o = document.getElementById("out");
-  o.value = t; o.classList.add("on"); o.select();
-  toast("Select and copy the text below");
-}
-
-document.getElementById("copyPicks").addEventListener("click", function(){
-  var rows = SHOWS.filter(function(s){ return MARK[s._slug]; })
-    .sort(function(a,b){ return a._d - b._d; })
-    .map(function(s){
-      var e = s._ev;
-      return "- [" + MARK[s._slug].toUpperCase() + "] " + s.date + (s.end ? " to " + s.end : "") + " | " + s.name +
-        " | " + s.city + " | " + s.drive + " min | " +
-        (s.cost != null ? "$" + s.cost + "/table" : "cost TBD") + " | " +
-        (e.scored ? money(e.perHr) + "/hr, " + e.score + "/10" : "not scored") +
-        (s.contact ? " | " + s.contact : "");
-    });
-  if(!rows.length){ toast("Nothing marked yet"); return; }
-  copyText("Pandashade Card Show Radar - marked shows (" + new Date().toISOString().slice(0,10) + ")\n" + rows.join("\n"),
-    rows.length + " picks copied");
-});
-document.getElementById("cpIcs").addEventListener("click", function(){
-  var n = SHOWS.filter(function(s){ var m = MARK[s._slug]; return m && m !== "pass"; }).length;
-  if(!n){ toast("Nothing marked yet"); return; }
-  copyText(buildIcs(), n + " events copied as .ics text");
-});
-document.getElementById("dlIcs").addEventListener("click", function(){
-  var n = SHOWS.filter(function(s){ var m = MARK[s._slug]; return m && m !== "pass"; }).length;
-  if(!n){ toast("Nothing marked yet"); return; }
-  var txt = buildIcs();
-  try{
-    var blob = new Blob([txt], {type:"text/calendar;charset=utf-8"});
-    var a = document.createElement("a");
-    a.href = URL.createObjectURL(blob); a.download = "card-shows.ics";
-    document.body.appendChild(a); a.click();
-    setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 400);
-    toast("Downloaded card-shows.ics \u2014 pick Pandashade Cards on import");
-  }catch(err){ showOut(txt); }
-});
-document.getElementById("clearAll").addEventListener("click", function(){
-  if(!Object.keys(MARK).length){ toast("Nothing to clear"); return; }
-  MARK = {}; saveMark(); renderAll(); toast("All marks cleared");
-});
-
-document.addEventListener("click", function(ev){
-  var b = ev.target.closest("[data-mk]");
-  if(b){
-    var sl = b.getAttribute("data-sl"), m = b.getAttribute("data-mk");
-    var hiding = (m === "pass" && MARK[sl] !== "pass" && !F.sp);
-    if(MARK[sl] === m) delete MARK[sl]; else MARK[sl] = m;
-    saveMark(); renderAll();
-    // the row just disappeared — say how to get it back, or it's unrecoverable
-    if(hiding) toast("Hidden. “Show passed” brings it back.");
-    return;
-  }
-  var c = ev.target.closest(".chip");
-  if(c){
-    var f = c.getAttribute("data-f"), v = c.getAttribute("data-v");
-    if(f === "rad"){ F.rad = +v; }
-    else if(f === "mon"){ F.mon = v; }
-    else if(f === "typ"){ F.typ = v; }
-    else if(f === "cc"){ F.cc = !F.cc; }
-    else if(f === "mk"){ F.mk = !F.mk; }
-    else if(f === "sp"){ F.sp = !F.sp; }
-    document.querySelectorAll('.chip[data-f="' + f + '"]').forEach(function(x){
-      if(f === "cc") x.setAttribute("aria-pressed", F.cc ? "true" : "false");
-      else if(f === "mk") x.setAttribute("aria-pressed", F.mk ? "true" : "false");
-      else if(f === "sp") x.setAttribute("aria-pressed", F.sp ? "true" : "false");
-      else x.setAttribute("aria-pressed", x.getAttribute("data-v") === v ? "true" : "false");
-    });
-    renderAll(); return;
-  }
-  var th = ev.target.closest("th.s");
-  if(th){
-    var k = th.getAttribute("data-k");
-    if(SORT.k === k) SORT.dir *= -1; else { SORT.k = k; SORT.dir = (k === "ev") ? -1 : 1; }
-    document.querySelectorAll("th.s").forEach(function(x){
-      x.classList.toggle("act", x === th);
-      x.querySelector(".ar").innerHTML = (x === th && SORT.dir === -1) ? "&#9660;" : "&#9650;";
-    });
-    renderTable(); return;
-  }
-});
-
-document.getElementById("vTable").addEventListener("click", function(){
-  document.getElementById("tblView").classList.remove("off");
-  document.getElementById("calView").classList.remove("on");
-  this.setAttribute("aria-pressed","true");
-  document.getElementById("vCal").setAttribute("aria-pressed","false");
-});
-document.getElementById("vCal").addEventListener("click", function(){
-  document.getElementById("tblView").classList.add("off");
-  document.getElementById("calView").classList.add("on");
-  this.setAttribute("aria-pressed","true");
-  document.getElementById("vTable").setAttribute("aria-pressed","false");
-});
-document.getElementById("themebtn").addEventListener("click", function(){
-  var r = document.documentElement, cur = r.getAttribute("data-theme");
-  var dark = cur ? cur === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
-  r.setAttribute("data-theme", dark ? "light" : "dark");
-});
-
-/* month chips */
-(function(){
-  var ms = {}, order = [];
-  SHOWS.forEach(function(s){ var k = s.date.slice(0,7); if(!ms[k]){ ms[k] = 1; order.push(k); } });
-  order.sort();
-  document.getElementById("months").innerHTML =
-    '<button class="chip" data-f="mon" data-v="all" aria-pressed="true" type="button">All</button>' +
-    order.map(function(k){
-      return '<button class="chip" data-f="mon" data-v="' + k + '" type="button">' +
-        MN[+k.slice(5,7)-1] + " " + k.slice(2,4) + "</button>";
-    }).join("");
-})();
-
-renderAll();
-</script>
-</body>
-</html>
+document.addEventListener('click',function(e){
+  var vb=e.target.closest('.vsw button');
+  if(vb){Array.prototype.forEach.call(document.querySelectorAll('.vsw button'),function(x){x.classList.remove('on')});
+    vb.classList.add('on');
+    var cal=vb.dataset.view==='cal';
+    document.getElementById('v-table').style.display=cal?'none':'';
+    document.getElementById('v-cal').style.display=cal?'':'none';
+    return;}
+  var b=e.target.closest('button.chip');if(!b)return;
+  if(b.id==='ics'){
+    var byK={};SHOWS.forEach(function(s){byK[s.key]=s});
+    var picked=Object.keys(ST).filter(function(k){return byK[k]&&ST[k]!=='Pass'}).map(function(k){return byK[k]})
+      .sort(function(x,y){return x._d-y._d});
+    if(!picked.length){document.getElementById('cs').textContent='mark some shows first';
+      setTimeout(function(){document.getElementById('cs').textContent=''},2200);return;}
+    var blob=new Blob([icsFor(picked)],{type:'text/calendar'});
+    var a=document.createElement('a');a.href=URL.createObjectURL(blob);
+    a.download='card-shows.ics';document.body.appendChild(a);a.click();
+    setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},1000);
+    document.getElementById('cs').textContent=picked.length+' event'+(picked.length>1?'s':'')+' downloaded';
+    setTimeout(function(){document.getElementById('cs').textContent=''},2600);return;}
+  if(b.id==='clear'){
+    if(!Object.keys(ST).length)return;
+    if(!confirm('Clear every status mark?'))return;
+    Object.keys(ST).forEach(function(k){delete ST[k]});save();render();picks();
+    document.getElementById('cs').textContent='cleared';
+    setTimeout(function(){document.getElementById('cs').textContent=''},1800);return;}
+  if(b.id==='copy'){var t=document.getElementById('out').textContent;
+    if(navigator.clipboard)navigator.clipboard.writeText(t);
+    document.getElementById('cs').textContent='copied';
+    setTimeout(function(){document.getElementById('cs').textContent=''},1800);return;}
+  var f=b.dataset.f;if(!f)return;
+  Array.prototype.forEach.call(document.querySelectorAll('button.chip[data-f="'+f+'"]'),function(x){x.classList.remove('on')});
+  b.classList.add('on');F[f]=b.dataset.v;render();});
+document.getElementById('q').oninput=function(e){F.q=e.target.value.toLowerCase().trim();render()};
+Array.prototype.forEach.call(document.querySelectorAll('th[data-s]'),function(th){th.onclick=function(){
+  var k=th.dataset.s;SORT.d=(SORT.k===k)?-SORT.d:1;SORT.k=k;render();}});
+render();picks();
+</script></body></html>
